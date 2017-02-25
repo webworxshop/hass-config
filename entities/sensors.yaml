@@ -1,0 +1,63 @@
+
+  - platform: zoneminder
+    name: zoneminder_sensor
+
+  - platform: darksky
+    api_key: !secret darksky_api_key
+    monitored_conditions:
+        #- summary
+        #- icon
+        #- nearest_storm_distance
+        #- nearest_storm_bearing
+        - precip_type
+        - precip_intensity
+        - precip_probability
+        - temperature
+        #- apparent_temperature
+        - dew_point
+        - wind_speed
+        - wind_bearing
+        - cloud_cover
+        - humidity
+        - pressure
+        - visibility
+        - ozone
+        #- minutely_summary
+        #- hourly_summary
+        #- daily_summary
+    units: ca
+
+  - platform: mqtt
+    state_topic: !secret bed2_temperature_topic 
+    name: Bed2 Temperature
+    unit_of_measurement: "°C"
+
+  - platform: mqtt
+    state_topic: !secret bed1_temperature_topic 
+    name: Bed1 Temperature
+    unit_of_measurement: "°C"
+
+  - platform: template
+    sensors:
+      bed1_temperature_proxy:
+        friendly_name: Bed1 Temperature Proxy
+        unit_of_measurement: "°C"
+        value_template: >-
+          {%- if is_state("group.presence", "home") %}
+              {{ states('sensor.bed1_temperature') }}
+          {% else %}
+              100.0
+          {%- endif %}
+
+  - platform: template
+    sensors:
+      bed2_temperature_proxy:
+        friendly_name: Bed2 Temperature Proxy
+        unit_of_measurement: "°C"
+        value_template: >-
+          {%- if is_state("group.presence", "home") %}
+              {{ states('sensor.bed2_temperature') }}
+          {% else %}
+              100.0
+          {%- endif %}
+

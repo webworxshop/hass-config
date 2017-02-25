@@ -1,0 +1,75 @@
+  default_view:
+    view: yes
+    entities:
+      - sun.sun
+      - device_tracker.android20
+      - device_tracker.owntracks_m7
+      - sensor.bed1_temperature
+      - sensor.bed2_temperature
+      - group.media
+      - group.lights
+      - group.heating
+      - group.appliances
+      - group.weather
+
+  media:
+    name: Media
+    entities:
+      - media_player.tv
+#      - weblink.tv_controller
+
+  lights:
+    name: Lights
+    entities:
+      - scene.movie
+      - scene.night
+      - light.main_lights
+      - light.reading_lamp
+      - light.lava_lamp
+        
+  heating:
+    name: Heating
+    entities:
+      - switch.bed1_heating
+      - switch.bed2_heating
+
+  appliances:
+    name: Appliances
+    entities:
+      - switch.kettle
+
+  weather:
+    name: Weather
+    entities:
+      - sensor.weather_temperature
+      - sensor.weather_wind_speed
+
+  cameras:
+    - camera.front
+    - camera.back_garden
+
+  motion:
+    name: All Motion Sensors
+    entities:
+      - binary_sensor.bed1_motion
+      - binary_sensor.garage_motion
+      - binary_sensor.kitchen_motion
+
+  internal_motion:
+    name: Internal Motion Sensors
+    entities:
+      - binary_sensor.bed1_motion
+      - binary_sensor.garage_motion
+      - binary_sensor.kitchen_motion
+
+  security:
+    name: Security
+    view: yes
+    entities:
+      - group.cameras
+      - group.motion
+
+  presence:
+    - device_tracker.android20
+    - device_tracker.owntracks_m7
+

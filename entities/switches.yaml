@@ -1,0 +1,33 @@
+
+  - platform: zoneminder
+    name: zoneminder_mode
+    command_on: Modect
+    command_off: Monitor
+
+  - platform: kankun
+    switches:
+      bed1_heating:
+        host: !secret bed1_heating_host
+      bed2_heating:
+        host: !secret bed2_heating_host
+
+  - platform: mqtt
+    name: "Kettle"
+    state_topic: !secret kettle_state_topic
+    command_topic: !secret kettle_cmd_topic
+    payload_on: "1"
+    payload_off: "0"
+    optimistic: false
+    qos: 0
+    retain: false
+
+  - platform: mqtt
+    name: "Living Room Camera"
+    state_topic: !secret lrcamera_state_topic
+    command_topic: !secret lrcamera_cmd_topic
+    payload_on: "1"
+    payload_off: "0"
+    optimistic: false
+    qos: 0
+    retain: false
+

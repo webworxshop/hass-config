@@ -1,0 +1,8 @@
+
+  - platform: ffmpeg
+    input: !secret front_cam_url
+    name: Front
+  - platform: mjpeg
+    mjpeg_url: !secret back_cam_url
+    name: Back Garden
+

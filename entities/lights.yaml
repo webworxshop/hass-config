@@ -1,0 +1,27 @@
+
+  - platform: mqtt
+    name: "Reading Lamp"
+    state_topic: !secret rl_state_topic
+    command_topic: !secret rl_state_topic
+    qos: 0
+    payload_on: "1"
+    payload_off: "0"
+    optimistic: false
+
+  - platform: mqtt
+    name: "Lava Lamp"
+    state_topic: !secret ll_state_topic
+    command_topic: !secret ll_cmd_topic
+    qos: 0
+    payload_on: "1"
+    payload_off: "0"
+    optimistic: false
+
+  - platform: limitlessled
+    bridges:
+      - host: !secret limitlessled_host
+        groups:
+          - number: 1
+            type: rgbw
+            name: Main Lights
+
