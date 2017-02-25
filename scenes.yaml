@@ -1,0 +1,22 @@
+
+  - name: Movie
+    entities:
+      light.main_lights:
+        state: on
+        rgb_color: [0, 0, 255]
+        brightness: 20
+      light.lava_lamp:
+        state: on
+  
+  - name: Night
+    entities:
+      group.lights:
+        state: off
+ 
+  - name: Main Lights Bright
+    entities:
+      light.main_lights:
+        state: on
+        rgb_color: [255, 255, 255]
+        brightness: 255
+         

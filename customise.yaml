@@ -1,0 +1,22 @@
+
+    switch.bed1_heating:
+      friendly_name: !secret bed1_heating_name
+
+    switch.bed2_heating:
+      friendly_name: !secret bed2_heating_name
+
+    sensor.bed1_temperature:
+      friendly_name: !secret bed1_temperature_name
+
+    sensor.bed2_temperature:
+      friendly_name: !secret bed2_temperature_name
+
+    binary_sensor.bed1_motion:
+      friendly_name: !secret bed1_motion_name
+
+    sensor.weather_temperature:
+      friendly_name: Outdoor Temperature
+
+    sensor.weather_wind_speed:
+      friendly_name: Wind Speed
+

@@ -1,0 +1,97 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  # C for Celcius, F for Fahrenheit
+  temperature_unit: C
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: !secret timezone
+
+  customize: customise.yaml
+
+http:
+  api_password: !secret http_password 
+  ssl_certificate: !tls_cert
+  ssl_key: !secret tls_key 
+
+# Enables support for tracking state changes over time.
+history:
+
+# Track the sun
+sun:
+
+# View all events in a logbook
+logbook:
+
+# Discover some devices automatically
+discovery:
+
+# Checks for available updates
+updater:
+
+# Enables the frontend
+frontend:
+
+# Allows you to issue voice commands from the frontend
+conversation:
+
+# MQTT broker
+mqtt:
+  broker: !secret mqtt_host
+  port: 1883
+  client_id: home-assistant
+  keepalive: 60
+  username: !secret mqtt_username
+  password: !secret mqtt_password
+  protocol: 3.1
+
+mqtt_eventstream:
+  publish_topic: !secret es_pub_topic
+
+device_tracker:
+  - platform: owntracks
+  - platform: snmp
+    host: !secret firewall_host
+    community: !secret firewall_snmp_community 
+    baseoid: 1.3.6.1.2.1.4.22.1.2
+
+# not using this yet
+#mysensors:
+#  gateways:
+#    - device: !secret mysensors_host
+#      persistence_file: '/home/hass/.homeassistant/mysensors.json'
+#      tcp_port: !secret mysensors_port
+#  debug: true
+#  persistence: true
+#  version: '1.5'
+#  optimistic: false
+
+zoneminder:
+  host: !secret zm_host
+  path: /zm/
+  ssl: False
+  username: !secret zm_username
+  password: !secret zm_password
+
+ffmpeg:
+  ffmpeg_bin: /usr/bin/avconv
+
+# include entity files
+input_boolean: !include entities/input_booleans.yaml
+sensor: !include entities/sensors.yaml
+binary_sensor: !include entities/binary_sensors.yaml
+thermostat: !include entities/heating.yaml
+light: !include entities/lights.yaml
+switch: !include entities/switches.yaml
+media_player: !include entities/media_players.yaml
+camera: !include entities/cameras.yaml
+group: !include entities/groups.yaml
+
+# include automation related stuff
+scene: !include scenes.yaml
+script: !include_dir_merge_named scripts/
+automation: !include_dir_merge_list automation/
+notify: !include notify.yaml
+

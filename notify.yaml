@@ -1,0 +1,26 @@
+
+  - name: smtp_notify1
+    platform: smtp
+    server: !secret smtp_server
+    port: !secret smtp_port
+    sender: !secret smtp_user 
+    starttls: 1
+    username: !secret smtp_user
+    password: !secret smtp_passwd 
+    recipient: !secret smtp_address1
+
+  - name: smtp_notify2
+    platform: smtp
+    server: !secret smtp_server
+    port: !secret smtp_port
+    sender: !secret smtp_user 
+    starttls: 1
+    username: !secret smtp_user
+    password: !secret smtp_passwd 
+    recipient: !secret smtp_address2
+
+  - name: notify
+    platform: group
+    services:
+      - service: smtp_notify1
+
