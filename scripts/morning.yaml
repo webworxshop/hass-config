@@ -1,0 +1,15 @@
+
+morning:
+  alias: Morning Routine
+  sequence:
+    - alias: Living Room Lights On
+      service: light.turn_on
+      data:
+        entity_id: light.main_lights
+        brightness: 255
+        rgb_color: [255, 255, 255]
+    - alias: Kettle On
+      service: switch.turn_on
+      data:
+        entity_id: switch.kettle
+

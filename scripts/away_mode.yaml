@@ -1,0 +1,60 @@
+away_mode_activate:
+  alias: "Activate Away Mode"
+  sequence:
+    - alias: "Turn on living room camera"
+      service: switch.turn_on
+      data:
+        entity_id: switch.living_room_camera
+    - alias: "Wait 5 secs"
+      delay:
+        seconds: 5
+    - alias: "Enable Modect on Front Camera"
+      service: switch.turn_on
+      data:
+        entity_id: switch.front_state
+    - alias: "Enable Modect on Back Garden Camera"
+      service: switch.turn_on
+      data:
+        entity_id: switch.back_garden_state
+    - alias: "Enable Modect on Living Room Camera"
+      service: switch.turn_on
+      data:
+        entity_id: switch.living_room_state
+    - alias: "Send Notification"
+      service: notify.notify
+      data:
+        title: "Away Mode Activated"
+      message: "Away Mode has been activated, cameras are now armed."
+      
+away_mode_deactivate:
+  alias: "Deactivate Away Mode"
+  sequence:
+    - alias: "Disable Vacation Mode"
+      service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.vacation_mode
+    - alias: "Disable Modect on Front Camera"
+      service: switch.turn_off
+      data:
+        entity_id: switch.front_state
+    - alias: "Disable Modect on Back Garden Camera"
+      service: switch.turn_off
+      data:
+        entity_id: switch.back_garden_state
+    - alias: "Disable Modect on Living Room Camera"
+      service: switch.turn_off
+      data:
+        entity_id: switch.living_room_state
+    - alias: "Wait 5 secs"
+      delay:
+        seconds: 5
+    - alias: "Turn off living room camera"
+      service: switch.turn_off
+      data:
+        entity_id: switch.living_room_camera
+    - alias: "Send Notification"
+      service: notify.notify
+      data:
+        title: "Away Mode Deactivated"
+      message: "Away Mode has been deactivated, cameras are now disarmed."
+    
