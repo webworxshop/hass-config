@@ -1,0 +1,21 @@
+
+- alias: "Activate Away Mode when everyone goes out"
+  trigger: 
+    - platform: state
+      entity_id: group.presence
+      from: 'home'
+      to: 'not_home'
+  action:
+    service: script.turn_on
+    entity_id: script.away_mode_activate
+
+- alias: "Deactivate Away Mode when someone comes home"
+  trigger:
+    - platform: state
+      entity_id: group.presence
+      from: 'not_home'
+      to: 'home'
+  action:
+    service: script.turn_on
+    entity_id: script.away_mode_deactivate
+
