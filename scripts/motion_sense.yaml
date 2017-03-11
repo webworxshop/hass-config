@@ -1,0 +1,15 @@
+
+motion_sense_notify_wait_10mins:
+  alias: "Notification with ten minute lockout"
+  sequence:
+    - alias: Send Notification
+      service: notify.kodi_livingroom
+      data:
+        title: "Home Assistant"
+        payload: "Motion Detected in {{ states.binary_sensor.bed1_motion.friendly_name }}!"
+        data:
+          icon: !secret hass_icon_url
+    - alias: Delay 10 mins
+      delay:
+        minutes: 10
+
