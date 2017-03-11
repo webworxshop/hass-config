@@ -4,17 +4,17 @@ homeassistant:
   # Location required to calculate the time the sun rises and sets
   latitude: !secret home_latitude
   longitude: !secret home_longitude
-  # C for Celcius, F for Fahrenheit
-  temperature_unit: C
+  elevation: !secret home_elevation
+  unit_system: metric
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-  time_zone: !secret timezone
+  time_zone: !secret time_zone
 
-  customize: customise.yaml
+  customize: !include customise.yaml
 
 http:
   api_password: !secret http_password 
-  ssl_certificate: !tls_cert
-  ssl_key: !secret tls_key 
+#  ssl_certificate: !secret tls_cert
+#  ssl_key: !secret tls_key 
 
 # Enables support for tracking state changes over time.
 history:
@@ -82,7 +82,7 @@ ffmpeg:
 input_boolean: !include entities/input_booleans.yaml
 sensor: !include entities/sensors.yaml
 binary_sensor: !include entities/binary_sensors.yaml
-thermostat: !include entities/heating.yaml
+climate: !include entities/heating.yaml
 light: !include entities/lights.yaml
 switch: !include entities/switches.yaml
 media_player: !include entities/media_players.yaml

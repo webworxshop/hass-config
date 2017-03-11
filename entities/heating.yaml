@@ -1,5 +1,5 @@
 
-  - platform: heat_control
+  - platform: generic_thermostat
     name: Bed2 Heating
     heater: switch.bed2_heating
     target_sensor: sensor.bed2_temperature_proxy
@@ -7,7 +7,7 @@
     max_temp: 22.0
     target_temp: 21.0
 
-  - platform: heat_control
+  - platform: generic_thermostat
     name: Bed1 Heating
     heater: switch.bed1_heating
     target_sensor: sensor.bed1_temperature_proxy

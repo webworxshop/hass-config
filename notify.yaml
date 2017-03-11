@@ -19,6 +19,12 @@
     password: !secret smtp_passwd 
     recipient: !secret smtp_address2
 
+  - name: kodi_livingroom
+    platform: kodi
+    host: !secret kodi_host
+    username: !secret kodi_username
+    password: !secret kodi_password
+
   - name: notify
     platform: group
     services:

@@ -24,7 +24,7 @@ away_mode_activate:
       service: notify.notify
       data:
         title: "Away Mode Activated"
-      message: "Away Mode has been activated, cameras are now armed."
+        message: "Away Mode has been activated, cameras are now armed."
       
 away_mode_deactivate:
   alias: "Deactivate Away Mode"
@@ -56,5 +56,5 @@ away_mode_deactivate:
       service: notify.notify
       data:
         title: "Away Mode Deactivated"
-      message: "Away Mode has been deactivated, cameras are now disarmed."
+        message: "Away Mode has been deactivated, cameras are now disarmed."
     
