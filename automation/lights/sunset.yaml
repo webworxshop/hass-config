@@ -5,14 +5,9 @@
       event: sunset
       offset: "-00:20:00"
   condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: group.presence
-        state: home
-      - condition: numeric_state
-        entity_id: sensor.dark_sky_cloud_coverage
-        below: 49
+      condition: state
+      entity_id: group.presence
+      state: home
   action:
     service: light.turn_on
     entity_id: light.main_lights
