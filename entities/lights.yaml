@@ -2,7 +2,7 @@
   - platform: mqtt
     name: "Reading Lamp"
     state_topic: !secret rl_state_topic
-    command_topic: !secret rl_state_topic
+    command_topic: !secret rl_cmd_topic
     qos: 0
     payload_on: "1"
     payload_off: "0"
