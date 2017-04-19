@@ -34,6 +34,9 @@ updater:
 # Enables the frontend
 frontend:
 
+# Enables configuration UI
+config:
+
 # Allows you to issue voice commands from the frontend
 conversation:
 
