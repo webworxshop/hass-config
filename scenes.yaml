@@ -5,6 +5,7 @@
         state: on
         rgb_color: [0, 0, 255]
         brightness: 20
+        transition: 3
       light.lava_lamp:
         state: on
   
@@ -19,4 +20,5 @@
         state: on
         rgb_color: [255, 255, 255]
         brightness: 255
+        transition: 3
          

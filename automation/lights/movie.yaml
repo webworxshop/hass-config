@@ -22,7 +22,7 @@
       state: paused
     - platform: state
       entity_id: media_player.tv
-      state: stopped
+      state: idle
   condition:
     condition: and
     conditions:
