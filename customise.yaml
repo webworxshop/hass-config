@@ -20,3 +20,6 @@
     sensor.weather_wind_speed:
       friendly_name: Wind Speed
 
+    binary_sensor.kitchen_motion:
+      device_class: motion
+

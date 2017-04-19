@@ -52,6 +52,7 @@ mqtt:
 
 mqtt_eventstream:
   publish_topic: !secret es_pub_topic
+  subscribe_topic: !secret es_sub_topic
 
 device_tracker:
   - platform: owntracks

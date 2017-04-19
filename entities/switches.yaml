@@ -21,13 +21,13 @@
     qos: 0
     retain: false
 
-  - platform: mqtt
-    name: "Living Room Camera"
-    state_topic: !secret lrcamera_state_topic
-    command_topic: !secret lrcamera_cmd_topic
-    payload_on: "1"
-    payload_off: "0"
-    optimistic: false
-    qos: 0
-    retain: false
+#  - platform: mqtt
+#    name: "Living Room Camera"
+#    state_topic: !secret lrcamera_state_topic
+#    command_topic: !secret lrcamera_cmd_topic
+#    payload_on: "1"
+#    payload_off: "0"
+#    optimistic: false
+#    qos: 0
+#    retain: false
 
