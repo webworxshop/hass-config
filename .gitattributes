@@ -2,3 +2,4 @@ secrets.yaml filter=git-crypt diff=git-crypt
 appdaemon.cfg filter=git-crypt diff=git-crypt
 known_devices.yaml filter=git-crypt diff=git-crypt
 mysensors.json filter=git-crypt diff=git-crypt
+html5_push_registrations.conf filter=git-crypt diff=git-crypt

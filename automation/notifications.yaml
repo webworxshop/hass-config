@@ -15,7 +15,7 @@
       entity_id: group.presence
       state: not_home
   action:
-    service: notify.smtp_notify1
+    service: notify.html5_family
     data:
       title: "Temperature Report"
       message: "The temperature in {{ states.sensor.bed1_temperature.friendly_name }} is {{ states('sensor.bed1_temperature') }}{{ states.sensor.bed1_temperature.attributes['unit_of_measurement'] }} and {{ states.sensor.bed2_temperature.friendly_name }} is {{ states('sensor.bed2_temperature') }}{{ states.sensor.bed2_temperature.attributes['unit_of_measurement'] }}" 
@@ -53,7 +53,7 @@
     entity_id: group.presence
     state: not_home
   action:
-    service: notify.smtp_notify1
+    service: notify.html5_notify1
     data:
       title: "ALERT: Internal Motion Detection"
       message: >
@@ -62,6 +62,7 @@
          {% if states(sensor) == "on" %}{{ sensor.split(".")[1].split("_")[0].capitalize() }}
          {% endif %}
        {% endfor %}. 
+      tag: "internal-motion-notification"
 
 - alias: 'Update Available Notifications'
   trigger:

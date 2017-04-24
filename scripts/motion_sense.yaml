@@ -3,7 +3,7 @@ motion_sense_notify_wait_10mins:
   alias: "Notification with ten minute lockout"
   sequence:
     - alias: Send Notification
-      service: notify.kodi_livingroom
+      service: notify.all_devices
       data:
         title: "Home Assistant"
         payload: "Motion Detected in {{ states.binary_sensor.bed1_motion.friendly_name }}!"

@@ -13,8 +13,8 @@ homeassistant:
 
 http:
   api_password: !secret http_password 
-  ssl_certificate: !secret tls_cert
-  ssl_key: !secret tls_key 
+  ip_ban_enabled: True
+  login_attempts_threshold: 5
 
 # Enables support for tracking state changes over time.
 history:
