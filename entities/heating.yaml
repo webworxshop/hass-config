@@ -3,15 +3,17 @@
     name: Bed2 Heating
     heater: switch.bed2_heating
     target_sensor: sensor.bed2_temperature_proxy
-    min_temp: 20.0
-    max_temp: 22.0
-    target_temp: 21.0
+    target_temp: 20.0
+    tolerance: 1.0
+    min_cycle_duration:
+      minutes: 30
 
   - platform: generic_thermostat
     name: Bed1 Heating
     heater: switch.bed1_heating
     target_sensor: sensor.bed1_temperature_proxy
-    min_temp: 18.0
-    max_temp: 20.0
     target_temp: 19.0
+    tolerance: 1.0
+    min_cycle_duration:
+      minutes: 30
 
