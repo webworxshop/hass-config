@@ -20,7 +20,7 @@
       title: "Temperature Report"
       message: "The temperature in {{ states.sensor.bed1_temperature.friendly_name }} is {{ states('sensor.bed1_temperature') }}{{ states.sensor.bed1_temperature.attributes['unit_of_measurement'] }} and {{ states.sensor.bed2_temperature.friendly_name }} is {{ states('sensor.bed2_temperature') }}{{ states.sensor.bed2_temperature.attributes['unit_of_measurement'] }}" 
 
-- alias: 'Motion detection notifications (Kids)'
+- alias: 'Motion detection notifications'
   trigger:
     platform: state
     entity_id: binary_sensor.bed1_motion

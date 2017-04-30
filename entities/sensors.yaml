@@ -37,6 +37,16 @@
     name: Bed1 Temperature
     unit_of_measurement: "°C"
 
+  - platform: mqtt
+    state_topic: !secret kitchen_temperature_topic 
+    name: Kitchen Temperature
+    unit_of_measurement: "°C"
+
+  - platform: mqtt
+    state_topic: !secret kitchen_humidity_topic 
+    name: Kitchen Humidity
+    unit_of_measurement: "%"
+
   - platform: template
     sensors:
       bed1_temperature_proxy:

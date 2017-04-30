@@ -6,6 +6,8 @@
       - device_tracker.owntracks_m7
       - sensor.bed1_temperature
       - sensor.bed2_temperature
+      - sensor.kitchen_temperature
+      - sensor.kitchen_humidity
       - group.media
       - group.lights
       - group.heating
