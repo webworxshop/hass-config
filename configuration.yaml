@@ -55,11 +55,18 @@ mqtt_eventstream:
   subscribe_topic: !secret es_sub_topic
 
 device_tracker:
-  - platform: owntracks
   - platform: snmp
     host: !secret firewall_host
     community: !secret firewall_snmp_community 
     baseoid: 1.3.6.1.2.1.4.22.1.2
+    track_new_devices: no
+  - platform: owntracks
+    max_gps_accuracy: 200
+    waypoints: yes
+    waypoint_whitelist:
+      - rob_ot
+
+map:
 
 # not using this yet
 #mysensors:
@@ -72,12 +79,12 @@ device_tracker:
 #  version: '1.5'
 #  optimistic: false
 
-zoneminder:
-  host: !secret zm_host
-  path: /zm/
-  ssl: False
-  username: !secret zm_username
-  password: !secret zm_password
+#zoneminder:
+#  host: !secret zm_host
+#  path: /zm/
+#  ssl: False
+#  username: !secret zm_username
+#  password: !secret zm_password
 
 ffmpeg:
   ffmpeg_bin: /usr/bin/avconv

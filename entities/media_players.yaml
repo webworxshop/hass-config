@@ -5,4 +5,14 @@
     name: TV
     username: !secret kodi_username 
     password: !secret kodi_password
+    
+  - platform: cast
+    host: !secret chromecast_host
+
+  - platform: snapcast
+    host: !secret musicserver_host
+
+  - platform: mpd
+    host: !secret musicserver_host
+    name: Mopidy
 

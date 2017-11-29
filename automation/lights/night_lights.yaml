@@ -1,0 +1,29 @@
+
+- alias: 'Hallway and toilet lights on in evening'
+  trigger:
+    platform: sun
+    event: sunset
+    offset: "-0:10:00"
+  action:
+    #- service: light.turn_on
+    #  data:
+    #    entity_id: light.hallway
+    #    brightness_pct: 1
+    - service: light.turn_on
+      data:
+        entity_id: light.toilet
+        brightness_pct: 1
+
+- alias: 'Hallway and toilet lights off in morning'
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: "0:10:00"
+  action:
+    #- service: light.turn_off
+    #  data:
+    #    entity_id: light.hallway
+    - service: light.turn_off
+      data:
+        entity_id: light.toilet
+

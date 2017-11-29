@@ -1,8 +1,8 @@
 
-  - platform: zoneminder
-    name: zoneminder_mode
-    command_on: Modect
-    command_off: Monitor
+#  - platform: zoneminder
+#    name: zoneminder_mode
+#    command_on: Modect
+#    command_off: Monitor
 
   - platform: kankun
     switches:

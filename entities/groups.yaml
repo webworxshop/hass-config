@@ -3,12 +3,9 @@
     entities:
       - sun.sun
       - device_tracker.android20
-      - device_tracker.owntracks_m7
-      - sensor.bed1_temperature
-      - sensor.bed2_temperature
-      - sensor.kitchen_temperature
-      - sensor.kitchen_humidity
+      - device_tracker.rob_ot_nexus
       - group.media
+      #- group.multi_room_audio
       - group.lights
       - group.heating
       - group.appliances
@@ -20,14 +17,34 @@
       - media_player.tv
 #      - weblink.tv_controller
 
+  multi_room_audio:
+    name: Multi-Room Audio
+    entities:
+      - media_player.mopidy
+      - media_player.snapcast_group_569d98d9da858f7bf1a0feccbc8879d0
+      - media_player.snapcast_client_02626e762d48bc47
+      - media_player.snapcast_client_2b7f698938ce4375bb2de6e2490595fa
+      - media_player.snapcast_client_f1fba17a706c4e42a34e1a3527f99a1a
+
+  kitchen_downlights:
+    name: Kitchen Downlights
+    entities:
+      - light.kitchen_downlight_1
+      - light.kitchen_downlight_2
+      - light.kitchen_downlight_3
+
   lights:
     name: Lights
     entities:
       - scene.movie
       - scene.night
-      - light.main_lights
+      - light.living_room_spots
+      - light.dining_room_spots
       - light.reading_lamp
       - light.lava_lamp
+      - light.hallway
+      - light.toilet
+      - group.kitchen_downlights
         
   heating:
     name: Heating
@@ -73,5 +90,5 @@
 
   presence:
     - device_tracker.android20
-    - device_tracker.owntracks_m7
+    - device_tracker.rob_ot_nexus
 

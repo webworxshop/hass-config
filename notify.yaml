@@ -21,7 +21,7 @@
 
   - name: kodi_livingroom
     platform: kodi
-    host: !secret kodi_host_http
+    host: !secret kodi_host
     username: !secret kodi_username
     password: !secret kodi_password
 
