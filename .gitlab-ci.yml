@@ -15,4 +15,4 @@ check_config:
   stage: check
   image: homeassistant/home-assistant:latest
   script:
-    - hass -c . --script check_config
+    - python -m homeassistant -c . --script check_config
