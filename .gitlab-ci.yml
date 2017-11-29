@@ -15,4 +15,5 @@ check_config:
   stage: check
   image: homeassistant/home-assistant:latest
   script:
-    - python -m homeassistant -c . --script check_config
+    - cd /usr/src/app
+    - python -m homeassistant -c $CI_PROJECT_DIR --script check_config
