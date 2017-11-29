@@ -1,0 +1,16 @@
+
+stages:
+  - check
+  - deploy
+
+before_script:
+  - git submodule sync --recursive
+  - git submodule update --init --recursive
+  - apt-get install -y mosquitto-clients
+  - mv fake_secrets.yaml secrets.yaml
+
+check_config:
+  stage: check
+  image: homeassistant/home-assistant:latest
+  script:
+    - hass -c . --script check_config
