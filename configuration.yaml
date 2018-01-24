@@ -99,6 +99,11 @@ switch: !include entities/switches.yaml
 media_player: !include entities/media_players.yaml
 camera: !include entities/cameras.yaml
 group: !include entities/groups.yaml
+fan: !include entities/fans.yaml
+timer: !include entities/timers.yaml
+
+# include zones
+zone: !include zones.yaml
 
 # include automation related stuff
 scene: !include scenes.yaml

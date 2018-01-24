@@ -32,6 +32,9 @@
     - platform: state
       entity_id: media_player.living_room
       to: idle
+    - platform: state
+      entity_id: media_player.living_room
+      to: 'off'
   condition:
     condition: and
     conditions:
@@ -41,4 +44,4 @@
         after: '20:00:00'
   action:
     service: scene.turn_on
-    entity_id: scene.main_lights_bright
+    entity_id: scene.downlights_bright

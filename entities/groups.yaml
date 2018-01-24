@@ -1,5 +1,6 @@
   default_view:
     view: yes
+    icon: mdi:home
     entities:
       - sun.sun
       - device_tracker.android20
@@ -84,6 +85,7 @@
   security:
     name: Security
     view: yes
+    icon: mdi:lock
     entities:
       - group.cameras
       - group.motion
@@ -91,4 +93,12 @@
   presence:
     - device_tracker.android20
     - device_tracker.rob_ot_nexus
+
+  config:
+    name: Configuration
+    view: yes
+    icon: mdi:settings
+    entities:
+      - input_boolean.on_holiday
+      - input_boolean.vacation_mode
 
