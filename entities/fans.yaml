@@ -1,0 +1,9 @@
+  
+  - platform: mqtt
+    name: !secret f1_name
+    state_topic: !secret f1_state_topic
+    command_topic: !secret f1_command_topic
+    payload_on: !secret f1_payload_on
+    payload_off: !secret f1_payload_off
+    optimistic: false
+    retain: false
