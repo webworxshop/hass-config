@@ -35,4 +35,12 @@
             name: Living Room Spots
           - number: 4
             name: Dining Room Spots
-
+  
+  - platform: mqtt
+    name: "Night Light"
+    state_topic: !secret nl_state_topic
+    command_topic: !secret nl_command_topic
+    payload_on: !secret nl_payload_on
+    payload_off: !secret nl_payload_off
+    optimistic: false
+    retain: true
