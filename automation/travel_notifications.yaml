@@ -1,0 +1,69 @@
+
+- alias: !secret n1_alias
+  trigger:
+    platform: zone
+    entity_id: device_tracker.rob_ot_nexus
+    zone: zone.zone_1
+    event: enter
+  condition:
+    condition: time
+    before: !secret n1_time
+  action:
+    service: notify.html5_notify2
+    data:
+      title: !secret n1_title
+      message: !secret n1_message
+      data:
+        tag: "travel-notifications"
+
+- alias: !secret n2_alias
+  trigger:
+    platform: zone
+    entity_id: device_tracker.rob_ot_nexus
+    zone: zone.zone_2
+    event: enter
+  condition:
+    condition: time
+    after: !secret n2_time
+  action:
+    service: notify.html5_notify2
+    data:
+      title: !secret n2_title
+      message: !secret n2_message
+      data:
+        tag: "travel-notifications"
+
+- alias: !secret n3_alias
+  trigger:
+    platform: zone
+    entity_id: device_tracker.rob_ot_nexus
+    zone: zone.zone_3
+    event: enter
+  condition:
+    condition: time
+    before: !secret n3_time
+  action:
+    service: notify.html5_notify2
+    data:
+      title: !secret n3_title
+      message: !secret n3_message
+      data:
+        tag: "travel-notifications"
+
+- alias: !secret n4_alias
+  trigger:
+    platform: zone
+    entity_id: device_tracker.rob_ot_nexus
+    zone: zone.zone_3
+    event: leave
+  condition:
+    condition: time
+    after: !secret n4_time
+  action:
+    service: notify.html5_notify2
+    data:
+      title: !secret n4_title
+      message: !secret n4_message
+      data:
+        tag: "travel-notifications"
+
