@@ -34,7 +34,6 @@
     platform: group
     services:
       - service: !secret html5_target1a
-      - service: !secret html5_target1b
 
   - name: html5_notify2
     platform: group

@@ -102,6 +102,11 @@ google_assistant:
     - switch
     - light
     - fan
+  entity_config:
+    group.kitchen_downlights:
+      expose: true
+    scene.movie:
+      expose: true
 
 # include entity files
 input_boolean: !include entities/input_booleans.yaml

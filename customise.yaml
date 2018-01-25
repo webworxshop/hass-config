@@ -23,12 +23,6 @@
     binary_sensor.kitchen_motion:
       device_class: motion
 
-    group.kitchen_downlights:
-      google_assistant: true
-
-    scene.movie:
-      google_assistant: true
-
     zone.zone_1:
       friendly_name: !secret z1_name
 

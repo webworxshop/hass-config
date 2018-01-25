@@ -6,6 +6,9 @@
     hours: 23
     seconds: 0
   action:
-    service: switch.turn_off
-    entity_id: switch.kettle
-
+    - service: switch.turn_off
+      entity_id: switch.kettle
+    - service: notify.html5_notify1
+      data:
+        title: "Set up the Kettle"
+        message: 'Remember to set up the kettle!'
