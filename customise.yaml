@@ -23,6 +23,9 @@
     binary_sensor.kitchen_motion:
       device_class: motion
 
+    !secret linode_sensor_name:
+      friendly_name: Linode VPS
+
     zone.zone_1:
       friendly_name: !secret z1_name
 

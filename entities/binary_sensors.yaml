@@ -26,3 +26,7 @@
   - platform: workday
     country: !secret country_code
     province: !secret province_code
+
+  - platform: linode
+    nodes:
+      - !secret linode_vps_name
