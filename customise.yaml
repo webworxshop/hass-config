@@ -23,3 +23,11 @@
     binary_sensor.kitchen_motion:
       device_class: motion
 
+    zone.zone_1:
+      friendly_name: !secret z1_name
+
+    zone.zone_2:
+      friendly_name: !secret z2_name
+
+    zone.zone_3:
+      friendly_name: !secret z3_name

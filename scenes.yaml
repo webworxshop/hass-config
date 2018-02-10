@@ -1,24 +1,48 @@
 
   - name: Movie
     entities:
-      light.main_lights:
+      light.living_room_spots:
         state: on
         rgb_color: [0, 0, 255]
         brightness: 20
         transition: 3
       light.lava_lamp:
         state: on
-  
-  - name: Night
-    entities:
-      group.lights:
+      light.dining_room_spots:
         state: off
- 
-  - name: Main Lights Bright
+      light.kitchen_downlight_1:
+        state: on
+        rgb_color: [255, 73, 255]
+        brightness: 17.85
+      light.kitchen_downlight_2:
+        state: on
+        rgb_color: [255, 73, 255]
+        brightness: 17.85
+      light.kitchen_downlight_3:
+        state: on
+        rgb_color: [255, 73, 255]
+        brightness: 17.85
+  
+  - name: Spot Lights Bright
     entities:
-      light.main_lights:
+      light.living_room_spots:
         state: on
         rgb_color: [255, 255, 255]
         brightness: 255
         transition: 3
+
+  - name: Downlights Bright
+    entities:
+      light.kitchen_downlight_1:
+        state: 'on'
+        brightness: 255
+        color_temp: 253
+      light.kitchen_downlight_2:
+        state: 'on'
+        brightness: 255
+        color_temp: 253
+      light.kitchen_downlight_3:
+        state: 'on'
+        brightness: 255
+        color_temp: 253
          

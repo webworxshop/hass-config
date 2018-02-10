@@ -21,7 +21,7 @@
 
   - name: kodi_livingroom
     platform: kodi
-    host: !secret kodi_host_http
+    host: !secret kodi_host
     username: !secret kodi_username
     password: !secret kodi_password
 
@@ -34,7 +34,6 @@
     platform: group
     services:
       - service: !secret html5_target1a
-      - service: !secret html5_target1b
 
   - name: html5_notify2
     platform: group

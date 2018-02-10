@@ -1,0 +1,39 @@
+
+- alias: 'Start shut off timer when TV becomes idle'
+  trigger:
+    - platform: state
+      entity_id: media_player.tv
+      to: idle
+    - platform: state
+      entity_id: media_player.living_room
+      to: idle
+    - platform: state
+      entity_id: media_player.living_room
+      to: 'off'
+  action:
+    service: timer.start
+    entity_id: timer.tv_off
+
+- alias: 'Cancel shut off timer if TV starts playing'
+  trigger:
+    - platform: state
+      entity_id: media_player.tv
+      to: playing
+    - platform: state
+      entity_id: media_player.living_room
+      to: playing
+  action:
+    service: timer.cancel
+    entity_id: timer.tv_off
+
+- alias: 'When timer expires, turn off TV'
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.tv_off
+  action:
+    service: switch.turn_off
+    data:
+      entity_id: switch.hdmi_0
+

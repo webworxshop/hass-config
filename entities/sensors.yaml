@@ -1,6 +1,6 @@
 
-  - platform: zoneminder
-    name: zoneminder_sensor
+#  - platform: zoneminder
+#    name: zoneminder_sensor
 
   - platform: darksky
     api_key: !secret darksky_api_key

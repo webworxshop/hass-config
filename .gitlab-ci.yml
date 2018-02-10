@@ -1,0 +1,19 @@
+
+stages:
+  - check
+  - deploy
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
+before_script:
+  - apt-get update
+  - apt-get install -y mosquitto-clients
+  - mv fake_secrets.yaml secrets.yaml
+
+check_config:
+  stage: check
+  image: homeassistant/home-assistant:latest
+  script:
+    - cd /usr/src/app
+    - python -m homeassistant -c $CI_PROJECT_DIR --script check_config
