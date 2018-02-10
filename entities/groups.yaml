@@ -94,6 +94,13 @@
     - device_tracker.android20
     - device_tracker.rob_ot_nexus
 
+  kitchen:
+    name: Kitchen
+    entities:
+      - binary_sensor.kitchen_motion_2
+      - sensor.kitchen_temperature_2
+      - sensor.kitchen_humidity_2
+
   config:
     name: Configuration
     view: yes
@@ -101,4 +108,5 @@
     entities:
       - input_boolean.on_holiday
       - input_boolean.vacation_mode
+      - group.kitchen
 
