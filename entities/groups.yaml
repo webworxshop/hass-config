@@ -3,36 +3,53 @@
     icon: mdi:home
     entities:
       - sun.sun
-      - device_tracker.android20
-      - device_tracker.rob_ot_nexus
-      - group.media
-      #- group.multi_room_audio
+      - !secret device_2
+      - !secret device_1
       - group.lights
-      - group.heating
+      - group.electric_blankets
       - group.appliances
+      - group.bedroom_1
       - group.weather
 
-  media:
-    name: Media
+  bedroom_1:
+    name: !secret group_bedroom_1_name
     entities:
-      - media_player.tv
-#      - weblink.tv_controller
+      - light.night_light_2
+      - !secret temp_sensor1
+      - !secret humidity_sensor1
+      - !secret brightness_sensor1
+      - !secret motion_sensor1
+
+  electric_blankets:
+    name: Electric Blankets
+    entities:
+      - switch.electric_blanket_1
+      - switch.electric_blanket_2
 
   multi_room_audio:
     name: Multi-Room Audio
     entities:
       - media_player.mopidy
-      - media_player.snapcast_group_569d98d9da858f7bf1a0feccbc8879d0
-      - media_player.snapcast_client_02626e762d48bc47
-      - media_player.snapcast_client_2b7f698938ce4375bb2de6e2490595fa
-      - media_player.snapcast_client_f1fba17a706c4e42a34e1a3527f99a1a
 
-  kitchen_downlights:
-    name: Kitchen Downlights
+  media_power:
+    name: Power
     entities:
-      - light.kitchen_downlight_1
-      - light.kitchen_downlight_2
-      - light.kitchen_downlight_3
+      - switch.living_room_tv
+
+  media_tools:
+    name: Tools
+    entities:
+      - script.restart_kodi
+
+  media:
+    name: Media
+    view: yes
+    icon: mdi:music
+    entities:
+      - group.media_tools
+      - group.media_power
+      - media_player.tv
+      - group.multi_room_audio
 
   lights:
     name: Lights
@@ -45,13 +62,7 @@
       - light.lava_lamp
       - light.hallway
       - light.toilet
-      - group.kitchen_downlights
-        
-  heating:
-    name: Heating
-    entities:
-      - switch.bed1_heating
-      - switch.bed2_heating
+      - light.kitchen_downlights
 
   appliances:
     name: Appliances
@@ -61,8 +72,18 @@
   weather:
     name: Weather
     entities:
-      - sensor.weather_temperature
-      - sensor.weather_wind_speed
+      - sensor.dark_sky_summary
+      - sensor.dark_sky_temperature
+      - sensor.dark_sky_dew_point
+      - sensor.dark_sky_humidity
+      - sensor.dark_sky_pressure
+      - sensor.dark_sky_wind_speed
+      - sensor.dark_sky_wind_bearing
+      - sensor.dark_sky_cloud_cover
+      - sensor.dark_sky_precip_intensity
+      - sensor.dark_sky_precip_probability
+      - sensor.dark_sky_daytime_high_temperature
+      - sensor.dark_sky_overnight_low_temperature
 
   cameras:
     - camera.front
@@ -71,51 +92,38 @@
   motion:
     name: All Motion Sensors
     entities:
-      - binary_sensor.bed1_motion
-      - binary_sensor.garage_motion
-      - binary_sensor.kitchen_motion
+      - !secret motion_sensor1
 
   internal_motion:
     name: Internal Motion Sensors
     entities:
-      - binary_sensor.bed1_motion
-      - binary_sensor.garage_motion
-      - binary_sensor.kitchen_motion
+      - !secret motion_sensor1
 
   security:
     name: Security
     view: yes
     icon: mdi:lock
     entities:
-      - group.cameras
       - group.motion
 
   presence:
-    - device_tracker.android20
-    - device_tracker.rob_ot_nexus
+    - !secret device_1
+    - !secret device_2
 
-  kitchen:
-    name: Kitchen
+  people_status:
+    name: "People Status"
     entities:
-      - binary_sensor.kitchen_motion_2
-      - sensor.kitchen_temperature_2
-      - sensor.kitchen_humidity_2
+      - sensor.person1_status
+      - sensor.person2_status
 
   config:
     name: Configuration
     view: yes
     icon: mdi:settings
     entities:
+      - group.people_status
       - input_boolean.on_holiday
       - input_boolean.vacation_mode
-      - group.kitchen
-
-  servers:
-    name: Server Status
-    entities:
-      - !secret linode_sensor_name
-      #- binary_sensor.ping_webworxshop
-      #- binary_sensor.ping_google
   
   speedtest:
     name: Speed Tests
@@ -137,6 +145,6 @@
     view: yes
     icon: mdi:cloud-check
     entities:
-      - group.servers
       - group.speedtest
       - group.certificates
+
