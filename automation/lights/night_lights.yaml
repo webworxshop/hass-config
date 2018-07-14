@@ -92,6 +92,10 @@
         entity_id: light.night_light_2
         rgb_color: [0, 255, 0]
         brightness_pct: 80
+    - delay:
+        minutes: 15
+    - service: light.turn_off
+      entity_id: light.night_light_2
 
 - alias: 'Night light green in morning (non-workdays)'
   trigger: 
@@ -107,9 +111,13 @@
         entity_id: 'input_boolean.on_holiday'
         state: 'on'
   action:
-    - service: light.turn_off
+    - service: light.turn_on
       data:
         entity_id: light.night_light_2
         rgb_color: [0, 255, 0]
         brightness_pct: 80
+    - delay:
+        minutes: 15
+    - service: light.turn_off
+      entity_id: light.night_light_2
 
