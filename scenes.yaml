@@ -10,15 +10,7 @@
         state: on
       light.dining_room_spots:
         state: off
-      light.kitchen_downlight_1:
-        state: on
-        rgb_color: [255, 73, 255]
-        brightness: 17.85
-      light.kitchen_downlight_2:
-        state: on
-        rgb_color: [255, 73, 255]
-        brightness: 17.85
-      light.kitchen_downlight_3:
+      light.kitchen_downlights:
         state: on
         rgb_color: [255, 73, 255]
         brightness: 17.85
@@ -31,18 +23,37 @@
         brightness: 255
         transition: 3
 
-  - name: Downlights Bright
+  - name: Dining Spots Bright
+    entities:
+      light.dining_room_spots:
+        state: on
+        rgb_color: [255, 255, 255]
+        brightness: 255
+        transition: 3
+         
+  - name: Main Lights
+    entities:
+      scene.spot_lights_bright:
+        state: 'on'
+      scene.dining_spots_bright:
+        state: 'on'
+      script.downlights_bright:
+        state: 'on'
+
+  - name: Goodnight
     entities:
       light.kitchen_downlight_1:
         state: 'on'
-        brightness: 255
         color_temp: 253
+        brightness: 18
       light.kitchen_downlight_2:
-        state: 'on'
-        brightness: 255
-        color_temp: 253
+        state: 'off'
       light.kitchen_downlight_3:
-        state: 'on'
-        brightness: 255
-        color_temp: 253
-         
+        state: 'off'
+      light.living_room_spots:
+        state: 'off'
+      light.dining_room_spots:
+        state: 'off'
+      light.hallway:
+        state: 'off'
+

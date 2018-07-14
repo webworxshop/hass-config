@@ -9,11 +9,8 @@
       entity_id: group.presence
       state: home
   action:
-    service: light.turn_on
-    entity_id: light.main_lights
-    data:
-      brightness: 255
-      rgb_color: [255, 255, 255]
+    service: scene.turn_on
+    entity_id: scene.main_lights
       
 - alias: 'Lights on at sunset, cloudy days'
   trigger:
@@ -30,11 +27,8 @@
         entity_id: sensor.dark_sky_cloud_coverage
         above: 50
   action:
-    service: light.turn_on
-    entity_id: light.main_lights
-    data:
-      brightness: 255
-      rgb_color: [255, 255, 255]
+    service: scene.turn_on
+    entity_id: scene.main_lights
 
 - alias: 'Lights on if someone comes home, after sunset'
   trigger:
@@ -47,9 +41,6 @@
       after: sunset
       after_offset: "-00:20:00"
   action:
-    service: light.turn_on
-    entity_id: light.main_lights
-    data:
-      brightness: 255
-      rgb_color: [255, 255, 255]
+    service: scene.turn_on
+    entity_id: scene.main_lights
 
