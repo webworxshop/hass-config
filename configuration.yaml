@@ -110,6 +110,9 @@ google_assistant:
     scene.movie:
       expose: true
 
+linode:
+  access_token: !secret linode_api_key
+
 # include entity files
 input_boolean: !include entities/input_booleans.yaml
 sensor: !include entities/sensors.yaml

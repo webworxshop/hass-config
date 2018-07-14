@@ -110,3 +110,33 @@
       - input_boolean.vacation_mode
       - group.kitchen
 
+  servers:
+    name: Server Status
+    entities:
+      - !secret linode_sensor_name
+      #- binary_sensor.ping_webworxshop
+      #- binary_sensor.ping_google
+  
+  speedtest:
+    name: Speed Tests
+    entities:
+      - sensor.speedtest_ping
+      - sensor.speedtest_download
+      - sensor.speedtest_upload
+
+  certificates:
+    name: Certificate Expiry
+    entities:
+      - sensor.blog
+      - sensor.analytics
+      - sensor.news
+      - sensor.home
+    
+  network:
+    name: Network
+    view: yes
+    icon: mdi:cloud-check
+    entities:
+      - group.servers
+      - group.speedtest
+      - group.certificates

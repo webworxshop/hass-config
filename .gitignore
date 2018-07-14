@@ -3,7 +3,6 @@
 .HA_VERSION
 .uuid
 home-assistant.log
-home-assistant_v2.db
-home-assistant_v2.db-journal
+home-assistant_v2.db*
 *.pem
 deps/
