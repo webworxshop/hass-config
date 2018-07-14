@@ -10,6 +10,7 @@ homeassistant:
   time_zone: !secret time_zone
 
   customize: !include customise.yaml
+  packages: !include_dir_named packages
 
 http:
   api_password: !secret http_password 
@@ -52,9 +53,9 @@ mqtt:
   discovery: true
   discovery_prefix: homeassistant
 
-mqtt_eventstream:
-  publish_topic: !secret es_pub_topic
-  subscribe_topic: !secret es_sub_topic
+#mqtt_eventstream:
+#  publish_topic: !secret es_pub_topic
+#  subscribe_topic: !secret es_sub_topic
 
 device_tracker:
   - platform: snmp
@@ -94,24 +95,21 @@ ffmpeg:
 hdmi_cec:
   host: !secret kodi_host
 
-google_assistant:
-  project_id: !secret ga_project_id
-  client_id: !secret ga_client_id
-  access_token: !secret ga_access_token
-  agent_user_id: !secret ga_agent_user_id
-  api_key:  !secret ga_api_key
-  exposed_domains:
-    - switch
-    - light
-    - fan
-  entity_config:
-    group.kitchen_downlights:
-      expose: true
-    scene.movie:
-      expose: true
-
-linode:
-  access_token: !secret linode_api_key
+#google_assistant:
+#  project_id: !secret ga_project_id
+#  client_id: !secret ga_client_id
+#  access_token: !secret ga_access_token
+#  agent_user_id: !secret ga_agent_user_id
+#  api_key:  !secret ga_api_key
+#  exposed_domains:
+#    - switch
+#    - light
+#    - fan
+#  entity_config:
+#    group.kitchen_downlights:
+#      expose: true
+#    scene.movie:
+#      expose: true
 
 # include entity files
 input_boolean: !include entities/input_booleans.yaml

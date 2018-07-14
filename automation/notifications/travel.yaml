@@ -9,7 +9,7 @@
     condition: time
     before: !secret n1_time
   action:
-    service: notify.html5_notify2
+    service: !secret notify_service2
     data:
       title: !secret n1_title
       message: !secret n1_message
@@ -26,7 +26,7 @@
     condition: time
     after: !secret n2_time
   action:
-    service: notify.html5_notify2
+    service: !secret notify_service2
     data:
       title: !secret n2_title
       message: !secret n2_message
@@ -43,7 +43,7 @@
     condition: time
     before: !secret n3_time
   action:
-    service: notify.html5_notify2
+    service: !secret notify_service2
     data:
       title: !secret n3_title
       message: !secret n3_message
@@ -60,7 +60,7 @@
     condition: time
     after: !secret n4_time
   action:
-    service: notify.html5_notify2
+    service: !secret notify_service2
     data:
       title: !secret n4_title
       message: !secret n4_message

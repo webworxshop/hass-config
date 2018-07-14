@@ -6,10 +6,10 @@
 
   - platform: kankun
     switches:
-      bed1_heating:
-        host: !secret bed1_heating_host
-      bed2_heating:
-        host: !secret bed2_heating_host
+      electric_blanket_1:
+        host: !secret blanket1_host
+      electric_blanket_2:
+        host: !secret blanket2_host
 
   - platform: mqtt
     name: "Kettle"
