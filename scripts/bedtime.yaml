@@ -1,0 +1,24 @@
+
+bedtime:
+  alias: Bedtime Routine
+  sequence:
+    - alias: Lights to Goodnight Scene
+      service: scene.turn_on
+      data:
+        entity_id: scene.goodnight
+    - alias: Kettle Off
+      service: switch.turn_off
+      data:
+        entity_id: switch.kettle
+    - delay:
+        minutes: 10
+    - alias: Blankets off
+      service: switch.turn_off
+      data:
+        entity_id: group.electric_blankets
+    - delay:
+        minutes: 10
+    - alias: Last Light Off
+      service: light.turn_off
+      entity_id: light.kitchen_downlight_1
+
