@@ -2,7 +2,7 @@
 - alias: !secret n1_alias
   trigger:
     platform: zone
-    entity_id: device_tracker.rob_ot_nexus
+    entity_id: !secret device_1
     zone: zone.zone_1
     event: enter
   condition:
@@ -19,7 +19,7 @@
 - alias: !secret n2_alias
   trigger:
     platform: zone
-    entity_id: device_tracker.rob_ot_nexus
+    entity_id: !secret device_1
     zone: zone.zone_2
     event: enter
   condition:
@@ -36,7 +36,7 @@
 - alias: !secret n3_alias
   trigger:
     platform: zone
-    entity_id: device_tracker.rob_ot_nexus
+    entity_id: !secret device_1
     zone: zone.zone_3
     event: enter
   condition:
@@ -53,7 +53,7 @@
 - alias: !secret n4_alias
   trigger:
     platform: zone
-    entity_id: device_tracker.rob_ot_nexus
+    entity_id: !secret device_1
     zone: zone.zone_3
     event: leave
   condition:
