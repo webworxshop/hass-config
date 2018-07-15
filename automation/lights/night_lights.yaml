@@ -62,7 +62,7 @@
         rgb_color: [255, 0, 190]
         brightness_pct: 80
 
-- alias: 'Night red at 5am'
+- alias: 'Night light red at 5am'
   trigger:
     platform: time
     at: '05:00:00'
