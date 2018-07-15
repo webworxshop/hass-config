@@ -92,9 +92,6 @@ map:
 ffmpeg:
   ffmpeg_bin: /usr/bin/avconv
 
-hdmi_cec:
-  host: !secret kodi_host
-
 #google_assistant:
 #  project_id: !secret ga_project_id
 #  client_id: !secret ga_client_id
