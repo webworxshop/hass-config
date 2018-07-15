@@ -1,0 +1,56 @@
+
+sensor:
+  - platform: template
+    sensors:
+      device1_battery:
+        friendly_name: !secret device1_battery_name
+        unit_of_measurement: "%"
+        device_class: "battery"
+        value_template: !secret device1_battery_template
+
+      device2_battery:
+        friendly_name: !secret device2_battery_name
+        unit_of_measurement: "%"
+        device_class: "battery"
+        value_template: !secret device2_battery_template
+
+      device3_battery:
+        friendly_name: !secret device3_battery_name
+        unit_of_measurement: "%"
+        device_class: "battery"
+        value_template: !secret device3_battery_template
+
+group:
+  batteries:
+    name: Batteries
+    entities:
+      - sensor.device1_battery
+      - sensor.device2_battery
+      - sensor.device3_battery
+# TODO: fix nut sensors
+#      - sensor.nut_ups_battery_charge
+
+# TODO: still need to work out how to do this
+#automation:
+#  - alias: "Battery warning notification"
+#    trigger:
+#      platform: template
+#      value_template: >
+#        {% set ret = "false" %}
+#        {% for entity in states.group.batteries.attributes.entity_id %}
+#        {% if float(states(entity)) <= 15 and float(states(entity)) > 5 %}
+#        {% set ret = "true" %}
+#        {% endif %}
+#        {% endfor %}
+#        {{ ret }}
+#    action:
+#      service: script.tts_or_notify_living_room
+#      data_template:
+#        message: >
+#          {% set entities = "" %}
+#          {% for entity in states.group.batteries.attributes.entity_id %}
+#          {% if float(states(entity)) <= 15 and float(states(entity)) > 5 %}
+#          {% set entities += state_attr(entity) + ", " %}
+#          {% endif %}
+#          {% endfor %}
+#          {{ ret }}
