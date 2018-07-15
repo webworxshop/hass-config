@@ -13,7 +13,7 @@
         entity_id: light.toilet
         brightness_pct: 100
 
-- alias: 'Dim toilet lights at kids bedtime'
+- alias: 'Toilet lights dim'
   trigger:
     platform: time
     at: '20:00:00'
