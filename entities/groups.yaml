@@ -9,16 +9,26 @@
       - group.electric_blankets
       - group.appliances
       - group.bedroom_1
+      - group.bedroom_2
       - group.weather
 
   bedroom_1:
     name: !secret group_bedroom_1_name
     entities:
-      - light.night_light_2
+      - !secret night_light1
       - !secret temp_sensor1
       - !secret humidity_sensor1
       - !secret brightness_sensor1
       - !secret motion_sensor1
+
+  bedroom_2:
+    name: !secret group_bedroom_2_name
+    entities:
+      - !secret night_light2
+      - !secret temp_sensor2
+      - !secret humidity_sensor2
+      - !secret brightness_sensor2
+      - !secret motion_sensor2
 
   electric_blankets:
     name: Electric Blankets
