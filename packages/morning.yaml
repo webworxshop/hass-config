@@ -75,7 +75,9 @@ automation:
         data:
           entity_id: switch.kettle
       - delay:
-          minutes: 3
+          minutes: 5
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.tts_enabled
       - condition: state
         entity_id: media_player.tv
         state: idle

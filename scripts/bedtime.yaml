@@ -2,6 +2,9 @@
 bedtime:
   alias: Bedtime Routine
   sequence:
+    - alias: Disable TTS
+      service: input_boolean.turn_off
+      entity_id: input_boolean.tts_enabled
     - alias: Lights to Goodnight Scene
       service: scene.turn_on
       data:
