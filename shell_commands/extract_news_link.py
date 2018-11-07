@@ -17,4 +17,4 @@ episode_url = make_soup(base_url).select("a.block-link__target")[0] \
 file_url = make_soup(episode_url).select("a.popup__list__item")[0] \
         .attrs['href']
 
-print(file_url)
+print("https:" + file_url)
