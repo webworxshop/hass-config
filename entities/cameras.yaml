@@ -6,3 +6,5 @@
 #    mjpeg_url: !secret back_cam_url
 #    name: Back Garden
 
+  - platform: zoneminder
+

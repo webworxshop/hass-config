@@ -98,8 +98,7 @@
       - sensor.dark_sky_overnight_low_temperature
 
   cameras:
-    - camera.front
-    - camera.back_garden
+    - camera.garage
 
   motion:
     name: All Motion Sensors
@@ -117,6 +116,7 @@
     icon: mdi:lock
     entities:
       - group.motion
+      - group.cameras
 
   presence:
     - !secret device_1
