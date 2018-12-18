@@ -94,6 +94,13 @@ zoneminder:
 ffmpeg:
   ffmpeg_bin: /usr/bin/avconv
 
+influxdb:
+  host: !secret influx_host
+  port: 8086
+  database: !secret influx_dbname
+  username: !secret influx_user
+  password: !secret influx_passwd
+
 #google_assistant:
 #  project_id: !secret ga_project_id
 #  client_id: !secret ga_client_id
