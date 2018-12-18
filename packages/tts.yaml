@@ -60,6 +60,7 @@ script:
           {% endif %}
           It's currently {{states.sensor.dark_sky_summary.state}} and {{states.sensor.dark_sky_temperature.state|round}} degrees. The weather for the next 24 hours will be {{states.sensor.dark_sky_hourly_summary.state|replace(".", "")}}, with a high of {{states.sensor.dark_sky_daytime_high_temperature.state|round}} and a low of {{states.sensor.dark_sky_overnight_low_temperature.state|round}}.
           The current average indoor temperature is {{ states.sensor.average_indoor_temperature.state }} degrees.
+          Sun protection is required between {{ states.binary_sensor.uv_protection_window.attributes.start_time.strftime("%-I:%M%p") }} and {{ states.binary_sensor.uv_protection_window.attributes.end_time.strftime("%-I:%M%p") }}. Today's max UV index is {{ states.sensor.max_uv_index.state|round(2) }}.
 
 automation:
   - alias: "Time to leave announcement"

@@ -110,6 +110,20 @@ ffmpeg:
 #    scene.movie:
 #      expose: true
 
+openuv:
+  api_key: !secret openuv_api_key
+  binary_sensors:
+    monitored_conditions:
+      - uv_protection_window
+  sensors:
+    monitored_conditions:
+      - current_ozone_level
+      - current_uv_index
+      - current_uv_level
+      - max_uv_index
+      - safe_exposure_time_type_1
+      - safe_exposure_time_type_2
+
 # include entity files
 input_boolean: !include entities/input_booleans.yaml
 sensor: !include entities/sensors.yaml
