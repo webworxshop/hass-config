@@ -40,11 +40,13 @@
     name: Multi-Room Audio
     entities:
       - media_player.mopidy
+      - media_player.snapcast_client_outdoor_speakers
 
   media_power:
     name: Power
     entities:
       - switch.living_room_tv
+      - switch.outdoor_speakers
 
   media_tools:
     name: Tools

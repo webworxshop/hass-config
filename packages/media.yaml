@@ -1,0 +1,26 @@
+
+automation:
+  - alias: "Mute outdoor speakers when powered down"
+    trigger:
+      platform: state
+      entity_id: switch.outdoor_speakers
+      from: "on"
+      to: "off"
+    action:
+      service: media_player.volume_mute
+      data:
+        entity_id: media_player.snapcast_client_outdoor_speakers
+        is_volume_muted: true
+
+  - alias: "Unmute outdoor speakers when powered up"
+    trigger:
+      platform: state
+      entity_id: switch.outdoor_speakers
+      from: "off"
+      to: "on"
+    action:
+      service: media_player.volume_mute
+      data:
+        entity_id: media_player.snapcast_client_outdoor_speakers
+        is_volume_muted: false
+
