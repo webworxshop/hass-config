@@ -69,6 +69,10 @@ automation:
           after: "07:00:00"
           before: "10:00:00"
     action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.home_mode
+          option: None
       - service: script.turn_on
         entity_id: script.downlights_bright
       - service: switch.turn_on

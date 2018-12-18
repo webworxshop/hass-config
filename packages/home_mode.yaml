@@ -8,6 +8,7 @@ input_select:
       - "Lunchtime"
       - "Evening"
       - "Bedtime"
+      - "Night"
 
 script:
   home_mode:
@@ -85,5 +86,5 @@ automation:
       - service: input_select.select_option
         data:
           entity_id: input_select.home_mode
-          option: None
+          option: Night
 
