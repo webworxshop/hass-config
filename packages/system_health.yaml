@@ -1,0 +1,83 @@
+
+shell_command:
+  restart_kodi: /home/homeassistant/.homeassistant/shell_commands/restart_kodi.sh
+
+script:
+  restart_kodi:
+    alias: "Restart Kodi"
+    sequence:
+      - alias: "Execute restart command"
+        service: shell_command.restart_kodi
+
+sensor:
+  - platform: mqtt
+    name: "Test Battery"
+    state_topic: test/battery
+    unit_of_measurement: '%'
+  - platform: mqtt
+    name: !secret bed1_battery_name
+    state_topic: !secret bed1_battery_topic
+    unit_of_measurement: '%'
+    value_template: "{{ value_json.battery }}"
+  - platform: mqtt
+    name: "Kitchen/Hall Door Battery"
+    state_topic: "zigbee2mqtt/kitchen_hall_door"
+    unit_of_measurement: '%'
+    value_template: "{{ value_json.battery }}"
+  - platform: template
+    sensors:
+      kitchen_button_battery:
+        friendly_name: "Kitchen Button Battery"
+        unit_of_measurement: "%"
+        value_template: "{{ states.sensor.kitchen_button.attributes.battery }}"
+      toilet_button_battery:
+        friendly_name: "Toilet Button Battery"
+        unit_of_measurement: "%"
+        value_template: "{{ states.sensor.toilet_button.attributes.battery }}"
+
+automation:
+  - alias: Low Battery Notification
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.test_battery
+        below: 20
+      - platform: numeric_state
+        entity_id: !secret bed1_battery_entity
+        below: 20
+      - platform: numeric_state
+        entity_id: sensor.kitchenhall_door_battery
+        below: 20
+      - platform: numeric_state
+        entity_id: sensor.kitchen_button_battery
+        below: 20
+      - platform: numeric_state
+        entity_id: sensor.toilet_button_battery
+        below: 20
+    action:
+      service: notify.notify
+      data_template:
+        title: "Low Battery Alert"
+        message: "Device '{{ trigger.to_state.name }}' has LOW battery: {{ trigger.to_state.state }}%."
+  - alias: Critical Battery Notification
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.test_battery
+        below: 5
+      - platform: numeric_state
+        entity_id: !secret bed1_battery_entity
+        below: 5
+      - platform: numeric_state
+        entity_id: sensor.kitchenhall_door_battery
+        below: 5
+      - platform: numeric_state
+        entity_id: sensor.kitchen_button_battery
+        below: 5
+      - platform: numeric_state
+        entity_id: sensor.toilet_button_battery
+        below: 5
+    action:
+      service: notify.notify
+      data_template:
+        title: "Critical Battery Alert"
+        message: "Device '{{ trigger.to_state.name }}' has CRITICAL battery: {{ trigger.to_state.state }}%."
+
