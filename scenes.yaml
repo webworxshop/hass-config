@@ -14,7 +14,7 @@
         state: on
         rgb_color: [255, 73, 255]
         brightness: 17.85
-  
+
   - name: Spot Lights Bright
     entities:
       light.living_room_spots:
@@ -30,7 +30,7 @@
         rgb_color: [255, 255, 255]
         brightness: 255
         transition: 3
-         
+
   - name: Main Lights
     entities:
       scene.spot_lights_bright:
