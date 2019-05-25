@@ -81,3 +81,21 @@ automation:
         title: "Critical Battery Alert"
         message: "Device '{{ trigger.to_state.name }}' has CRITICAL battery: {{ trigger.to_state.state }}%."
 
+  - alias: Auto-reset Room Sensors
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.toilet_sensor_status
+        to: "off"
+        for: "00:10:00"
+    action:
+      - service: switch.turn_off
+        entity_id: switch.room_sensors
+      - delay:
+          seconds: 30
+      - service: switch.turn_on
+        entity_id: switch.room_sensors
+      - service: notify.notify
+        data_template:
+          title: "Room Sensors Reset"
+          message: "Device '{{ trigger.to_state.name }}' was offline for 10 minutes, room sensors reset."
+
