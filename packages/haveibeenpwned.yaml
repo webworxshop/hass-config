@@ -1,0 +1,16 @@
+
+#sensor:
+#  - platform: haveibeenpwned
+#    email:
+#      - !secret hibp_email1
+#      - !secret hibp_email2
+#      - !secret hibp_email3
+#      - !secret hibp_email4
+#      - !secret hibp_email5
+#      - !secret hibp_email6
+#      - !secret hibp_email7
+#      - !secret hibp_email8
+#      - !secret hibp_email9
+#      - !secret hibp_email10
+#      - !secret hibp_email11
+
