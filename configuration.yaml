@@ -65,11 +65,11 @@ device_tracker:
     community: !secret firewall_snmp_community 
     baseoid: 1.3.6.1.2.1.4.22.1.2
     track_new_devices: no
-  - platform: owntracks
-    max_gps_accuracy: 200
-    waypoints: yes
-    waypoint_whitelist:
-      - rob_ot
+#  - platform: owntracks
+#    max_gps_accuracy: 200
+#    waypoints: yes
+#    waypoint_whitelist:
+#      - rob_ot
 
 map:
 
@@ -94,12 +94,12 @@ zoneminder:
 ffmpeg:
   ffmpeg_bin: /usr/bin/avconv
 
-influxdb:
-  host: !secret influx_host
-  port: 8086
-  database: !secret influx_dbname
-  username: !secret influx_user
-  password: !secret influx_passwd
+#influxdb:
+#  host: !secret influx_host
+#  port: 8086
+#  database: !secret influx_dbname
+#  username: !secret influx_user
+#  password: !secret influx_passwd
 
 #google_assistant:
 #  project_id: !secret ga_project_id

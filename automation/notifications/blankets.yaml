@@ -17,38 +17,38 @@
       data:
          title: "It's cold tonight!"
          message: "Would you like to turn on the electric blankets?"
-         data:
-           actions:
-             - action: "blankets_yes"
-               title: "Yes, please."
-             - action: "blankets_no"
-               title: "No, thanks."
-           icon: "/local/static/icons/snowflake.png"
+#         data:
+#           actions:
+#             - action: "blankets_yes"
+#               title: "Yes, please."
+#             - action: "blankets_no"
+#               title: "No, thanks."
+#           icon: "/local/static/icons/snowflake.png"
     - service: script.tts_or_notify_living_room
       data_template:
         message: "Brrr, it's chilly! Don't forget about the electric blankets!"
 
-- alias: "Turn on electric blankets"
-  trigger:
-    platform: event
-    event_type: html5_notification.clicked
-    event_data:
-      action: blankets_yes
-  action:
-    - service: switch.turn_on
-      entity_id: switch.electric_blanket_1
-    - service: switch.turn_on
-      entity_id: switch.electric_blanket_2
+#- alias: "Turn on electric blankets"
+#  trigger:
+#    platform: event
+#    event_type: html5_notification.clicked
+#    event_data:
+#      action: blankets_yes
+#  action:
+#    - service: switch.turn_on
+#      entity_id: switch.electric_blanket_1
+#    - service: switch.turn_on
+#      entity_id: switch.electric_blanket_2
 
-- alias: "Turn off electric blankets"
-  trigger:
-    platform: event
-    event_type: html5_notification.clicked
-    event_data:
-      action: blankets_no
-  action:
-    - service: switch.turn_off
-      entity_id: switch.electric_blanket_1
-    - service: switch.turn_off
-      entity_id: switch.electric_blanket_2
+#- alias: "Turn off electric blankets"
+#  trigger:
+#    platform: event
+#    event_type: html5_notification.clicked
+#    event_data:
+#      action: blankets_no
+#  action:
+#    - service: switch.turn_off
+#      entity_id: switch.electric_blanket_1
+#    - service: switch.turn_off
+#      entity_id: switch.electric_blanket_2
 

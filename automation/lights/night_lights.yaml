@@ -90,7 +90,7 @@
         brightness_pct: 80
 
 - alias: 'Night lights green in morning (workdays)'
-  trigger: 
+  trigger:
     platform: time
     at: '07:30:00'
   condition:
@@ -121,7 +121,7 @@
       entity_id: !secret night_light2
 
 - alias: 'Night light green in morning (non-workdays)'
-  trigger: 
+  trigger:
     platform: time
     at: '08:15:00'
   condition:

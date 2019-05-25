@@ -25,16 +25,11 @@
     username: !secret kodi_username
     password: !secret kodi_password
 
-  - name: html5
-    platform: html5
-    gcm_api_key: !secret html5_gcm_api_key
-    gcm_sender_id: !secret html5_gcm_sender_id
-
-#  - name: family
-#    platform: group
-#    services:
-#      - service: !secret notify_service1
-#      - service: !secret notify_service2
+  - name: family
+    platform: group
+    services:
+      - service: smtp_notify1
+      - service: smtp_notify2
 
 #  - name: all_devices
 #    platform: group

@@ -12,25 +12,25 @@
     service: script.turn_on
     entity_id: script.motion_sense_notify_wait_10mins
         
-- alias: 'Internal motion detection alarm'
-  trigger:
-    - platform: state
-      entity_id: !secret motion_sensor1
-      from: 'off'
-      to: 'on'
-  condition:
-    condition: state
-    entity_id: group.presence
-    state: not_home
-  action:
-    service: !secret notify_service1
-    data:
-      title: "ALERT: Internal Motion Detection"
-      message: >
-       Internal motion detection was triggered at {{ now }}. The following sensors were triggered:
-       {% for sensor in states.group.internal_motion.attributes.entity_id %}
-         {% if states(sensor) == "on" %}{{ sensor.split(".")[1].split("_")[0].capitalize() }}
-         {% endif %}
-       {% endfor %}. 
-      tag: "internal-motion-notification"
+#- alias: 'Internal motion detection alarm'
+#  trigger:
+#    - platform: state
+#      entity_id: !secret motion_sensor1
+#      from: 'off'
+#      to: 'on'
+#  condition:
+#    condition: state
+#    entity_id: group.presence
+#    state: not_home
+#  action:
+#    service: !secret notify_service1
+#    data:
+#      title: "ALERT: Internal Motion Detection"
+#      message: >
+#       Internal motion detection was triggered at {{ now }}. The following sensors were triggered:
+#       {% for sensor in states.group.internal_motion.attributes.entity_id %}
+#         {% if states(sensor) == "on" %}{{ sensor.split(".")[1].split("_")[0].capitalize() }}
+#         {% endif %}
+#       {% endfor %}. 
+#      tag: "internal-motion-notification"
 
