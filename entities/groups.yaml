@@ -11,6 +11,13 @@
       - group.bedroom_1
       - group.bedroom_2
       - group.weather
+      - group.vacuum
+
+  vacuum:
+    name: "Vacuum Cleaner"
+    entities:
+      - vacuum.marvin
+      - script.spot_clean
 
   bedroom_1:
     name: !secret group_bedroom_1_name
