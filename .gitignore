@@ -8,3 +8,4 @@ home-assistant_v2.db*
 deps/
 tts/
 dashboards/
+.storage

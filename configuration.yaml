@@ -43,6 +43,9 @@ config:
 # Allows you to issue voice commands from the frontend
 conversation:
 
+# System health
+system_health:
+
 # MQTT broker
 mqtt:
   broker: !secret mqtt_host
@@ -91,9 +94,6 @@ zoneminder:
   username: !secret zm_username
   password: !secret zm_password
 
-ffmpeg:
-  ffmpeg_bin: /usr/bin/avconv
-
 #influxdb:
 #  host: !secret influx_host
 #  port: 8086
@@ -130,6 +130,12 @@ openuv:
       - max_uv_index
       - safe_exposure_time_type_1
       - safe_exposure_time_type_2
+
+speedtestdotnet:
+  monitored_conditions:
+    - ping
+    - download
+    - upload
 
 # include entity files
 input_boolean: !include entities/input_booleans.yaml

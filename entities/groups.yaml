@@ -17,7 +17,6 @@
     name: "Vacuum Cleaner"
     entities:
       - vacuum.marvin
-      - script.spot_clean
 
   bedroom_1:
     name: !secret group_bedroom_1_name
@@ -98,7 +97,7 @@
       - sensor.dark_sky_pressure
       - sensor.dark_sky_wind_speed
       - sensor.dark_sky_wind_bearing
-      - sensor.dark_sky_cloud_cover
+      - sensor.dark_sky_cloud_coverage
       - sensor.dark_sky_precip_intensity
       - sensor.dark_sky_precip_probability
       - sensor.dark_sky_daytime_high_temperature
