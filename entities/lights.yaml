@@ -1,21 +1,10 @@
 
-  - platform: yeelight
-    devices:
-      !secret rl_host:
-        name: Reading Lamp
-      !secret kd1_host:
-        name: Kitchen Downlight 1
-      !secret kd2_host:
-        name: Kitchen Downlight 2
-      !secret kd3_host:
-        name: Kitchen Downlight 3
-
   - platform: group
     name: Kitchen Downlights
     entities:
-      - light.kitchen_downlight_1
-      - light.kitchen_downlight_2
-      - light.kitchen_downlight_3
+      - light.yeelight_color1_34ce0084d85f
+      - light.yeelight_color1_34ce0084fb1d
+      - light.yeelight_color1_34ce008b7b7e
 
   - platform: mqtt
     name: "Lava Lamp"
