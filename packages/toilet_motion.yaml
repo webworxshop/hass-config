@@ -57,7 +57,7 @@ automation:
   - alias: Set Last Opened Door
     trigger:
       - platform: state
-        entity_id: binary_sensor.kitchen_hall_door
+        entity_id: binary_sensor.kitchen_hall_door_contact
         from: "off"
         to: "on"
       - platform: state
