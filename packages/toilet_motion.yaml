@@ -9,7 +9,6 @@ input_select:
     options:
       - "Kitchen"
       - "Bedroom"
-      - "Manual Override"
 
 automation:
   - alias: Toilet Motion Light
@@ -21,8 +20,6 @@ automation:
     condition:
       condition: and
       conditions:
-        - condition: template
-          value_template: "{{ states.input_select.last_door.state != 'Manual Override' }}"
         - condition: or
           conditions:
             - condition: sun
@@ -47,9 +44,6 @@ automation:
       event_type: timer.finished
       event_data:
         entity_id: timer.toilet_light_timeout
-    condition:
-      condition: template
-      value_template: "{{ states.input_select.last_door.state != 'Manual Override' }}"
     action:
       - service: light.turn_off
         entity_id: light.toilet
