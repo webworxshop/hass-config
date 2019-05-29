@@ -36,7 +36,16 @@ automation:
       - service: light.turn_on
         entity_id: light.toilet
         data_template:
-          brightness_pct: "{% if states.input_select.last_door.state == 'Bedroom' %}1{% else %}100{% endif %}"
+          brightness_pct: >
+            {% if now().hour >= 20 or now().hour < 7 %}
+            {% if states.input_select.last_door.state == 'Bedroom' %}
+            1
+            {% else %}
+            100
+            {% endif %}
+            {% else %}
+            100
+            {% endif %}
 
   - alias: Toilet Light Timeout
     trigger:
