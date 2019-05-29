@@ -9,6 +9,14 @@ script:
       - alias: "Execute restart command"
         service: shell_command.restart_kodi
 
+binary_sensor:
+  - platform: mqtt
+    name: "Open MQTT Gateway Status"
+    state_topic: "home/OpenMQTTGateway/LWT"
+    payload_on: "online"
+    payload_off: "offline"
+    device_class: "connectivity"
+
 sensor:
   - platform: mqtt
     name: "Test Battery"

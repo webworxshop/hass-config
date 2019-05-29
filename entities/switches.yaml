@@ -17,6 +17,7 @@
     command_topic: !secret kettle_command_topic
     payload_on: !secret kettle_payload_on
     payload_off: !secret kettle_payload_off
+    availability_topic: "home/OpenMQTTGateway/LWT"
     optimistic: false
     retain: false
 
