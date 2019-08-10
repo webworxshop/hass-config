@@ -1,4 +1,4 @@
-#!/srv/homeassistant/bin/python
+#!/config/script-env/bin/python
 
 from bs4 import BeautifulSoup
 
