@@ -67,6 +67,10 @@ automation:
         entity_id: !secret bed1_door_entity
         from: "off"
         to: "on"
+      - platform: state
+        entity_id: !secret bed2_door_entity
+        from: "off"
+        to: "on"
     action:
       service: input_select.select_option
       entity_id: input_select.last_door

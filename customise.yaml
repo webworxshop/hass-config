@@ -46,9 +46,14 @@
     switch.electric_blanket_2:
       friendly_name: !secret blanket2_name
 
+    switch.living_room_tv_fused:
+      friendly_name: "Living Room TV"
+
     binary_sensor.kitchen_hall_door:
       friendly_name: Kitchen/Hall Door
 
     !secret bed1_door_entity:
       friendly_name: !secret bed1_door_name
 
+    !secret bed2_door_entity:
+      friendly_name: !secret bed2_door_name
