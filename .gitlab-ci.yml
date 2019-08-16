@@ -13,10 +13,10 @@ variables:
   tags:
     - hass
 
-before_script:
-  - apt-get update
-  - apt-get install -y mosquitto-clients
-  - mv fake_secrets.yaml secrets.yaml
+#before_script:
+#  - apt-get update
+#  - apt-get install -y mosquitto-clients
+#  - mv fake_secrets.yaml secrets.yaml
 
 # Preflight jobs
 shellcheck:
@@ -27,9 +27,6 @@ shellcheck:
   before_script:
     - shellcheck --version
     - apk --no-cache add grep
-    - |
-      find . -type f -print0 | \
-        xargs -0 sed -i 's:#!/usr/bin/with-contenv bash:#!/bin/bash:g'
   script:
     - |
       echo $PATH
