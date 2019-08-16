@@ -46,6 +46,8 @@ yamllint:
   image: sdesbure/yamllint
   before_script:
     - yamllint --version
+    - mv fake_secrets.yaml secrets.yaml
+    - rm known_devices.yaml
   script:
     - yamllint .
 
