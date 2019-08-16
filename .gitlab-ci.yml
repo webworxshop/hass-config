@@ -17,3 +17,5 @@ check_config:
   script:
     - cd /usr/src/app
     - python -m homeassistant -c $CI_PROJECT_DIR --script check_config
+  tags:
+    - hass
