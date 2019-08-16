@@ -32,6 +32,7 @@ shellcheck:
         xargs -0 sed -i 's:#!/usr/bin/with-contenv bash:#!/bin/bash:g'
   script:
     - |
+      echo $PATH
       for file in $(grep -IRl "#\!\(/usr/bin/env \|/bin/\)" --exclude-dir ".git" "${ADDON_TARGET}"); do
         if ! shellcheck $file; then
           export FAILED=1
