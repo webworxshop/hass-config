@@ -56,7 +56,7 @@ jsonlint:
     - jsonlint --version || true
   script:
     - |
-      for file in $(find . -type f -name "*.json"); do
+      for file in $(find . -type f -name "*.json" -path "mysensors.json" -prune); do
         if ! jsonlint -q $file; then
           export FAILED=1
         else
