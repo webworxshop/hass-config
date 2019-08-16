@@ -1,162 +1,162 @@
-  default_view:
-    view: yes
-    icon: mdi:home
-    entities:
-      - sun.sun
-      - !secret device_2
-      - !secret device_1
-      - group.lights
-      - group.electric_blankets
-      - group.appliances
-      - group.bedroom_1
-      - group.bedroom_2
-      - group.weather
-
-  bedroom_1:
-    name: !secret group_bedroom_1_name
-    entities:
-      - !secret night_light1
-      - !secret temp_sensor1
-      - !secret humidity_sensor1
-      - !secret brightness_sensor1
-      - !secret motion_sensor1
-
-  bedroom_2:
-    name: !secret group_bedroom_2_name
-    entities:
-      - !secret night_light2
-      - !secret temp_sensor2
-      - !secret humidity_sensor2
-      - !secret brightness_sensor2
-      - !secret motion_sensor2
-
-  electric_blankets:
-    name: Electric Blankets
-    entities:
-      - switch.electric_blanket_1
-      - switch.electric_blanket_2
-
-  multi_room_audio:
-    name: Multi-Room Audio
-    entities:
-      - media_player.mopidy
-      - media_player.snapcast_client_outdoor_speakers
-
-  media_power:
-    name: Power
-    entities:
-      - switch.living_room_tv
-      - switch.outdoor_speakers
-
-  media_tools:
-    name: Tools
-    entities:
-      - script.restart_kodi
-
-  media:
-    name: Media
-    view: yes
-    icon: mdi:music
-    entities:
-      - group.media_tools
-      - group.media_power
-      - media_player.tv
-      - group.multi_room_audio
-
-  lights:
-    name: Lights
-    entities:
-      - scene.movie
-      - scene.main_lights
-      - light.living_room_spots
-      - light.dining_room_spots
-      - light.reading_lamp
-      - light.lava_lamp
-      - light.hallway
-      - light.toilet
-      - light.kitchen_downlights
-
-  appliances:
-    name: Appliances
-    entities:
-      - switch.kettle
-
-  weather:
-    name: Weather
-    entities:
-      - sensor.dark_sky_summary
-      - sensor.dark_sky_temperature
-      - sensor.dark_sky_dew_point
-      - sensor.dark_sky_humidity
-      - sensor.dark_sky_pressure
-      - sensor.dark_sky_wind_speed
-      - sensor.dark_sky_wind_bearing
-      - sensor.dark_sky_cloud_cover
-      - sensor.dark_sky_precip_intensity
-      - sensor.dark_sky_precip_probability
-      - sensor.dark_sky_daytime_high_temperature
-      - sensor.dark_sky_overnight_low_temperature
-
-  cameras:
-    - camera.garage
-
-  motion:
-    name: All Motion Sensors
-    entities:
-      - !secret motion_sensor1
-
-  internal_motion:
-    name: Internal Motion Sensors
-    entities:
-      - !secret motion_sensor1
-
-  security:
-    name: Security
-    view: yes
-    icon: mdi:lock
-    entities:
-      - group.motion
-      - group.cameras
-
-  presence:
-    - !secret device_1
+---
+default_view:
+  view: true
+  icon: mdi:home
+  entities:
+    - sun.sun
     - !secret device_2
+    - !secret device_1
+    - group.lights
+    - group.electric_blankets
+    - group.appliances
+    - group.bedroom_1
+    - group.bedroom_2
+    - group.weather
 
-  people_status:
-    name: "People Status"
-    entities:
-      - sensor.person1_status
-      - sensor.person2_status
+bedroom_1:
+  name: !secret group_bedroom_1_name
+  entities:
+    - !secret night_light1
+    - !secret temp_sensor1
+    - !secret humidity_sensor1
+    - !secret brightness_sensor1
+    - !secret motion_sensor1
 
-  config:
-    name: Configuration
-    view: yes
-    icon: mdi:settings
-    entities:
-      - group.people_status
-      - input_boolean.on_holiday
-      - input_boolean.vacation_mode
-  
-  speedtest:
-    name: Speed Tests
-    entities:
-      - sensor.speedtest_ping
-      - sensor.speedtest_download
-      - sensor.speedtest_upload
+bedroom_2:
+  name: !secret group_bedroom_2_name
+  entities:
+    - !secret night_light2
+    - !secret temp_sensor2
+    - !secret humidity_sensor2
+    - !secret brightness_sensor2
+    - !secret motion_sensor2
 
-  certificates:
-    name: Certificate Expiry
-    entities:
-      - sensor.blog
-      - sensor.analytics
-      - sensor.news
-      - sensor.home
-    
-  network:
-    name: Network
-    view: yes
-    icon: mdi:cloud-check
-    entities:
-      - group.speedtest
-      - group.certificates
+electric_blankets:
+  name: Electric Blankets
+  entities:
+    - switch.electric_blanket_1
+    - switch.electric_blanket_2
 
+multi_room_audio:
+  name: Multi-Room Audio
+  entities:
+    - media_player.mopidy
+    - media_player.snapcast_client_outdoor_speakers
+
+media_power:
+  name: Power
+  entities:
+    - switch.living_room_tv
+    - switch.outdoor_speakers
+
+media_tools:
+  name: Tools
+  entities:
+    - script.restart_kodi
+
+media:
+  name: Media
+  view: true
+  icon: mdi:music
+  entities:
+    - group.media_tools
+    - group.media_power
+    - media_player.tv
+    - group.multi_room_audio
+
+lights:
+  name: Lights
+  entities:
+    - scene.movie
+    - scene.main_lights
+    - light.living_room_spots
+    - light.dining_room_spots
+    - light.reading_lamp
+    - light.lava_lamp
+    - light.hallway
+    - light.toilet
+    - light.kitchen_downlights
+
+appliances:
+  name: Appliances
+  entities:
+    - switch.kettle
+
+weather:
+  name: Weather
+  entities:
+    - sensor.dark_sky_summary
+    - sensor.dark_sky_temperature
+    - sensor.dark_sky_dew_point
+    - sensor.dark_sky_humidity
+    - sensor.dark_sky_pressure
+    - sensor.dark_sky_wind_speed
+    - sensor.dark_sky_wind_bearing
+    - sensor.dark_sky_cloud_cover
+    - sensor.dark_sky_precip_intensity
+    - sensor.dark_sky_precip_probability
+    - sensor.dark_sky_daytime_high_temperature
+    - sensor.dark_sky_overnight_low_temperature
+
+cameras:
+  - camera.garage
+
+motion:
+  name: All Motion Sensors
+  entities:
+    - !secret motion_sensor1
+
+internal_motion:
+  name: Internal Motion Sensors
+  entities:
+    - !secret motion_sensor1
+
+security:
+  name: Security
+  view: true
+  icon: mdi:lock
+  entities:
+    - group.motion
+    - group.cameras
+
+presence:
+  - !secret device_1
+  - !secret device_2
+
+people_status:
+  name: "People Status"
+  entities:
+    - sensor.person1_status
+    - sensor.person2_status
+
+config:
+  name: Configuration
+  view: true
+  icon: mdi:settings
+  entities:
+    - group.people_status
+    - input_boolean.on_holiday
+    - input_boolean.vacation_mode
+
+speedtest:
+  name: Speed Tests
+  entities:
+    - sensor.speedtest_ping
+    - sensor.speedtest_download
+    - sensor.speedtest_upload
+
+certificates:
+  name: Certificate Expiry
+  entities:
+    - sensor.blog
+    - sensor.analytics
+    - sensor.news
+    - sensor.home
+
+network:
+  name: Network
+  view: true
+  icon: mdi:cloud-check
+  entities:
+    - group.speedtest
+    - group.certificates

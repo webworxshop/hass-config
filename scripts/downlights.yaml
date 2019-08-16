@@ -1,4 +1,4 @@
-
+---
 downlights_bright:
   alias: Downlights Bright
   sequence:
@@ -8,10 +8,10 @@ downlights_bright:
         entity_id: light.kitchen_downlights
         brightness: 255
         color_temp: >
-          {% if as_timestamp(now()) > (as_timestamp(states.sun.sun.attributes.next_setting) - 3600)
+          {% if as_timestamp(now()) >
+              (as_timestamp(states.sun.sun.attributes.next_setting) - 3600)
               or states.sun.sun.state == 'below_horizon' %}
             253
           {% else %}
             217
           {% endif %}
-

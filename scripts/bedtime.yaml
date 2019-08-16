@@ -1,4 +1,4 @@
-
+---
 bedtime:
   alias: Bedtime Routine
   sequence:
@@ -24,4 +24,3 @@ bedtime:
     - alias: Last Light Off
       service: light.turn_off
       entity_id: light.kitchen_downlight_1
-
