@@ -13,8 +13,7 @@ variables:
   tags:
     - hass
 
-before_script:
-   - ln -s $CI_PROJECT_DIR /config
+#before_script:
 #  - apt-get update
 #  - apt-get install -y mosquitto-clients
 #  - mv fake_secrets.yaml secrets.yaml
@@ -26,6 +25,7 @@ shellcheck:
     name: koalaman/shellcheck-alpine:stable
     entrypoint: [""]
   before_script:
+    - ln -s $CI_PROJECT_DIR /config
     - shellcheck --version
     - apk --no-cache add grep
   script:
