@@ -47,7 +47,7 @@ yamllint:
   before_script:
     - yamllint --version
     - mv fake_secrets.yaml secrets.yaml
-    - rm known_devices.yaml
+    - rm known_devices.yaml appdaemon.yaml apps/apps.yaml entity_registry.yaml
   script:
     - yamllint .
 
