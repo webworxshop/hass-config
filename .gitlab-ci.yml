@@ -73,6 +73,7 @@ markdownlint:
     name: ruby:alpine
     entrypoint: [""]
   before_script:
+    - apk --no-cache add git
     - gem install mdl
     - mdl --version
   script:
