@@ -29,7 +29,7 @@ shellcheck:
     - apk --no-cache add grep
   script:
     - |
-      for file in $(/bin/grep -IRl "#\!\(/usr/bin/env \|/bin/\)" --exclude-dir ".git" "${ADDON_TARGET}"); do
+      for file in $(grep -IRl "#\!\(/usr/bin/env \|/bin/\)" --exclude-dir ".git" .); do
         if ! shellcheck $file; then
           export FAILED=1
         else
