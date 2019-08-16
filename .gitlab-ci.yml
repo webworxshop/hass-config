@@ -76,7 +76,7 @@ markdownlint:
     - gem install mdl
     - mdl --version
   script:
-    - mdl --style all --warnings .
+    - mdl --style all --warnings --git-recurse .
 
 check_config:
   stage: check
