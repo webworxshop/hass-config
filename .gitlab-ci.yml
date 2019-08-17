@@ -13,10 +13,26 @@ variables:
   tags:
     - hass
 
+# Generic Home Assistant template
+.ha: &ha
+  stage: homeassistant
+    variables:
+      PYTHONPATH: "/usr/src/app:$PYTHONPATH"
+    before_script:
+      - python -m homeassistant --version
+      - mv fake_secrets.yaml secrets.yaml
+    script:
+      - |
+        python -m homeassistant \
+          --config $CI_PROJECT_DIR \
+          --script check_config \
+          --info all
+    tags:
+      - hass
+
 #before_script:
 #  - apt-get update
 #  - apt-get install -y mosquitto-clients
-#  - mv fake_secrets.yaml secrets.yaml
 
 # Preflight jobs
 shellcheck:
@@ -82,11 +98,23 @@ markdownlint:
   script:
     - mdl --style all --warnings --git-recurse .
 
-check_config:
-  stage: check
-  image: homeassistant/home-assistant:latest
-  script:
-    - cd /usr/src/app
-    - python -m homeassistant -c $CI_PROJECT_DIR --script check_config
-  tags:
-    - hass
+# Home Assistant test jobs
+ha-latest:
+  <<: *ha
+  image:
+    name: homeassistant/home-assistant:latest
+    entrypoint: [""]
+
+ha-rc:
+  <<: *ha
+  image:
+    name: homeassistant/home-assistant:rc
+    entrypoint: [""]
+  allow_failure: true
+
+ha-dev:
+  <<: *ha
+  image:
+    name: homeassistant/home-assistant:dev
+    entrypoint: [""]
+  allow_failure: true
