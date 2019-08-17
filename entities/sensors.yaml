@@ -21,12 +21,6 @@
       - temperature_low
   units: ca
 
-- platform: speedtest
-  monitored_conditions:
-      - ping
-      - download
-      - upload
-
 - platform: cert_expiry
   name: Blog
   host: !secret blog_host

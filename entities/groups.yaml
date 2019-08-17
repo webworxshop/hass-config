@@ -138,13 +138,6 @@ config:
     - input_boolean.on_holiday
     - input_boolean.vacation_mode
 
-speedtest:
-  name: Speed Tests
-  entities:
-    - sensor.speedtest_ping
-    - sensor.speedtest_download
-    - sensor.speedtest_upload
-
 certificates:
   name: Certificate Expiry
   entities:

@@ -1,7 +1,7 @@
 
 - alias: 'Kettle off at night'
   trigger:
-    platform: time
+    platform: time_pattern
     minutes: 0
     hours: 23
     seconds: 0
