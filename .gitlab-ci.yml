@@ -1,7 +1,7 @@
 
 stages:
   - preflight
-  - check
+  - homeassistant
   - deploy
 
 variables:
@@ -16,19 +16,19 @@ variables:
 # Generic Home Assistant template
 .ha: &ha
   stage: homeassistant
-    variables:
-      PYTHONPATH: "/usr/src/app:$PYTHONPATH"
-    before_script:
-      - python -m homeassistant --version
-      - mv fake_secrets.yaml secrets.yaml
-    script:
-      - |
-        python -m homeassistant \
-          --config $CI_PROJECT_DIR \
-          --script check_config \
-          --info all
-    tags:
-      - hass
+  variables:
+    PYTHONPATH: "/usr/src/app:$PYTHONPATH"
+  before_script:
+    - python -m homeassistant --version
+    - mv fake_secrets.yaml secrets.yaml
+  script:
+    - |
+      python -m homeassistant \
+        --config $CI_PROJECT_DIR \
+        --script check_config \
+        --info all
+  tags:
+    - hass
 
 #before_script:
 #  - apt-get update
