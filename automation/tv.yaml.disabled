@@ -33,7 +33,17 @@
       event_data:
         entity_id: timer.tv_off
   action:
-    service: switch.turn_off
-    data:
-      entity_id: switch.hdmi_0
+    - service: switch.turn_off
+      data:
+        entity_id: switch.living_room_tv
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: light.living_room_spots
+          state: 'on'
+        - condition: template
+          value_template: '{{ states.light.living_room_spots.attributes.rgb_color == [0, 0, 255] or states.light.living_room_spots.attributes.rgb_color == (0, 0, 255) }}'
+    - service: light.turn_off
+      data:
+        entity_id: light.living_room_spots
 

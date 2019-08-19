@@ -1,94 +1,23 @@
-
+---
 #  - platform: zoneminder
 #    name: zoneminder_sensor
 
-  - platform: darksky
-    api_key: !secret darksky_api_key
-    monitored_conditions:
-        #- summary
-        #- icon
-        #- nearest_storm_distance
-        #- nearest_storm_bearing
-        - precip_type
-        - precip_intensity
-        - precip_probability
-        - temperature
-        #- apparent_temperature
-        - dew_point
-        - wind_speed
-        - wind_bearing
-        - cloud_cover
-        - humidity
-        - pressure
-        - visibility
-        - ozone
-        #- minutely_summary
-        #- hourly_summary
-        #- daily_summary
-    units: ca
+- platform: cert_expiry
+  name: Blog
+  host: !secret blog_host
 
-  - platform: mqtt
-    state_topic: !secret bed2_temperature_topic 
-    name: Bed2 Temperature
-    unit_of_measurement: "°C"
+- platform: cert_expiry
+  name: Analytics
+  host: !secret analytics_host
 
-  - platform: mqtt
-    state_topic: !secret bed1_temperature_topic 
-    name: Bed1 Temperature
-    unit_of_measurement: "°C"
+- platform: cert_expiry
+  name: News
+  host: !secret news_host
 
-  - platform: mqtt
-    state_topic: !secret kitchen_temperature_topic 
-    name: Kitchen Temperature
-    unit_of_measurement: "°C"
+- platform: cert_expiry
+  name: Home
+  host: !secret hass_host
 
-  - platform: mqtt
-    state_topic: !secret kitchen_humidity_topic 
-    name: Kitchen Humidity
-    unit_of_measurement: "%"
-
-  - platform: template
-    sensors:
-      bed1_temperature_proxy:
-        friendly_name: Bed1 Temperature Proxy
-        unit_of_measurement: "°C"
-        value_template: >-
-          {%- if is_state("group.presence", "home") %}
-              {{ states('sensor.bed1_temperature') }}
-          {% else %}
-              100.0
-          {%- endif %}
-
-  - platform: template
-    sensors:
-      bed2_temperature_proxy:
-        friendly_name: Bed2 Temperature Proxy
-        unit_of_measurement: "°C"
-        value_template: >-
-          {%- if is_state("group.presence", "home") %}
-              {{ states('sensor.bed2_temperature') }}
-          {% else %}
-              100.0
-          {%- endif %}
-
-  - platform: speedtest
-    monitored_conditions:
-      - ping
-      - download
-      - upload
-
-  - platform: cert_expiry
-    name: Blog
-    host: !secret blog_host
- 
-  - platform: cert_expiry
-    name: Analytics
-    host: !secret analytics_host
- 
-  - platform: cert_expiry
-    name: News
-    host: !secret news_host
- 
-  - platform: cert_expiry
-    name: Home
-    host: !secret hass_host
+- platform: cert_expiry
+  name: Home
+  host: !secret hass_host

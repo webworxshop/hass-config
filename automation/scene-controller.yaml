@@ -5,9 +5,9 @@
     topic: !secret sc_topic
     payload: !secret sc_b1_payload
   action:
-    service: scene.turn_on
+    service: script.turn_on
     data:
-      entity_id: scene.downlights_bright
+      entity_id: script.downlights_bright
 
 - alias: 'Switch off kitchen downlights'
   trigger:
@@ -15,7 +15,7 @@
     topic: !secret sc_topic
     payload: !secret sc_b2_payload
   action:
-    service: homeassistant.turn_off
+    service: light.turn_off
     data:
-      entity_id: group.kitchen_downlights
+      entity_id: light.kitchen_downlights
 

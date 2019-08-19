@@ -1,142 +1,160 @@
-  default_view:
-    view: yes
-    icon: mdi:home
-    entities:
-      - sun.sun
-      - device_tracker.android20
-      - device_tracker.rob_ot_nexus
-      - group.media
-      #- group.multi_room_audio
-      - group.lights
-      - group.heating
-      - group.appliances
-      - group.weather
+default_view:
+  view: yes
+  icon: mdi:home
+  entities:
+    - sun.sun
+    - !secret device_2
+    - !secret device_1
+    - group.lights
+    - group.electric_blankets
+    - group.appliances
+    - group.bedroom_1
+    - group.bedroom_2
+    - group.weather
+    - group.vacuum
 
-  media:
-    name: Media
-    entities:
-      - media_player.tv
-#      - weblink.tv_controller
+vacuum:
+  name: "Vacuum Cleaner"
+  entities:
+    - vacuum.marvin
 
-  multi_room_audio:
-    name: Multi-Room Audio
-    entities:
-      - media_player.mopidy
-      - media_player.snapcast_group_569d98d9da858f7bf1a0feccbc8879d0
-      - media_player.snapcast_client_02626e762d48bc47
-      - media_player.snapcast_client_2b7f698938ce4375bb2de6e2490595fa
-      - media_player.snapcast_client_f1fba17a706c4e42a34e1a3527f99a1a
+bedroom_1:
+  name: !secret group_bedroom_1_name
+  entities:
+    - !secret night_light1
+    - !secret temp_sensor1
+    - !secret humidity_sensor1
+    - !secret brightness_sensor1
+    - !secret motion_sensor1
 
-  kitchen_downlights:
-    name: Kitchen Downlights
-    entities:
-      - light.kitchen_downlight_1
-      - light.kitchen_downlight_2
-      - light.kitchen_downlight_3
+bedroom_2:
+  name: !secret group_bedroom_2_name
+  entities:
+    - !secret night_light2
+    - !secret temp_sensor2
+    - !secret humidity_sensor2
+    - !secret brightness_sensor2
+    - !secret motion_sensor2
 
-  lights:
-    name: Lights
-    entities:
-      - scene.movie
-      - scene.night
-      - light.living_room_spots
-      - light.dining_room_spots
-      - light.reading_lamp
-      - light.lava_lamp
-      - light.hallway
-      - light.toilet
-      - group.kitchen_downlights
-        
-  heating:
-    name: Heating
-    entities:
-      - switch.bed1_heating
-      - switch.bed2_heating
+electric_blankets:
+  name: Electric Blankets
+  entities:
+    - switch.electric_blanket_1
+    - switch.electric_blanket_2
 
-  appliances:
-    name: Appliances
-    entities:
-      - switch.kettle
+multi_room_audio:
+  name: Multi-Room Audio
+  entities:
+    - media_player.mopidy
+    - media_player.snapcast_client_outdoor_speakers
 
-  weather:
-    name: Weather
-    entities:
-      - sensor.weather_temperature
-      - sensor.weather_wind_speed
+media_power:
+  name: Power
+  entities:
+    - switch.living_room_tv
+    - switch.outdoor_speakers
 
-  cameras:
-    - camera.front
-    - camera.back_garden
+media_tools:
+  name: Tools
+  entities:
+    - script.restart_kodi
 
-  motion:
-    name: All Motion Sensors
-    entities:
-      - binary_sensor.bed1_motion
-      - binary_sensor.garage_motion
-      - binary_sensor.kitchen_motion
+media:
+  name: Media
+  view: yes
+  icon: mdi:music
+  entities:
+    - group.media_tools
+    - group.media_power
+    - media_player.tv
+    - group.multi_room_audio
 
-  internal_motion:
-    name: Internal Motion Sensors
-    entities:
-      - binary_sensor.bed1_motion
-      - binary_sensor.garage_motion
-      - binary_sensor.kitchen_motion
+lights:
+  name: Lights
+  entities:
+    - scene.movie
+    - scene.main_lights
+    - light.living_room_spots
+    - light.dining_room_spots
+    - light.reading_lamp
+    - light.lava_lamp
+    - light.hallway
+    - light.toilet
+    - light.kitchen_downlights
 
-  security:
-    name: Security
-    view: yes
-    icon: mdi:lock
-    entities:
-      - group.cameras
-      - group.motion
+appliances:
+  name: Appliances
+  entities:
+    - switch.kettle
 
-  presence:
-    - device_tracker.android20
-    - device_tracker.rob_ot_nexus
+weather:
+  name: Weather
+  entities:
+    - sensor.dark_sky_summary
+    - sensor.dark_sky_temperature
+    - sensor.dark_sky_dew_point
+    - sensor.dark_sky_humidity
+    - sensor.dark_sky_pressure
+    - sensor.dark_sky_wind_speed
+    - sensor.dark_sky_wind_bearing
+    - sensor.dark_sky_cloud_coverage
+    - sensor.dark_sky_precip_intensity
+    - sensor.dark_sky_precip_probability
+    - sensor.dark_sky_daytime_high_temperature
+    - sensor.dark_sky_overnight_low_temperature
 
-  kitchen:
-    name: Kitchen
-    entities:
-      - binary_sensor.kitchen_motion_2
-      - sensor.kitchen_temperature_2
-      - sensor.kitchen_humidity_2
+cameras:
+  - camera.garage
 
-  config:
-    name: Configuration
-    view: yes
-    icon: mdi:settings
-    entities:
-      - input_boolean.on_holiday
-      - input_boolean.vacation_mode
-      - group.kitchen
+motion:
+  name: All Motion Sensors
+  entities:
+    - !secret motion_sensor1
 
-  servers:
-    name: Server Status
-    entities:
-      - !secret linode_sensor_name
-      #- binary_sensor.ping_webworxshop
-      #- binary_sensor.ping_google
-  
-  speedtest:
-    name: Speed Tests
-    entities:
-      - sensor.speedtest_ping
-      - sensor.speedtest_download
-      - sensor.speedtest_upload
+internal_motion:
+  name: Internal Motion Sensors
+  entities:
+    - !secret motion_sensor1
 
-  certificates:
-    name: Certificate Expiry
-    entities:
-      - sensor.blog
-      - sensor.analytics
-      - sensor.news
-      - sensor.home
-    
-  network:
-    name: Network
-    view: yes
-    icon: mdi:cloud-check
-    entities:
-      - group.servers
-      - group.speedtest
-      - group.certificates
+security:
+  name: Security
+  view: yes
+  icon: mdi:lock
+  entities:
+    - group.motion
+    - group.cameras
+
+presence:
+  - !secret device_1
+  - !secret device_2
+
+people_status:
+  name: "People Status"
+  entities:
+    - sensor.person1_status
+    - sensor.person2_status
+
+config:
+  name: Configuration
+  view: true
+  icon: mdi:settings
+  entities:
+    - group.people_status
+    - input_boolean.on_holiday
+    - input_boolean.vacation_mode
+
+certificates:
+  name: Certificate Expiry
+  entities:
+    - sensor.blog
+    - sensor.analytics
+    - sensor.news
+    - sensor.home
+
+network:
+  name: Network
+  view: true
+  icon: mdi:cloud-check
+  entities:
+    - group.speedtest
+    - group.certificates

@@ -1,30 +1,35 @@
-
-    switch.bed1_heating:
-      friendly_name: !secret bed1_heating_name
-
-    switch.bed2_heating:
-      friendly_name: !secret bed2_heating_name
-
-    sensor.bed1_temperature:
-      friendly_name: !secret bed1_temperature_name
-
-    sensor.bed2_temperature:
-      friendly_name: !secret bed2_temperature_name
-
-    binary_sensor.bed1_motion:
-      friendly_name: !secret bed1_motion_name
-
-    sensor.weather_temperature:
+    sensor.dark_sky_temperature:
       friendly_name: Outdoor Temperature
 
-    sensor.weather_wind_speed:
+    sensor.dark_sky_wind_speed:
       friendly_name: Wind Speed
 
-    binary_sensor.kitchen_motion:
-      device_class: motion
+    sensor.dark_sky_summary:
+      friendly_name: Current Conditions
 
-    !secret linode_sensor_name:
-      friendly_name: Linode VPS
+    sensor.dark_sky_dew_point:
+      friendly_name: Dew Point
+
+    sensor.dark_sky_humidity:
+      friendly_name: Humidity
+
+    sensor.dark_sky_pressure:
+      friendly_name: Pressure
+
+    sensor.dark_sky_wind_bearing:
+      friendly_name: Wind Bearing
+
+    sensor.dark_sky_precip_intensity:
+      friendly_name: Precipitation Intensity
+
+    sensor.dark_sky_precip_probability:
+      friendly_name: Precipitation Probability
+
+    sensor.dark_sky_daytime_high_temperature:
+      friendly_name: Daytime High Temperature
+
+    sensor.dark_sky_overnight_low_temperature:
+      friendly_name: Overnight Low Temperature
 
     zone.zone_1:
       friendly_name: !secret z1_name
@@ -34,3 +39,21 @@
 
     zone.zone_3:
       friendly_name: !secret z3_name
+
+    switch.electric_blanket_1:
+      friendly_name: !secret blanket1_name
+
+    switch.electric_blanket_2:
+      friendly_name: !secret blanket2_name
+
+    switch.living_room_tv_fused:
+      friendly_name: "Living Room TV"
+
+    binary_sensor.kitchen_hall_door:
+      friendly_name: Kitchen/Hall Door
+
+    !secret bed1_door_entity:
+      friendly_name: !secret bed1_door_name
+
+    !secret bed2_door_entity:
+      friendly_name: !secret bed2_door_name

@@ -1,0 +1,92 @@
+
+tts:
+  platform: marytts
+  language: 'en-GB'
+  host: !secret marytts_host
+  voice: 'dfki-poppy-hsmm'
+
+sensor:
+  - platform: template
+    sensors:
+      average_indoor_temperature:
+        value_template: !secret indoor_temperature_template
+
+input_boolean:
+  tts_enabled:
+    name: TTS Announcements Enabled
+    initial: 'on'
+
+script:
+  tts_living_room:
+    alias: "Living room TTS announcement"
+    sequence:
+      - condition: state
+        entity_id: input_boolean.tts_enabled
+        state: 'on'
+      - service: media_player.turn_on
+        entity_id: media_player.living_room_tv
+      - delay:
+          seconds: 5
+      - service: tts.marytts_say
+        entity_id: media_player.living_room_tv
+        data_template:
+          message: "{{ message }}"
+
+  tts_or_notify_living_room:
+    alias: "TTS announcement or notification"
+    sequence:
+      - service_template: >
+          {% if is_state("media_player.tv", "playing") or is_state("media_player.tv", "paused") %}
+          notify.kodi_livingroom
+          {% else %}
+          script.tts_living_room
+          {%- endif %}
+        data_template:
+          title: "Home Assistant"
+          message: "{{ message }}"
+          data:
+            icon: !secret hass_icon_url
+
+  tts_status_report:
+    alias: TTS Status Report
+    sequence:
+    - service: script.tts_living_room
+      data_template:
+        message: >
+          {% if now().strftime("%H")|int < 12 %}
+          Good morning.
+          {% elif now().strftime("%H")|int < 18 %}
+          Good afternoon.
+          {% else %}
+          Good evening.
+          {% endif %}
+          It's currently {{states.weather.home.state}} and {{states.weather.home.attributes.temperature|round}} degrees. The weather for the next 24 hours will be {{states.sensor.dark_sky_hourly_summary.state|replace(".", "")}}.
+          The current average indoor temperature is {{ states.sensor.average_indoor_temperature.state }} degrees.
+          {% if state_attr("binary_sensor.protection_window", "start_time") != None %}
+          Sun protection is required between {{ states.binary_sensor.protection_window.attributes.start_time.strftime("%-I:%M%p") }} and {{ states.binary_sensor.protection_window.attributes.end_time.strftime("%-I:%M%p") }}. Today's max U.V. index is {{ states.sensor.max_uv_index.state|round(2) }}.
+          {% endif %}
+          
+#, with a high of {{states.sensor.dark_sky_daytime_high_temperature.state|round}} and a low of {{states.sensor.dark_sky_overnight_low_temperature.state|round}}.
+
+automation:
+  - alias: "Time to leave announcement"
+    trigger:
+      - platform: time
+        at: '08:20:00'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: 'binary_sensor.workday_sensor'
+          state: 'on'
+        - condition: state
+          entity_id: 'input_boolean.on_holiday'
+          state: 'off'
+        - condition: state
+          entity_id: 'sensor.person2_status'
+          state: 'Home'
+    action:
+      - service: script.tts_living_room
+        data:
+          message: !secret message_time_to_leave
+        

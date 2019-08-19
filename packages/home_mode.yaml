@@ -1,0 +1,90 @@
+
+input_select:
+  home_mode:
+    name: "Home Mode"
+    options:
+      - "None"
+      - "Coffee Time!"
+      - "Lunchtime"
+      - "Evening"
+      - "Bedtime"
+      - "Night"
+
+script:
+  home_mode:
+    alias: Home Mode Switch
+    sequence:
+      - alias: Select Home Mode
+        service: input_select.select_option
+        data_template:
+          entity_id: input_select.home_mode
+          option: >
+            {% if now().hour < 12 %}
+            Coffee Time!
+            {% elif now().hour < 18 %}
+            Lunchtime
+            {% elif now().hour < 22 %}
+            Evening
+            {% else %}
+            Bedtime
+            {% endif %}
+
+automation:
+  - alias: Coffee/Lunchtime Lights
+    trigger:
+      - platform: state
+        entity_id: input_select.home_mode
+        to: "Coffee Time!"
+      - platform: state
+        entity_id: input_select.home_mode
+        to: "Lunchtime"
+    action:
+      - service: script.turn_on
+        entity_id: script.downlights_bright
+
+  - alias: End of Coffee/Lunch Time
+    trigger:
+      - platform: state
+        entity_id: input_select.home_mode
+        to: "Coffee Time!"
+        for:
+          minutes: 20
+      - platform: state
+        entity_id: input_select.home_mode
+        to: "Lunchtime"
+        for:
+          hours: 1
+    action:
+      - service: light.turn_off
+        entity_id: light.kitchen_downlights
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.home_mode
+          option: None
+
+  - alias: Evening
+    trigger:
+      - platform: state
+        entity_id: input_select.home_mode
+        to: "Evening"
+    action:
+      - service: automation.trigger
+        entity_id: automation.toilet_lights_dim
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.home_mode
+          option: None
+
+  - alias: Bedtime
+    trigger:
+      - platform: state
+        entity_id: input_select.home_mode
+        to: "Bedtime"
+    action:
+      - service: script.turn_on
+        entity_id: script.bedtime
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.home_mode
+          option: Night
+

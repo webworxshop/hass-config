@@ -10,17 +10,17 @@ homeassistant:
   time_zone: !secret time_zone
 
   customize: !include customise.yaml
+  packages: !include_dir_named packages
 
 http:
   api_password: !secret http_password 
   ip_ban_enabled: True
   login_attempts_threshold: 5
+  use_x_forwarded_for: True
+  trusted_proxies: !secret reverse_proxy_ip
 
 # Enables support for tracking state changes over time.
 history:
-
-# Track the sun
-sun:
 
 # View all events in a logbook
 logbook:
@@ -33,12 +33,16 @@ updater:
 
 # Enables the frontend
 frontend:
+  themes: !include themes.yaml
 
 # Enables configuration UI
 config:
 
 # Allows you to issue voice commands from the frontend
 conversation:
+
+# System health
+system_health:
 
 # MQTT broker
 mqtt:
@@ -52,9 +56,9 @@ mqtt:
   discovery: true
   discovery_prefix: homeassistant
 
-mqtt_eventstream:
-  publish_topic: !secret es_pub_topic
-  subscribe_topic: !secret es_sub_topic
+#mqtt_eventstream:
+#  publish_topic: !secret es_pub_topic
+#  subscribe_topic: !secret es_sub_topic
 
 device_tracker:
   - platform: snmp
@@ -62,11 +66,11 @@ device_tracker:
     community: !secret firewall_snmp_community 
     baseoid: 1.3.6.1.2.1.4.22.1.2
     track_new_devices: no
-  - platform: owntracks
-    max_gps_accuracy: 200
-    waypoints: yes
-    waypoint_whitelist:
-      - rob_ot
+#  - platform: owntracks
+#    max_gps_accuracy: 200
+#    waypoints: yes
+#    waypoint_whitelist:
+#      - rob_ot
 
 map:
 
@@ -81,37 +85,45 @@ map:
 #  version: '1.5'
 #  optimistic: false
 
-#zoneminder:
-#  host: !secret zm_host
-#  path: /zm/
-#  ssl: False
-#  username: !secret zm_username
-#  password: !secret zm_password
+zoneminder:
+  host: !secret zm_host
+  path: /zm/
+  ssl: False
+  username: !secret zm_username
+  password: !secret zm_password
 
-ffmpeg:
-  ffmpeg_bin: /usr/bin/avconv
+#influxdb:
+#  host: !secret influx_host
+#  port: 8086
+#  database: !secret influx_dbname
+#  username: !secret influx_user
+#  password: !secret influx_passwd
 
-hdmi_cec:
-  host: !secret kodi_host
+#google_assistant:
+#  project_id: !secret ga_project_id
+#  client_id: !secret ga_client_id
+#  access_token: !secret ga_access_token
+#  agent_user_id: !secret ga_agent_user_id
+#  api_key:  !secret ga_api_key
+#  exposed_domains:
+#    - switch
+#    - light
+#    - fan
+#  entity_config:
+#    group.kitchen_downlights:
+#      expose: true
+#    scene.movie:
+#      expose: true
 
-google_assistant:
-  project_id: !secret ga_project_id
-  client_id: !secret ga_client_id
-  access_token: !secret ga_access_token
-  agent_user_id: !secret ga_agent_user_id
-  api_key:  !secret ga_api_key
-  exposed_domains:
-    - switch
-    - light
-    - fan
-  entity_config:
-    group.kitchen_downlights:
-      expose: true
-    scene.movie:
-      expose: true
-
-linode:
-  access_token: !secret linode_api_key
+speedtestdotnet:
+  monitored_conditions:
+    - ping
+    - download
+    - upload
+    
+cast:
+  media_player:
+    - host: !secret chromecast_host
 
 # include entity files
 input_boolean: !include entities/input_booleans.yaml

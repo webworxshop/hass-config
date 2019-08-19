@@ -1,0 +1,141 @@
+
+input_select:
+  status_dropdown_1:
+    name: !secret person1_name
+    options:
+      - Home
+      - Just Arrived
+      - Just Left
+      - Away
+      - Extended Away
+    initial: Home
+  status_dropdown_2:
+    name: !secret person2_name
+    options:
+      - Home
+      - Just Arrived
+      - Just Left
+      - Away
+      - Extended Away
+    initial: Home
+
+sensor:
+  - platform: template
+    sensors:
+      person1_status:
+        value_template: '{{ states.input_select.status_dropdown_1.state }}'
+        friendly_name: !secret person1_name
+      person2_status:
+        value_template: '{{ states.input_select.status_dropdown_2.state }}'
+        friendly_name: !secret person2_name
+
+automation:
+  - alias: Mark person as just arrived
+    trigger:
+      - platform: state
+        entity_id: !secret device_1
+        from: 'not_home'
+        to: 'home'
+      - platform: state
+        entity_id: !secret device_2
+        from: 'not_home'
+        to: 'home'
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: !secret presence_entity_template
+          option: !secret presence_option_template
+
+  - alias: Mark person as home
+    trigger:
+      - platform: state
+        entity_id: input_select.status_dropdown_1
+        to: 'Just Arrived'
+        for:
+          minutes: 10
+      - platform: state
+        entity_id: input_select.status_dropdown_2
+        to: 'Just Arrived'
+        for:
+          minutes: 10
+      - platform: state
+        entity_id: input_select.status_dropdown_1
+        from: 'Just Left'
+        to: 'Just Arrived'
+      - platform: state
+        entity_id: input_select.status_dropdown_2
+        from: 'Just Left'
+        to: 'Just Arrived'
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: >
+            {% if trigger.entity_id == 'input_select.status_dropdown_1' %}
+              input_select.status_dropdown_1
+            {% else %}
+              input_select.status_dropdown_2
+            {% endif %}
+          option: Home
+
+  - alias: Mark person as just left
+    trigger:
+      - platform: state
+        entity_id: !secret device_1
+        from: 'home'
+        to: 'not_home'
+      - platform: state
+        entity_id: !secret device_2
+        from: 'home'
+        to: 'not_home'
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: !secret presence_entity_template
+          option: Just Left
+
+  - alias: Mark person as away
+    trigger:
+      - platform: state
+        entity_id: input_select.status_dropdown_1
+        to: 'Just Left'
+        for:
+          minutes: 10
+      - platform: state
+        entity_id: input_select.status_dropdown_2
+        to: 'Just Left'
+        for:
+          minutes: 10
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: >
+            {% if trigger.entity_id == 'input_select.status_dropdown_1' %}
+              input_select.status_dropdown_1
+            {% else %}
+              input_select.status_dropdown_2
+            {% endif %}
+          option: Away
+
+  - alias: Mark person as extended away
+    trigger:
+      - platform: state
+        entity_id: input_select.status_dropdown_1
+        to: 'Away'
+        for:
+          hours: 12
+      - platform: state
+        entity_id: input_select.status_dropdown_2
+        to: 'Away'
+        for:
+          hours: 12
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: >
+            {% if trigger.entity_id == 'input_select.status_dropdown_1' %}
+              input_select.status_dropdown_1
+            {% else %}
+              input_select.status_dropdown_2
+            {% endif %}
+          option: Extended Away
+

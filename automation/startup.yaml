@@ -1,0 +1,10 @@
+
+# the kettle switch will almost always be on when HASS starts
+- alias: "Sync kettle on startup"
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+    service: switch.turn_on
+    entity_id: switch.kettle
+

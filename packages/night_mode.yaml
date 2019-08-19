@@ -1,0 +1,35 @@
+
+automation:
+  - alias: "Night mode kitchen light on"
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.kitchen_hall_door_contact
+        from: "off"
+        to: "on"
+    condition:
+      - condition: state
+        entity_id: input_select.home_mode
+        state: "Night"
+    action:
+      - alias: Lights to Goodnight Scene
+        service: scene.turn_on
+        data:
+          entity_id: scene.goodnight
+
+  - alias: "Night mode kitchen light off"
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.kitchen_hall_door_contact
+        from: "on"
+        to: "off"
+        for:
+          seconds: 30
+    condition:
+      - condition: state
+        entity_id: input_select.home_mode
+        state: "Night"
+    action:
+      - alias: Light Off
+        service: light.turn_off
+        entity_id: light.yeelight_color1_34ce0084fb1d
+

@@ -2,13 +2,15 @@
 - alias: 'Kettle off at night'
   trigger:
     platform: time
-    minutes: 0
-    hours: 23
-    seconds: 0
+    at: "23:00:00"
+  condition:
+    condition: state
+    entity_id: switch.kettle
+    state: 'on'
   action:
     - service: switch.turn_off
       entity_id: switch.kettle
-    - service: notify.html5_notify1
+    - service: notify.smtp_notify1
       data:
         title: "Set up the Kettle"
         message: 'Remember to set up the kettle!'

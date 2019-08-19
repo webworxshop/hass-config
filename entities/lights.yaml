@@ -1,46 +1,42 @@
+---
+- platform: yeelight
+  devices:
+    !secret rl_host:
+      name: Reading Lamp
+    !secret kd1_host:
+      name: Kitchen Downlight 1
+    !secret kd2_host:
+      name: Kitchen Downlight 2
+    !secret kd3_host:
+      name: Kitchen Downlight 3
 
-  - platform: yeelight
-    devices:
-      !secret rl_host:
-        name: Reading Lamp
-      !secret kd1_host:
-        name: Kitchen Downlight 1
-      !secret kd2_host:
-        name: Kitchen Downlight 2
-      !secret kd3_host:
-        name: Kitchen Downlight 3
+- platform: group
+  name: Kitchen Downlights
+  entities:
+    - light.yeelight_color1_34ce0084d85f
+    - light.yeelight_color1_34ce0084fb1d
+    - light.yeelight_color1_34ce008b7b7e
 
-  - platform: mqtt
-    name: "Lava Lamp"
-    state_topic: !secret ll_state_topic
-    command_topic: !secret ll_cmd_topic
-    qos: 0
-    payload_on: "1"
-    payload_off: "0"
-    optimistic: false
+- platform: limitlessled
+  bridges:
+    - host: !secret limitlessled_host
+      port: 8899
+      version: 4
+      groups:
+        - number: 1
+          name: Hallway
+        - number: 2
+          name: Toilet
+        - number: 3
+          name: Living Room Spots
+        - number: 4
+          name: Dining Room Spots
 
-  - platform: limitlessled
-    bridges:
-      - host: !secret limitlessled_host
-        port: 8899
-        version: 4
-        groups:
-          - number: 1
-            name: Hallway
-            #type: rgbww
-          - number: 2
-            name: Toilet
-            #type: rgbww
-          - number: 3
-            name: Living Room Spots
-          - number: 4
-            name: Dining Room Spots
-  
-  - platform: mqtt
-    name: "Night Light"
-    state_topic: !secret nl_state_topic
-    command_topic: !secret nl_command_topic
-    payload_on: !secret nl_payload_on
-    payload_off: !secret nl_payload_off
-    optimistic: false
-    retain: true
+- platform: mqtt
+  name: "Night Light"
+  state_topic: !secret nl_state_topic
+  command_topic: !secret nl_command_topic
+  payload_on: !secret nl_payload_on
+  payload_off: !secret nl_payload_off
+  optimistic: false
+  retain: true

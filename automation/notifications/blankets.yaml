@@ -1,0 +1,21 @@
+
+- alias: "Electric blankets prompt"
+  trigger:
+    platform: time
+    at: "21:30:00"
+  condition:
+    condition: and
+    conditions:
+#      - condition: template
+#        value_template: "{{ states.weather.home.attributes.temperature <= 10.0 }}"
+      - condition: state
+        entity_id: group.presence
+        state: "home"
+  action:
+    - service: homeassistant.turn_on
+      entity_id: group.electric_blankets
+    - service: notify.gotify_1
+      data:
+         title: "It's cold tonight!"
+         message: "Go and make sure the electric blankets are turned on."
+

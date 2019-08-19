@@ -1,3 +1,4 @@
+---
 away_mode_activate:
   alias: "Activate Away Mode"
   sequence:
@@ -21,11 +22,11 @@ away_mode_activate:
       data:
         entity_id: switch.living_room_state
     - alias: "Send Notification"
-      service: notify.html5_family
+      service: notify.family
       data:
         title: "Away Mode Activated"
         message: "Away Mode has been activated, cameras are now armed."
-      
+
 away_mode_deactivate:
   alias: "Deactivate Away Mode"
   sequence:
@@ -53,8 +54,7 @@ away_mode_deactivate:
       data:
         entity_id: switch.living_room_camera
     - alias: "Send Notification"
-      service: notify.html5_family
+      service: notify.family
       data:
         title: "Away Mode Deactivated"
         message: "Away Mode has been deactivated, cameras are now disarmed."
-    

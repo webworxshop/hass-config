@@ -1,14 +1,18 @@
 
   - platform: kodi
-    host: !secret kodi_host
+    host: !secret kodi_livingroom_host
     port: 8080
-    name: TV
+    name: Living Room Kodi
+    username: !secret kodi_username 
+    password: !secret kodi_password
+
+  - platform: kodi
+    host: !secret kodi_bedroom_host
+    port: 8080
+    name: Master Bedroom Kodi
     username: !secret kodi_username 
     password: !secret kodi_password
     
-  - platform: cast
-    host: !secret chromecast_host
-
   - platform: snapcast
     host: !secret musicserver_host
 

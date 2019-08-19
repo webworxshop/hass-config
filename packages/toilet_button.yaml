@@ -1,0 +1,68 @@
+
+automation:
+  - alias: Toilet button light bright
+    trigger:
+      platform: mqtt
+      topic: 'zigbee2mqtt/toilet_button'
+    condition:
+      condition: and
+      conditions:
+        - condition: template
+          value_template: "{{ 'single' == trigger.payload_json.click }}"
+        - condition: template
+          value_template: "{{ states.light.toilet.state == 'off' or states.light.toilet.attributes.brightness < 255 }}"
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.toilet
+          brightness_pct: 100
+
+  - alias: Toilet button light off
+    trigger:
+      platform: mqtt
+      topic: 'zigbee2mqtt/toilet_button'
+    condition:
+      condition: and
+      conditions:
+        - condition: template
+          value_template: "{{ 'single' == trigger.payload_json.click }}"
+        - condition: template
+          value_template: "{{ states.light.toilet.state == 'on' and states.light.toilet.attributes.brightness == 255 }}"
+    action:
+      service: light.turn_off
+      data:
+        entity_id: light.toilet
+
+  - alias: Toilet button light dim
+    trigger:
+      platform: mqtt
+      topic: 'zigbee2mqtt/toilet_button'
+    condition:
+      condition: and
+      conditions:
+        - condition: template
+          value_template: "{{ 'double' == trigger.payload_json.click }}"
+        - condition: template
+          value_template: "{{ states.light.toilet.state == 'off' or states.light.toilet.attributes.brightness > 2 }}"
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.toilet
+          brightness_pct: 1
+
+  - alias: Toilet button light off from dim
+    trigger:
+      platform: mqtt
+      topic: 'zigbee2mqtt/toilet_button'
+    condition:
+      condition: and
+      conditions:
+        - condition: template
+          value_template: "{{ 'double' == trigger.payload_json.click }}"
+        - condition: template
+          value_template: "{{ states.light.toilet.state == 'on' and states.light.toilet.attributes.brightness == 2 }}"
+    action:
+      service: light.turn_off
+      data:
+        entity_id: light.toilet
+

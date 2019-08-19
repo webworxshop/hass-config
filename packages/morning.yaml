@@ -1,0 +1,102 @@
+
+sensor:
+  - platform: command_line
+    name: BBC News Summary URL
+    scan_interval: 3600
+    command: "/config/shell_commands/extract_news_link.py"
+
+script:
+  play_news_summary:
+     alias: "Play a BBC News Summary"
+     sequence:
+       - service: switch.turn_on
+         entity_id: switch.living_room_tv
+       - service: media_player.play_media
+         entity_id: media_player.tv
+         data_template:
+           media_content_id: "{{ states('sensor.bbc_news_summary_url') }}"
+           media_content_type: "music"
+
+# TODO: bayesian sensor wasn't very reliable
+#binary_sensor:
+#
+#  - platform: template
+#    sensors:
+#      bedtime:
+#        friendly_name: "Bedtime"
+#        value_template: '{{ now().hour <= 23 and now().hour >= 7 }}'
+#
+#  - platform: bayesian
+#    name: Asleep
+#    prior: 0.3
+#    probability_threshold: 0.9
+#    observations:
+#      - entity_id: 'switch.living_room_tv'
+#        prob_given_true: 0.6
+#        prob_given_false: 0.2
+#        platform: 'state'
+#        to_state: 'off'
+#      - entity_id: 'switch.kettle'
+#        prob_given_true: 0.8
+#        prob_given_false: 0.1
+#        platform: 'state'
+#        to_state: 'off'
+#      - entity_id: !secret device1_charge_status
+#        prob_given_true: 0.9
+#        prob_given_false: 0.1
+#        platform: 'state'
+#        to_state: 'on'
+#      - entity_id: 'binary_sensor.bedtime'
+#        prob_given_true: 0.9
+#        prob_given_false: 0.1
+#        platform: 'state'
+#        to_state: 'on'
+
+automation:  
+  - alias: 'Getting Up'
+    trigger:
+      platform: state
+      entity_id: !secret device1_charge_status
+      from: 'on'
+      to: 'off'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: group.presence
+          state: home
+        - condition: time
+          after: "07:00:00"
+          before: "10:00:00"
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.home_mode
+          option: None
+      - service: script.turn_on
+        entity_id: script.downlights_bright
+      - service: switch.turn_on
+        data:
+          entity_id: switch.kettle
+#      - wait_template: "{{ is_state('binary_sensor.kitchen_hall_door_contact', 'off') }}"
+#      - delay:
+#          seconds: 30
+#      - service: input_boolean.turn_on
+#        entity_id: input_boolean.tts_enabled
+#      - condition: state
+#        entity_id: media_player.tv
+#        state: idle
+#      - condition: state
+#        entity_id: media_player.living_room_tv
+#        state: idle
+#      - service: script.turn_on
+#        entity_id: script.tts_status_report
+#      - wait_template: "{{ is_state('media_player.living_room_tv', 'stop') }}"
+#      - service: tts.marytts_say
+#        entity_id: media_player.living_room_tv
+#        data_template:
+#          message: "The latest news from the BBC follows:"
+#      - wait_template: "{{ is_state('media_player.living_room_tv', 'stop') }}"
+#      - service: script.turn_on
+#        entity_id: script.play_news_summary
+

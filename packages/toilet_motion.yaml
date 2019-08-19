@@ -1,0 +1,79 @@
+
+timer:
+  toilet_light_timeout:
+    duration: "00:02:00"
+
+input_select:
+  last_door:
+    name: "Last Opened Door"
+    options:
+      - "Kitchen"
+      - "Bedroom"
+
+automation:
+  - alias: Toilet Motion Light
+    trigger:
+      platform: state
+      entity_id: binary_sensor.toilet_motion
+      from: "off"
+      to: "on"
+    condition:
+      condition: and
+      conditions:
+        - condition: or
+          conditions:
+            - condition: sun
+              after: sunset
+              after_offset: "-00:20:00"
+            - condition: sun
+              before: sunrise
+              before_offset: "00:20:00"
+    action:
+      - service: timer.start
+        entity_id: timer.toilet_light_timeout
+      - condition: template
+        value_template: "{{ states.light.toilet.state == 'off' }}"
+      - service: light.turn_on
+        entity_id: light.toilet
+        data_template:
+          brightness_pct: >
+            {% if now().hour >= 20 or now().hour < 7 %}
+            {% if states.input_select.last_door.state == 'Bedroom' %}
+            1
+            {% else %}
+            100
+            {% endif %}
+            {% else %}
+            100
+            {% endif %}
+
+  - alias: Toilet Light Timeout
+    trigger:
+      platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.toilet_light_timeout
+    action:
+      - service: light.turn_off
+        entity_id: light.toilet
+
+  - alias: Set Last Opened Door
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.kitchen_hall_door_contact
+        from: "off"
+        to: "on"
+      - platform: state
+        entity_id: !secret bed1_door_entity
+        from: "off"
+        to: "on"
+      - platform: state
+        entity_id: !secret bed2_door_entity
+        from: "off"
+        to: "on"
+    action:
+      service: input_select.select_option
+      entity_id: input_select.last_door
+      data_template:
+          option: "{% if trigger.entity_id == 'binary_sensor.kitchen_hall_door_contact' %}Kitchen{% else %}Bedroom{% endif %}"
+

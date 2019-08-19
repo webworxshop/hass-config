@@ -1,0 +1,128 @@
+
+automation:
+  - alias: Kitchen button downlights on
+    trigger:
+      platform: mqtt
+      topic: 'zigbee2mqtt/kitchen_button'
+    condition:
+      condition: and
+      conditions:
+        - condition: template
+          value_template: "{{ 'single' == trigger.payload_json.click }}"
+        - condition: template
+          value_template: "{{ states.light.kitchen_downlights.state == 'off' }}"
+    action:
+      service: script.turn_on
+      data:
+        entity_id: script.downlights_bright
+
+  - alias: Kitchen button downlights off
+    trigger:
+      platform: mqtt
+      topic: 'zigbee2mqtt/kitchen_button'
+    condition:
+      condition: and
+      conditions:
+        - condition: template
+          value_template: "{{ 'single' == trigger.payload_json.click }}"
+        - condition: template
+          value_template: "{{ states.light.kitchen_downlights.state == 'on' }}"
+    action:
+      service: light.turn_off
+      data:
+        entity_id: light.kitchen_downlights
+
+  - alias: Kitchen button dining room on
+    trigger:
+      platform: mqtt
+      topic: 'zigbee2mqtt/kitchen_button'
+    condition:
+      condition: and
+      conditions:
+        - condition: template
+          value_template: "{{ 'double' == trigger.payload_json.click }}"
+        - condition: template
+          value_template: "{{ states.light.dining_room_spots.state == 'off' }}"
+    action:
+      service: scene.turn_on
+      entity_id: scene.dining_spots_bright
+
+  - alias: Kitchen button dining room off
+    trigger:
+      platform: mqtt
+      topic: 'zigbee2mqtt/kitchen_button'
+    condition:
+      condition: and
+      conditions:
+        - condition: template
+          value_template: "{{ 'double' == trigger.payload_json.click }}"
+        - condition: template
+          value_template: "{{ states.light.dining_room_spots.state == 'on' }}"
+    action:
+      service: light.turn_off
+      data:
+        entity_id: light.dining_room_spots
+
+  - alias: Kitchen button all lights on
+    trigger:
+      platform: mqtt
+      topic: 'zigbee2mqtt/kitchen_button'
+    condition:
+      condition: and
+      conditions:
+        - condition: template
+          value_template: "{{ 'long' == trigger.payload_json.click }}"
+        - condition: or
+          conditions:
+            - condition: template
+              value_template: "{{ states.light.kitchen_downlights.state == 'off' }}"
+            - condition: template
+              value_template: "{{ states.light.dining_room_spots.state == 'off' }}"
+            - condition: template
+              value_template: "{{ states.light.living_room_spots.state == 'off' }}"
+    action:
+      service: scene.turn_on
+      entity_id: scene.main_lights
+
+  - alias: Kitchen button all lights off
+    trigger:
+      platform: mqtt
+      topic: 'zigbee2mqtt/kitchen_button'
+    condition:
+      condition: and
+      conditions:
+        - condition: template
+          value_template: "{{ 'long' == trigger.payload_json.click }}"
+        - condition: template
+          value_template: "{{ states.light.kitchen_downlights.state == 'on' }}"
+        - condition: template
+          value_template: "{{ states.light.dining_room_spots.state == 'on' }}"
+        - condition: template
+          value_template: "{{ states.light.living_room_spots.state == 'on' }}"
+    action:
+      - service: light.turn_off
+        entity_id: light.kitchen_downlights
+      - service: light.turn_off
+        entity_id: light.dining_room_spots
+      - service: light.turn_off
+        entity_id: light.living_room_spots
+
+  - alias: Kitchen button candlelight dinner
+    trigger:
+      platform: mqtt
+      topic: 'zigbee2mqtt/kitchen_button'
+    condition:
+      condition: and
+      conditions:
+        - condition: template
+          value_template: "{{ 'triple' == trigger.payload_json.click }}"
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.dining_room_spots
+          brightness_pct: 1
+      - service: light.turn_off
+        entity_id: light.kitchen_downlights
+      - service: light.turn_off
+        entity_id: light.living_room_spots
+

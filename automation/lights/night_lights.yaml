@@ -1,43 +1,44 @@
 
-- alias: 'Hallway and toilet lights on in evening'
-  trigger:
-    platform: sun
-    event: sunset
-    offset: "-0:10:00"
-  action:
-    #- service: light.turn_on
-    #  data:
-    #    entity_id: light.hallway
-    #    brightness_pct: 1
-    - service: light.turn_on
-      data:
-        entity_id: light.toilet
-        brightness_pct: 1
-
-- alias: 'Hallway and toilet lights off in morning'
-  trigger:
-    platform: sun
-    event: sunrise
-    offset: "0:10:00"
-  action:
-    #- service: light.turn_off
-    #  data:
-    #    entity_id: light.hallway
-    - service: light.turn_off
-      data:
-        entity_id: light.toilet
-
-- alias: 'Night light on at bedtime'
+- alias: 'Night light 1 on at bedtime'
   trigger:
     platform: time
     at: '19:30:00'
   action:
     - service: light.turn_on
       data:
-        entity_id: light.night_light
+        entity_id: !secret night_light1
+        rgb_color: [255, 0, 190]
+        brightness_pct: 80
 
-- alias: 'Night light off in morning (workdays)'
-  trigger: 
+- alias: 'Night light 2 on at bedtime'
+  trigger:
+    platform: time
+    at: '19:15:00'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: !secret night_light2
+        rgb_color: [255, 0, 190]
+        brightness_pct: 80
+
+- alias: 'Night lights red at 5am'
+  trigger:
+    platform: time
+    at: '05:00:00'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: !secret night_light1
+        rgb_color: [255, 0, 0]
+        brightness_pct: 80
+    - service: light.turn_on
+      data:
+        entity_id: !secret night_light2
+        rgb_color: [255, 0, 0]
+        brightness_pct: 80
+
+- alias: 'Night lights green in morning (workdays)'
+  trigger:
     platform: time
     at: '07:30:00'
   condition:
@@ -50,14 +51,27 @@
         entity_id: 'input_boolean.on_holiday'
         state: 'off'
   action:
-    - service: light.turn_off
+    - service: light.turn_on
       data:
-        entity_id: light.night_light
+        entity_id: !secret night_light1
+        rgb_color: [0, 255, 0]
+        brightness_pct: 80
+    - service: light.turn_on
+      data:
+        entity_id: !secret night_light2
+        rgb_color: [0, 255, 0]
+        brightness_pct: 80
+    - delay:
+        minutes: 15
+    - service: light.turn_off
+      entity_id: !secret night_light1
+    - service: light.turn_off
+      entity_id: !secret night_light2
 
-- alias: 'Night light off in morning (non-workdays)'
-  trigger: 
+- alias: 'Night light green in morning (non-workdays)'
+  trigger:
     platform: time
-    at: '08:00:00'
+    at: '08:15:00'
   condition:
     condition: or
     conditions:
@@ -68,7 +82,21 @@
         entity_id: 'input_boolean.on_holiday'
         state: 'on'
   action:
-    - service: light.turn_off
+    - service: light.turn_on
       data:
-        entity_id: light.night_light
+        entity_id: !secret night_light1
+        rgb_color: [0, 255, 0]
+        brightness_pct: 80
+    - service: light.turn_on
+      data:
+        entity_id: !secret night_light2
+        rgb_color: [0, 255, 0]
+        brightness_pct: 80
+    - delay:
+        minutes: 15
+    - service: light.turn_off
+      entity_id: !secret night_light1
+    - service: light.turn_off
+      entity_id: !secret night_light2
+
 
