@@ -42,6 +42,7 @@ shellcheck:
     entrypoint: [""]
   before_script:
     - ln -s $CI_PROJECT_DIR /config
+    - mv shell_commands/fake_secrets.sh shell_commands/secrets.sh
     - shellcheck --version
     - apk --no-cache add grep
   script:
