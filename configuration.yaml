@@ -44,6 +44,12 @@ conversation:
 # System health
 system_health:
 
+hacs:
+  token: !secret hacs_token
+  appdaemon: True
+  python_script: True
+  theme: True
+
 # MQTT broker
 mqtt:
   broker: !secret mqtt_host
@@ -115,25 +121,15 @@ zoneminder:
 #    scene.movie:
 #      expose: true
 
-openuv:
-  api_key: !secret openuv_api_key
-  binary_sensors:
-    monitored_conditions:
-      - uv_protection_window
-  sensors:
-    monitored_conditions:
-      - current_ozone_level
-      - current_uv_index
-      - current_uv_level
-      - max_uv_index
-      - safe_exposure_time_type_1
-      - safe_exposure_time_type_2
-
 speedtestdotnet:
   monitored_conditions:
     - ping
     - download
     - upload
+    
+cast:
+  media_player:
+    - host: !secret chromecast_host
 
 # include entity files
 input_boolean: !include entities/input_booleans.yaml
