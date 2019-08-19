@@ -9,21 +9,43 @@ script:
       - alias: "Execute restart command"
         service: shell_command.restart_kodi
 
+binary_sensor:
+  - platform: mqtt
+    name: "Open MQTT Gateway Status"
+    state_topic: "home/OpenMQTTGateway/LWT"
+    payload_on: "online"
+    payload_off: "offline"
+    device_class: "connectivity"
+  - platform: mqtt
+    name: "Node-RED Eomer Status"
+    state_topic: "nodered/eomer/status"
+    payload_on: "online"
+    payload_off: "offline"
+    device_class: "connectivity"
+  - platform: mqtt
+    name: "Node-RED Fili Status"
+    state_topic: "nodered/fili/status"
+    payload_on: "online"
+    payload_off: "offline"
+    device_class: "connectivity"
+  - platform: mqtt
+    name: "Node-RED Balin Status"
+    state_topic: "nodered/balin/status"
+    payload_on: "online"
+    payload_off: "offline"
+    device_class: "connectivity"
+  - platform: mqtt
+    name: "Zigbee2mqtt Status"
+    state_topic: "zigbee2mqtt/bridge/state"
+    payload_on: "online"
+    payload_off: "offline"
+    device_class: "connectivity"
+
 sensor:
   - platform: mqtt
     name: "Test Battery"
     state_topic: test/battery
     unit_of_measurement: '%'
-  - platform: mqtt
-    name: !secret bed1_battery_name
-    state_topic: !secret bed1_battery_topic
-    unit_of_measurement: '%'
-    value_template: "{{ value_json.battery }}"
-  - platform: mqtt
-    name: "Kitchen/Hall Door Battery"
-    state_topic: "zigbee2mqtt/kitchen_hall_door"
-    unit_of_measurement: '%'
-    value_template: "{{ value_json.battery }}"
   - platform: template
     sensors:
       kitchen_button_battery:
@@ -45,7 +67,10 @@ automation:
         entity_id: !secret bed1_battery_entity
         below: 20
       - platform: numeric_state
-        entity_id: sensor.kitchenhall_door_battery
+        entity_id: !secret bed2_battery_entity
+        below: 20
+      - platform: numeric_state
+        entity_id: sensor.kitchen_hall_door_battery
         below: 20
       - platform: numeric_state
         entity_id: sensor.kitchen_button_battery
@@ -65,6 +90,9 @@ automation:
         below: 5
       - platform: numeric_state
         entity_id: !secret bed1_battery_entity
+        below: 5
+      - platform: numeric_state
+        entity_id: !secret bed2_battery_entity
         below: 5
       - platform: numeric_state
         entity_id: sensor.kitchenhall_door_battery

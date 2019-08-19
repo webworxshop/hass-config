@@ -3,7 +3,7 @@ sensor:
   - platform: command_line
     name: BBC News Summary URL
     scan_interval: 3600
-    command: "/home/homeassistant/.homeassistant/shell_commands/extract_news_link.py"
+    command: "/config/shell_commands/extract_news_link.py"
 
 script:
   play_news_summary:
@@ -78,23 +78,25 @@ automation:
       - service: switch.turn_on
         data:
           entity_id: switch.kettle
-      - delay:
-          minutes: 5
-      - service: input_boolean.turn_on
-        entity_id: input_boolean.tts_enabled
-      - condition: state
-        entity_id: media_player.tv
-        state: idle
-      - service: script.turn_on
-        entity_id: script.tts_status_report
-      - delay:
-          seconds: 33
-      - service: tts.picotts_say
-        entity_id: media_player.tv
-        data_template:
-          message: "The latest news from the BBC follows:"
-      - delay:
-          seconds: 5
-      - service: script.turn_on
-        entity_id: script.play_news_summary
+#      - wait_template: "{{ is_state('binary_sensor.kitchen_hall_door_contact', 'off') }}"
+#      - delay:
+#          seconds: 30
+#      - service: input_boolean.turn_on
+#        entity_id: input_boolean.tts_enabled
+#      - condition: state
+#        entity_id: media_player.tv
+#        state: idle
+#      - condition: state
+#        entity_id: media_player.living_room_tv
+#        state: idle
+#      - service: script.turn_on
+#        entity_id: script.tts_status_report
+#      - wait_template: "{{ is_state('media_player.living_room_tv', 'stop') }}"
+#      - service: tts.marytts_say
+#        entity_id: media_player.living_room_tv
+#        data_template:
+#          message: "The latest news from the BBC follows:"
+#      - wait_template: "{{ is_state('media_player.living_room_tv', 'stop') }}"
+#      - service: script.turn_on
+#        entity_id: script.play_news_summary
 

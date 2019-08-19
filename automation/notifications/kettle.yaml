@@ -2,9 +2,7 @@
 - alias: 'Kettle off at night'
   trigger:
     platform: time
-    minutes: 0
-    hours: 23
-    seconds: 0
+    at: "23:00:00"
   condition:
     condition: state
     entity_id: switch.kettle

@@ -1,0 +1,144 @@
+
+switch:
+  - platform: broadlink
+    host: !secret broadlink_ip
+    mac: !secret broadlink_mac
+    type: rm_mini
+
+shell_command:
+  soundbar_power_toggle: /config/shell_commands/broadlink_cli_wrapper.sh 2600600000012192131213121212133614111311143513371336121213121311133712121312123713111312131212121312131113121311133712371336133613361435143513361300056a0001264914000c3f0001254a15000c3d0001284712000d050000000000000000
+  soundbar_source_tv: /config/shell_commands/broadlink_cli_wrapper.sh 260060000001219313111312131113361411131213361237133614111311131212371311131214351435143514351436131114111212131213111411141112121336143514361336130005670001274813000c3d0001254914000c3c0001264814000d050000000000000000
+  soundbar_source_aux: /config/shell_commands/broadlink_cli_wrapper.sh 2600600000012192141113111312133613121311133613371237131113121311133713111312133613111312133613361312131113121312123712371311131213361336133614351300056b0001264912000c400001264913000c400001264813000d050000000000000000
+  soundbar_source_bluetooth: /config/shell_commands/broadlink_cli_wrapper.sh 2600500000012192141112121312133614111212133614351436131113121311143514111411123713111435141113121237121213121311133614111435143514111336143514351300056a0001254914000d050000000000000000
+  soundbar_volume_up: /config/shell_commands/broadlink_cli_wrapper.sh 2600600000012093141112121312123713111312133613361336131213121212133613121311133712121336143513371237131113121312123713111312131113121336133613361400056a0001264913000c410001254915000c3e0001264913000d050000000000000000
+  soundbar_volume_down: /config/shell_commands/broadlink_cli_wrapper.sh 260058000001229213111312121213361312121213371237123712121312131213361212131212371336133613361336143612121312121213121212141113121212133613361337130005680001274913000c3d0001274912000d05
+  soundbar_bass_up: /config/shell_commands/broadlink_cli_wrapper.sh 260058000001229214111212131212371312131113361336143612121312131113361411131213361212141112371336133613121237131113371237121213121212133712121336140005660001264a13000c3c0001274814000d05
+  soundbar_bass_down: /config/shell_commands/broadlink_cli_wrapper.sh 260050000001209313111411131213361311131213361336143513121311141114351411121214351435131214351336143514111435141112131236141113121212143514111336130005670001274814000d050000000000000000
+  soundbar_mute_toggle: /config/shell_commands/broadlink_cli_wrapper.sh 260050000001209313121311141112371311131214341535143513121312121214351312131113371212131212121312121214361311141112371237133614351336141113361435130005690001264914000d050000000000000000
+  soundbar_effect_movie: /config/shell_commands/broadlink_cli_wrapper.sh 26004800000122921212141113111337121213121237133613361411121213121336131212121336133613371237121214351337133612121312131113121336131212121411133613000d05
+  soundbar_effect_night: /config/shell_commands/broadlink_cli_wrapper.sh 260058000001219214111212131213361410131213361336143514111411121213361411131113371336131114111336143513361336141114111336123712121312131212121435140005690001274814000c400001244914000d05
+  soundbar_effect_music: /config/shell_commands/broadlink_cli_wrapper.sh 2600580000012093131113121311133712121312123712371336141112121312133613111411133613121311131213361336133613371311133614351435141113121311141112371300056a0001254913000c3f0001254913000d05
+  soundbar_voice_adjust_1: /config/shell_commands/broadlink_cli_wrapper.sh 26004800000121921411131213111435141113111337133612371311131213121237131114111336131213361237133614351435143513121336141113111312121213121311133712000d05
+  soundbar_voice_adjust_2: /config/shell_commands/broadlink_cli_wrapper.sh 2600500000012193131114111311133713111312133613361336141113111312133613121311133613361436133612371336143513361411131113121411131113121311141113361300056a0001264914000d050000000000000000
+  soundbar_voice_adjust_3: /config/shell_commands/broadlink_cli_wrapper.sh 2600500000012192131213121212133613121311133712371336131113121411123713111312133613121212131213111411131113121333173513361336133712371336133614111200056a0001264912000d050000000000000000
+
+input_select:
+  soundbar_source:
+    name: Soundbar Source Select
+    options:
+      - TV
+      - Aux
+      - Bluetooth
+    initial: TV
+    icon: mdi:video-input-hdmi
+
+  soundbar_effect:
+    name: Soundbar Effect
+    options:
+      - Movie
+      - Night
+      - Music
+    initial: Movie
+    icon: mdi:movie
+
+  soundbar_voice_adjust:
+    name: Soundbar Voice Adjust
+    options:
+      - Level 1
+      - Level 2
+      - Level 3
+    initial: Level 1
+    icon: mdi:voice
+
+input_boolean:
+  soundbar_power:
+    name: Soundbar Power
+    initial: off
+    icon: mdi:flash
+
+  soundbar_mute:
+    name: Soundbar Mute
+    initial: off
+    icon: mdi:volume-mute
+
+automation:
+  - alias: Set soundbar power
+    trigger:
+      platform: state
+      entity_id: input_boolean.soundbar_power
+    action:
+      service: shell_command.soundbar_power_toggle
+
+  - alias: Set soundbar mute
+    trigger:
+      platform: state
+      entity_id: input_boolean.soundbar_mute
+    action:
+      service: shell_command.soundbar_mute_toggle
+
+  - alias: Set soundbar source
+    trigger:
+      platform: state
+      entity_id: input_select.soundbar_source
+    action:
+      service_template: >
+        shell_command.{% if trigger.to_state.state == 'TV' %}soundbar_source_tv{% elif trigger.to_state.state == 'Aux' %}soundbar_source_aux{% else %}soundbar_source_bluetooth{% endif %}
+
+  - alias: Set soundbar effect
+    trigger:
+      platform: state
+      entity_id: input_select.soundbar_effect
+    action:
+      service_template: >
+        shell_command.{% if trigger.to_state.state == 'Movie' %}soundbar_effect_movie{% elif trigger.to_state.state == 'Night' %}soundbar_effect_night{% else %}soundbar_effect_music{% endif %}
+
+  - alias: Set soundbar voice adjust
+    trigger:
+      platform: state
+      entity_id: input_select.soundbar_voice_adjust
+    action:
+      service_template: >
+        shell_command.{% if trigger.to_state.state == 'Level 1' %}soundbar_voice_adjust_1{% elif trigger.to_state.state == 'Level 2' %}soundbar_voice_adjust_2{% else %}soundbar_voice_adjust_3{% endif %}
+
+script:
+  soundbar_preset_movie:
+    alias: Soundbar Preset Movie
+    sequence:
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.soundbar_power
+      - delay:
+          seconds: 15
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.soundbar_source
+          option: TV
+      - delay:
+          seconds: 1
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.soundbar_effect
+          option: Movie
+      - delay:
+          seconds: 1
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.soundbar_voice_adjust
+          option: Level 2
+
+  soundbar_preset_music:
+    alias: Soundbar Preset Music
+    sequence:
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.soundbar_power
+      - delay:
+          seconds: 15
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.soundbar_source
+          option: Aux
+      - delay:
+          seconds: 1
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.soundbar_effect
+          option: Music

@@ -16,10 +16,6 @@ automation:
         data:
           entity_id: light.toilet
           brightness_pct: 100
-      - service: input_select.select_option
-        entity_id: input_select.last_door
-        data:
-          option: "Manual Override"
 
   - alias: Toilet button light off
     trigger:
@@ -53,10 +49,6 @@ automation:
         data:
           entity_id: light.toilet
           brightness_pct: 1
-      - service: input_select.select_option
-        entity_id: input_select.last_door
-        data:
-          option: "Manual Override"
 
   - alias: Toilet button light off from dim
     trigger:

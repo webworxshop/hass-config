@@ -1,7 +1,9 @@
 
 tts:
-  - platform: picotts
-    language: 'en-GB'
+  platform: marytts
+  language: 'en-GB'
+  host: !secret marytts_host
+  voice: 'dfki-poppy-hsmm'
 
 sensor:
   - platform: template
@@ -21,12 +23,12 @@ script:
       - condition: state
         entity_id: input_boolean.tts_enabled
         state: 'on'
-      - service: switch.turn_on
-        entity_id: switch.living_room_tv
+      - service: media_player.turn_on
+        entity_id: media_player.living_room_tv
       - delay:
-          seconds: 3
-      - service: tts.picotts_say
-        entity_id: media_player.tv
+          seconds: 5
+      - service: tts.marytts_say
+        entity_id: media_player.living_room_tv
         data_template:
           message: "{{ message }}"
 
@@ -46,7 +48,7 @@ script:
             icon: !secret hass_icon_url
 
   tts_status_report:
-    alias: Morning
+    alias: TTS Status Report
     sequence:
     - service: script.tts_living_room
       data_template:
@@ -58,9 +60,13 @@ script:
           {% else %}
           Good evening.
           {% endif %}
-          It's currently {{states.sensor.dark_sky_summary.state}} and {{states.sensor.dark_sky_temperature.state|round}} degrees. The weather for the next 24 hours will be {{states.sensor.dark_sky_hourly_summary.state|replace(".", "")}}, with a high of {{states.sensor.dark_sky_daytime_high_temperature.state|round}} and a low of {{states.sensor.dark_sky_overnight_low_temperature.state|round}}.
+          It's currently {{states.weather.home.state}} and {{states.weather.home.attributes.temperature|round}} degrees. The weather for the next 24 hours will be {{states.sensor.dark_sky_hourly_summary.state|replace(".", "")}}.
           The current average indoor temperature is {{ states.sensor.average_indoor_temperature.state }} degrees.
-          Sun protection is required between {{ states.binary_sensor.uv_protection_window.attributes.start_time.strftime("%-I:%M%p") }} and {{ states.binary_sensor.uv_protection_window.attributes.end_time.strftime("%-I:%M%p") }}. Today's max UV index is {{ states.sensor.max_uv_index.state|round(2) }}.
+          {% if state_attr("binary_sensor.protection_window", "start_time") != None %}
+          Sun protection is required between {{ states.binary_sensor.protection_window.attributes.start_time.strftime("%-I:%M%p") }} and {{ states.binary_sensor.protection_window.attributes.end_time.strftime("%-I:%M%p") }}. Today's max U.V. index is {{ states.sensor.max_uv_index.state|round(2) }}.
+          {% endif %}
+          
+#, with a high of {{states.sensor.dark_sky_daytime_high_temperature.state|round}} and a low of {{states.sensor.dark_sky_overnight_low_temperature.state|round}}.
 
 automation:
   - alias: "Time to leave announcement"

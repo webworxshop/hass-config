@@ -6,49 +6,16 @@
   condition:
     condition: and
     conditions:
-      - condition: numeric_state
-        entity_id: sensor.dark_sky_overnight_low_temperature
-        below: 10.0
+#      - condition: template
+#        value_template: "{{ states.weather.home.attributes.temperature <= 10.0 }}"
       - condition: state
         entity_id: group.presence
         state: "home"
   action:
-    - service: notify.family
+    - service: homeassistant.turn_on
+      entity_id: group.electric_blankets
+    - service: notify.gotify_1
       data:
          title: "It's cold tonight!"
-         message: "Would you like to turn on the electric blankets?"
-#         data:
-#           actions:
-#             - action: "blankets_yes"
-#               title: "Yes, please."
-#             - action: "blankets_no"
-#               title: "No, thanks."
-#           icon: "/local/static/icons/snowflake.png"
-    - service: script.tts_or_notify_living_room
-      data_template:
-        message: "Brrr, it's chilly! Don't forget about the electric blankets!"
-
-#- alias: "Turn on electric blankets"
-#  trigger:
-#    platform: event
-#    event_type: html5_notification.clicked
-#    event_data:
-#      action: blankets_yes
-#  action:
-#    - service: switch.turn_on
-#      entity_id: switch.electric_blanket_1
-#    - service: switch.turn_on
-#      entity_id: switch.electric_blanket_2
-
-#- alias: "Turn off electric blankets"
-#  trigger:
-#    platform: event
-#    event_type: html5_notification.clicked
-#    event_data:
-#      action: blankets_no
-#  action:
-#    - service: switch.turn_off
-#      entity_id: switch.electric_blanket_1
-#    - service: switch.turn_off
-#      entity_id: switch.electric_blanket_2
+         message: "Go and make sure the electric blankets are turned on."
 

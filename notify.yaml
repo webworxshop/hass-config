@@ -21,14 +21,34 @@
 
   - name: kodi_livingroom
     platform: kodi
-    host: !secret kodi_host
+    host: !secret kodi_livingroom_host
     username: !secret kodi_username
     password: !secret kodi_password
+
+  - name: kodi_bedroom
+    platform: kodi
+    host: !secret kodi_bedroom_host
+    username: !secret kodi_username
+    password: !secret kodi_password
+    
+  - name: gotify_1
+    platform: rest
+    resource: !secret gotify_resource
+    method: POST_JSON
+    headers: 
+      X-Gotify-Key: !secret gotify_key
+    message_param_name: message
+    title_param_name: title
+    target_param_name: priority
+    data:
+      extras:
+        client::display:
+          contentType: "text/markdown"
 
   - name: family
     platform: group
     services:
-      - service: smtp_notify1
+      - service: gotify_1
       - service: smtp_notify2
 
 #  - name: all_devices
@@ -41,5 +61,5 @@
   - name: notify
     platform: group
     services:
-      - service: smtp_notify1
+      - service: gotify_1
 

@@ -8,3 +8,10 @@ home-assistant_v2.db*
 deps/
 tts/
 dashboards/
+.storage
+custom_components/
+www/community/
+script-env/
+broadlink-env/
+shell_commands/__pycache__/
+ip_bans.yaml
