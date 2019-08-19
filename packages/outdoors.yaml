@@ -1,0 +1,67 @@
+ 
+sun:
+
+weather:
+  - platform: darksky
+    name: "Home"
+    api_key: !secret darksky_api_key
+    units: ca
+    
+sensor:
+  - platform: darksky
+    api_key: !secret darksky_api_key
+    monitored_conditions:
+      - cloud_cover
+      - hourly_summary
+      - temperature_high
+      - temperature_low
+    units: ca
+    scan_interval:
+      minutes: 15
+      
+  - platform: template
+    sensors:
+      air_pressure:
+        friendly_name: "Air Pressure"
+        unit_of_measurement: "hPa"
+        value_template: "{{ states.weather.home.attributes.pressure }}"
+        icon_template: "mdi:gauge"
+      wind_speed:
+        friendly_name: "Wind Speed"
+        unit_of_measurement: "km/h"
+        value_template: "{{ states.weather.home.attributes.wind_speed }}"
+        icon_template: "mdi:weather-windy"
+        
+  - platform: moon
+  
+  - platform: command_line
+    name: North Taranaki Webcam URL
+    scan_interval: 900
+    command: "/config/shell_commands/tac_webcam.py"
+    
+camera:
+  - platform: generic
+    name: North Taranaki Webcam
+    still_image_url: "{{ states.sensor.north_taranaki_webcam_url.state }}"
+    limit_refetch_to_url_change: true
+  - platform: generic
+    name: Fitzroy Beach Webcam
+    still_image_url: "https://www.primowireless.co.nz/webcameras/snapshot_fitzboardriders_sth.jpg"
+    
+openuv:
+  api_key: !secret openuv_api_key
+  binary_sensors:
+    monitored_conditions:
+      - uv_protection_window
+  sensors:
+    monitored_conditions:
+      - current_ozone_level
+      - current_uv_index
+      - current_uv_level
+      - max_uv_index
+      - safe_exposure_time_type_1
+      - safe_exposure_time_type_2
+      
+binary_sensor:
+  - platform: iss
+
