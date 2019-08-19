@@ -10,12 +10,12 @@
     !secret kd3_host:
       name: Kitchen Downlight 3
 
-  - platform: group
-    name: Kitchen Downlights
-    entities:
-      - light.yeelight_color1_34ce0084d85f
-      - light.yeelight_color1_34ce0084fb1d
-      - light.yeelight_color1_34ce008b7b7e
+- platform: group
+  name: Kitchen Downlights
+  entities:
+    - light.yeelight_color1_34ce0084d85f
+    - light.yeelight_color1_34ce0084fb1d
+    - light.yeelight_color1_34ce008b7b7e
 
 - platform: limitlessled
   bridges:
