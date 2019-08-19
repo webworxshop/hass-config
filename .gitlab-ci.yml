@@ -120,3 +120,25 @@ ha-dev:
     name: homeassistant/home-assistant:dev
     entrypoint: [""]
   allow_failure: true
+
+deploy:
+  stage: deploy
+  image:
+    name: alpine:latest
+    entrypoint: [""]
+  environment:
+    name: home-assistant
+  before_script:
+    - apk --no-cache add curl openssh-client
+    - echo "$DEPLOYMENT_SSH_KEY" > id_rsa
+    - chmod 600 id_rsa
+  script:
+    - ssh -i id_rsa -o "StrictHostKeyChecking=no" $DEPLOYMENT_SSH_LOGIN "cd /mnt/docker-data/home-assistant && git fetch && git checkout $CI_COMMIT_SHA"
+    - "curl -X POST -H \"Authorization: Bearer $DEPLOYMENT_HASS_TOKEN\" -H \"Content-Type: application/json\" $DEPLOYMENT_HASS_URL/api/services/homeassistant/restart"
+  after_script:
+    - rm id_rsa
+  only:
+    refs:
+      - master
+  tags:
+    - hass
