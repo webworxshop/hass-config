@@ -1,4 +1,29 @@
 
+binary_sensor:
+  - platform: ping
+    name: "Living Room TV state"
+    host: !secret living_room_tv_host
+    count: 1
+    scan_interval: 15
+  - platform: command_line
+    name: "Living Room Netflix"
+    command: !secret living_room_netflix_command
+    device_class: connectivity
+
+switch:
+  - platform: template
+    switches:
+      living_room_tv_fused:
+        value_template: "{{ is_state('binary_sensor.living_room_tv_state', 'on') }}"
+        turn_on:
+          service: switch.turn_on
+          data:
+            entity_id: switch.living_room_tv
+        turn_off:
+          service: switch.turn_off
+          data:
+            entity_id: switch.living_room_tv
+
 automation:
   - alias: "Mute outdoor speakers when powered down"
     trigger:
@@ -24,3 +49,41 @@ automation:
         entity_id: media_player.snapcast_client_outdoor_speakers
         is_volume_muted: false
 
+  - alias: 'Turn off TV if idle for 5 minutes'
+    trigger:
+      - platform: state
+        entity_id: media_player.living_room_kodi
+        to: idle
+        for:
+          minutes: 5
+      - platform: state
+        entity_id: binary_sensor.living_room_netflix
+        to: 'off'
+        for:
+          minutes: 5
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: media_player.living_room_kodi
+          state: idle
+        - condition: state
+          entity_id: binary_sensor.living_room_netflix
+          state: 'off'
+        - condition: time
+          after: '20:00:00'
+          before: '07:00:00'
+    action:
+      - service: switch.turn_off
+        data:
+          entity_id: switch.living_room_tv_fused
+      - condition: and
+        conditions:
+          - condition: state
+            entity_id: light.living_room_spots
+            state: 'on'
+          - condition: template
+            value_template: '{{ states.light.living_room_spots.attributes.rgb_color == [0, 0, 255] or states.light.living_room_spots.attributes.rgb_color == (0, 0, 255) }}'
+      - service: light.turn_off
+        data:
+          entity_id: light.living_room_spots

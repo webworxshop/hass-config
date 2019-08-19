@@ -2,36 +2,21 @@
 #  - platform: zoneminder
 #    name: zoneminder_sensor
 
-- platform: darksky
-  api_key: !secret darksky_api_key
-  monitored_conditions:
-      - summary
-      - precip_intensity
-      - precip_probability
-      - temperature
-      - dew_point
-      - wind_speed
-      - wind_bearing
-      - cloud_cover
-      - humidity
-      - pressure
-      - visibility
-      - hourly_summary
-      - temperature_high
-      - temperature_low
-  units: ca
-
-- platform: cert_expiry
-  name: Blog
-  host: !secret blog_host
-
-- platform: cert_expiry
-  name: Analytics
-  host: !secret analytics_host
-
-- platform: cert_expiry
-  name: News
-  host: !secret news_host
+  - platform: cert_expiry
+    name: Blog
+    host: !secret blog_host
+ 
+  - platform: cert_expiry
+    name: Analytics
+    host: !secret analytics_host
+ 
+  - platform: cert_expiry
+    name: News
+    host: !secret news_host
+ 
+  - platform: cert_expiry
+    name: Home
+    host: !secret hass_host
 
 - platform: cert_expiry
   name: Home

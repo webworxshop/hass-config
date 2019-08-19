@@ -23,4 +23,5 @@ bedtime:
         minutes: 10
     - alias: Last Light Off
       service: light.turn_off
-      entity_id: light.kitchen_downlight_1
+      entity_id: light.yeelight_color1_34ce0084fb1d
+

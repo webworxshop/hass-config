@@ -1,56 +1,4 @@
 
-- alias: 'Toilet lights on in evening (early sunset)'
-  trigger:
-    platform: sun
-    event: sunset
-    offset: "-0:10:00"
-  condition:
-    condition: time
-    before: '20:00:00'
-  action:
-    - service: light.turn_on
-      data:
-        entity_id: light.toilet
-        brightness_pct: 100
-
-- alias: 'Toilet lights dim'
-  trigger:
-    platform: time
-    at: '20:00:00'
-  condition:
-    condition: sun
-    after: sunset
-    after_offset: "-00:10:00"
-  action:
-    - service: light.turn_on
-      data:
-        entity_id: light.toilet
-        brightness_pct: 1
-
-- alias: 'Toilet lights on in evening (late sunset)'
-  trigger:
-    platform: sun
-    event: sunset
-    offset: "-0:10:00"
-  condition:
-    condition: time
-    after: '20:00:00'
-  action:
-    - service: light.turn_on
-      data:
-        entity_id: light.toilet
-        brightness_pct: 1
-
-- alias: 'Toilet lights off in morning'
-  trigger:
-    platform: sun
-    event: sunrise
-    offset: "0:10:00"
-  action:
-    - service: light.turn_off
-      data:
-        entity_id: light.toilet
-
 - alias: 'Night light 1 on at bedtime'
   trigger:
     platform: time
@@ -90,7 +38,7 @@
         brightness_pct: 80
 
 - alias: 'Night lights green in morning (workdays)'
-  trigger: 
+  trigger:
     platform: time
     at: '07:30:00'
   condition:
@@ -121,7 +69,7 @@
       entity_id: !secret night_light2
 
 - alias: 'Night light green in morning (non-workdays)'
-  trigger: 
+  trigger:
     platform: time
     at: '08:15:00'
   condition:
