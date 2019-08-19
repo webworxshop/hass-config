@@ -44,12 +44,6 @@ conversation:
 # System health
 system_health:
 
-hacs:
-  token: !secret hacs_token
-  appdaemon: True
-  python_script: True
-  theme: True
-
 # MQTT broker
 mqtt:
   broker: !secret mqtt_host
