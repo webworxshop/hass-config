@@ -129,8 +129,10 @@ deploy:
   environment:
     name: home-assistant
   before_script:
+    - apk add curl openssh-client
     - cat $DEPLOYMENT_SSH_KEY > id_rsa
   script:
     - ssh -i id_rsa -o "StrictHostKeyChecking=no" $DEPLOYMENT_SSH_LOGIN "cd /mnt/docker-data/homeassistant && git pull && git checkout $CI_COMMIT_SHA"
+    - 
   after_script:
     - rm id_rsa
