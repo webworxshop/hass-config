@@ -1,5 +1,4 @@
-
-  - platform: workday
-    country: !secret country_code
-    province: !secret province_code
-
+---
+- platform: workday
+  country: !secret country_code
+  province: !secret province_code

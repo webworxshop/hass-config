@@ -1,20 +1,23 @@
-
+---
 #  - platform: zoneminder
 #    name: zoneminder_sensor
 
-  - platform: cert_expiry
-    name: Blog
-    host: !secret blog_host
- 
-  - platform: cert_expiry
-    name: Analytics
-    host: !secret analytics_host
- 
-  - platform: cert_expiry
-    name: News
-    host: !secret news_host
- 
-  - platform: cert_expiry
-    name: Home
-    host: !secret hass_host
+- platform: cert_expiry
+  name: Blog
+  host: !secret blog_host
 
+- platform: cert_expiry
+  name: Analytics
+  host: !secret analytics_host
+
+- platform: cert_expiry
+  name: News
+  host: !secret news_host
+
+- platform: cert_expiry
+  name: Home
+  host: !secret hass_host
+
+- platform: cert_expiry
+  name: Home
+  host: !secret hass_host

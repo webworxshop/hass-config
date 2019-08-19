@@ -1,4 +1,4 @@
-
+---
 #  - platform: generic_thermostat
 #    name: Bed2 Heating
 #    heater: switch.bed2_heating
@@ -16,4 +16,3 @@
 #    tolerance: 1.0
 #    min_cycle_duration:
 #      minutes: 30
-
