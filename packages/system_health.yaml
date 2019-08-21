@@ -127,3 +127,22 @@ automation:
           title: "Room Sensors Reset"
           message: "Device '{{ trigger.to_state.name }}' was offline for 10 minutes, room sensors reset."
 
+  - alias: Notify on startup
+    trigger:
+      - platform: homeassistant
+        event: start
+    action:
+      - service: notify.notify
+        data:
+          title: "Home Assistant Started Up"
+          message: "Home Assistant has been started up!"
+
+  - alias: Notify on shutdown
+    trigger:
+      - platform: homeassistant
+        event: shutdown
+    action:
+      - service: notify.notify
+        data:
+          title: "Home Assistant Shutdown"
+          message: "Home Assistant is shutting down!"

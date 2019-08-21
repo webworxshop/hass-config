@@ -30,12 +30,12 @@
     host: !secret kodi_bedroom_host
     username: !secret kodi_username
     password: !secret kodi_password
-    
+
   - name: gotify_1
     platform: rest
     resource: !secret gotify_resource
     method: POST_JSON
-    headers: 
+    headers:
       X-Gotify-Key: !secret gotify_key
     message_param_name: message
     title_param_name: title
