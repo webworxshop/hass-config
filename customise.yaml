@@ -58,8 +58,8 @@
     !secret bed2_door_entity:
       friendly_name: !secret bed2_door_name
 
-    !secret linode_web_server_sensor
+    !secret linode_web_server_sensor:
       friendly_name: !secret linode_web_server_friendly_name
 
-    !secret linode_mail_server_sensor
+    !secret linode_mail_server_sensor:
       friendly_name: !secret linode_mail_server_friendly_name
