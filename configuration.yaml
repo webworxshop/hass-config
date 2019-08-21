@@ -85,12 +85,12 @@ map:
 #  version: '1.5'
 #  optimistic: false
 
-zoneminder:
-  host: !secret zm_host
-  path: /zm/
-  ssl: False
-  username: !secret zm_username
-  password: !secret zm_password
+#zoneminder:
+#  host: !secret zm_host
+#  path: /zm/
+#  ssl: False
+#  username: !secret zm_username
+#  password: !secret zm_password
 
 #influxdb:
 #  host: !secret influx_host
