@@ -1,5 +1,15 @@
 ---
 sensor:
   - platform: gitlab_ci
+    name: HASS Config
     gitlab_id: robconnolly/hass-config
     token: !secret gitlab_token
+
+linode:
+  access_token: !secret linode_api_key
+
+binary_sensor:
+  - platform: linode
+    nodes:
+      - !secret linode_web_server_name
+      - !secret linode_mail_server_name
