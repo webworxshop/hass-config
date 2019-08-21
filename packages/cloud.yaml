@@ -1,0 +1,5 @@
+---
+sensor:
+  - platform: gitlab_ci
+    gitlab_id: robconnolly/hass-config
+    token: !secret gitlab_token
