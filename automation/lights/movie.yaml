@@ -15,9 +15,9 @@
       - condition: time
         after: '20:00:00'
       - condition: template
-        value_template: '{{ states.media_player.tv.attributes.media_content_type != "music" }}'
+        value_template: '{{ states.media_player.living_room_kodi.attributes.media_content_type != "music" }}'
       - condition: template
-        value_template: '{{ states.media_player.tv.attributes.media_title != "Home And Away" }}'
+        value_template: '{{ states.media_player.living_room_kodi.attributes.media_title != "Home And Away" }}'
   action:
       service: scene.turn_on
       entity_id: scene.movie
