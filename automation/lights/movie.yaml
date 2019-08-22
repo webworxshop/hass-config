@@ -38,7 +38,7 @@
       to: idle
     - platform: state
       entity_id: media_player.chromecast
-      to: off
+      to: 'off'
   condition:
     condition: and
     conditions:
