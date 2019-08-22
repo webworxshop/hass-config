@@ -1,4 +1,8 @@
 
+cast:
+  media_player:
+    - host: !secret chromecast_host
+
 binary_sensor:
   - platform: ping
     name: "Living Room TV state"

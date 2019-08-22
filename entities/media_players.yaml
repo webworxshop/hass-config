@@ -12,7 +12,7 @@
     name: Master Bedroom Kodi
     username: !secret kodi_username 
     password: !secret kodi_password
-    
+
   - platform: snapcast
     host: !secret musicserver_host
 
