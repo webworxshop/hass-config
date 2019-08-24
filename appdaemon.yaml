@@ -1,6 +1,8 @@
+---
 log:
   logfile: STDOUT
   errorfile: STDERR
+
 appdaemon:
   threads: 10
   timezone: 'Pacific/Auckland'
@@ -9,3 +11,5 @@ appdaemon:
       type: hass
       ha_url: http://homeassistant:8123
       token: !secret appdaemon_token
+
+hadashboard:
