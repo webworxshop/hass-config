@@ -13,7 +13,7 @@ class MotionLight(hass.Hass):
     def set_timer(self):
         if self.timer is not None:
             self.cancel_timer(self.timer)
-        self.run_in(self.timeout_callback, self.timeout)
+        self.timer = self.run_in(self.timeout_callback, self.timeout)
 
     def is_light_times(self):
         #return self.now_is_between("sunset - 00:10:00", "sunrise + 00:10:00")
@@ -33,9 +33,9 @@ class BrightnessControlledMotionLight(MotionLight):
     def initialize(self):
         self.last_door = "Other"
         for door in self.args['bedroom_doors']:
-            self.listen_state(self.bedroom_door_callback, door, new = "on")
+            self.listen_state(self.bedroom_door_callback, door, old = "off", new = "on")
         for door in self.args['other_doors']:
-            self.listen_state(self.other_door_callback, door, new = "on")
+            self.listen_state(self.other_door_callback, door, old = "off", new = "on")
 
         super().initialize()
 
