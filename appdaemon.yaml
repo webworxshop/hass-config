@@ -13,3 +13,4 @@ appdaemon:
       token: !secret appdaemon_token
 
 hadashboard:
+  dash_url: "http://localhost:5050"
