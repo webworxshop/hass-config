@@ -41,9 +41,11 @@ class BrightnessControlledMotionLight(MotionLight):
 
     def bedroom_door_callback(self, entity, attribute, old, new, kwargs):
         self.last_door = "Bedroom"
+        self.log("Last door is: {}".format(self.last_door))
 
     def other_door_callback(self, entity, attribute, old, new, kwargs):
         self.last_door = "Other"
+        self.log("Last door is: {}".format(self.last_door))
 
     def motion_callback(self, entity, attribute, old, new, kwargs):
         if self.is_light_times():
