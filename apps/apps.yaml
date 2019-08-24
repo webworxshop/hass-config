@@ -5,7 +5,7 @@ hello_world:
 
 toilet_motion_lights:
   module: motion_lights
-  class: BrightnessControlledMotionLights
+  class: BrightnessControlledMotionLight
   motion_sensor: binary_sensor.toilet_motion
   light: light.toilet
   timeout: 120
