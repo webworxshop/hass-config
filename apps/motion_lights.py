@@ -16,8 +16,7 @@ class MotionLight(hass.Hass):
         self.timer = self.run_in(self.timeout_callback, self.timeout)
 
     def is_light_times(self):
-        #return self.now_is_between("sunset - 00:10:00", "sunrise + 00:10:00")
-        return True
+        return self.now_is_between("sunset - 00:10:00", "sunrise + 00:10:00")
 
     def motion_callback(self, entity, attribute, old, new, kwargs):
         if self.is_light_times():
@@ -49,8 +48,7 @@ class BrightnessControlledMotionLight(MotionLight):
 
     def motion_callback(self, entity, attribute, old, new, kwargs):
         if self.is_light_times() and self.get_state(entity=self.light) == "off":
-            #if self.now_is_between("07:00:00", "20:00:00") or 
-            if self.last_door != "Bedroom":
+            if self.now_is_between("07:00:00", "20:00:00") or self.last_door != "Bedroom":
                 self.turn_on(self.light, brightness_pct = 100)
             else:
                 self.turn_on(self.light, brightness_pct = 1)
