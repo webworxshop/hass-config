@@ -47,7 +47,8 @@ class BrightnessControlledMotionLight(MotionLight):
 
     def motion_callback(self, entity, attribute, old, new, kwargs):
         if self.is_light_times():
-            if self.now_is_between("07:00:00", "20:00:00") or self.last_door != "Bedroom":
+            #if self.now_is_between("07:00:00", "20:00:00") or 
+            if self.last_door != "Bedroom":
                 self.turn_on(self.light, brightness_pct = 100)
             else:
                 self.turn_on(self.light, brightness_pct = 1)
