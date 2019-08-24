@@ -2,3 +2,15 @@
 hello_world:
   module: hello
   class: HelloWorld
+
+toilet_motion_lights:
+  module: motion_lights
+  class: BrightnessControlledMotionLights
+  motion_sensor: binary_sensor.toilet_motion
+  light: light.toilet
+  timeout: 120
+  bedroom_doors:
+    - !secret bed1_door_entity
+    - !secret bed2_door_entity
+  other_doors:
+    - binary_sensor.kitchen_hall_door_contact
