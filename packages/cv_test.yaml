@@ -1,0 +1,4 @@
+---
+camera:
+  - platform: onvif
+    host: 10.0.2.125
