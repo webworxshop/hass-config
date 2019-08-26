@@ -47,10 +47,11 @@ class BrightnessControlledMotionLight(MotionLight):
         self.log("Last door is: {}".format(self.last_door))
 
     def motion_callback(self, entity, attribute, old, new, kwargs):
-        if self.is_light_times() and self.get_state(entity=self.light) == "off":
-            if self.now_is_between("07:00:00", "20:00:00") or self.last_door != "Bedroom":
-                self.turn_on(self.light, brightness_pct = 100)
-            else:
-                self.turn_on(self.light, brightness_pct = 1)
+        if self.is_light_times():
+            if self.get_state(entity=self.light) == "off":
+                if self.now_is_between("07:00:00", "20:00:00") or self.last_door != "Bedroom":
+                    self.turn_on(self.light, brightness_pct = 100)
+                else:
+                    self.turn_on(self.light, brightness_pct = 1)
             self.set_timer()
 
