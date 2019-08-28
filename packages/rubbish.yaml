@@ -1,0 +1,22 @@
+
+sensor:
+  - platform: garbage_collection
+    name: Food Scraps
+    frequency: weekly
+    collection_days:
+      - !secret rubbish_collection_day
+  - platform: garbage_collection
+    name: General Recycling
+    frequency: odd-weeks
+    collection_days:
+      - !secret rubbish_collection_day
+  - platform: garbage_collection
+    name: Glass Recycling
+    frequency: even-weeks
+    collection_days:
+      - !secret rubbish_collection_day
+  - platform: garbage_collection
+    name: Landfill
+    frequency: even-weeks
+    collection_days:
+      - !secret rubbish_collection_day
