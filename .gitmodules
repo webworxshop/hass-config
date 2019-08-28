@@ -1,3 +1,6 @@
 [submodule "apps/occusim"]
 	path = apps/occusim
 	url = https://github.com/acockburn/occusim.git
+[submodule "www/lovelace-card-tools"]
+	path = www/plugins/lovelace-card-tools
+	url = https://github.com/thomasloven/lovelace-card-tools.git
