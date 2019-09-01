@@ -10,6 +10,7 @@ device_tracker:
 
   - platform: traccar
     host: !secret traccar_host
+    port: 443
     username: !secret traccar_user
     password: !secret traccar_password
     ssl: true
