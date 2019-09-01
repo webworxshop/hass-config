@@ -1,0 +1,15 @@
+---
+map:
+
+device_tracker:
+  - platform: snmp
+    host: !secret firewall_host
+    community: !secret firewall_snmp_community 
+    baseoid: 1.3.6.1.2.1.4.22.1.2
+    track_new_devices: no
+
+  - platform: traccar
+    host: !secret traccar_host
+    username: !secret traccar_user
+    password: !secret traccar_password
+    ssl: true
