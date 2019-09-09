@@ -1,0 +1,72 @@
+version: '3'
+
+services:
+  mosquitto:
+    image: eclipse-mosquitto
+    restart: always
+    ports:
+      - 1883:1883
+      - 8883:8883
+      - 9001:9001
+    volumes:
+      - /mnt/docker-data/mosquitto/config:/mosquitto/config
+      - /mnt/docker-data/mosquitto/data:/mosquitto/data
+      - /mnt/docker-data/mosquitto/logs:/mosquitto/logs
+
+  zigbee2mqtt:
+    image: koenkk/zigbee2mqtt
+    volumes:
+      - /mnt/docker-data/zigbee2mqtt:/app/data
+    devices:
+      - /dev/ttyACM0:/dev/ttyACM0
+    depends_on:
+      - mosquitto
+    restart: always
+    network_mode: host
+
+  homeassistant:
+    image: homeassistant/home-assistant
+    volumes:
+      - /mnt/docker-data/home-assistant:/config
+      - /etc/localtime:/etc/localtime:ro
+    depends_on:
+      - mosquitto
+    restart: always
+    network_mode: host
+
+  nodered:
+    image: nodered/node-red-docker:v8
+    ports:
+      - 1880:1880
+    volumes:
+      - /mnt/docker-data/node-red:/data
+      - /etc/localtime:/etc/localtime:ro
+    depends_on:
+      - mosquitto
+      - homeassistant
+    restart: always
+
+  appdaemon:
+    image: acockburn/appdaemon:latest
+    volumes:
+      - /mnt/docker-data/home-assistant:/conf
+      - /etc/localtime:/etc/localtime:ro
+    depends_on:
+      - homeassistant
+    restart: always
+
+  esphome:
+    image: esphome/esphome
+    volumes:
+      - /mnt/docker-data/esphome:/config
+    restart: always
+    network_mode: host
+
+  marytts:
+    image: sliversniper/marytts
+    ports:
+      - 59125:59125
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /mnt/docker-data/marytts/lib/voice-dfki-poppy-hsmm-5.2.jar:/marytts/marytts-5.1.2/lib/voice-dfki-poppy-hsmm-5.2.jar:ro
+    restart: always
