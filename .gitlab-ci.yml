@@ -145,6 +145,29 @@ deploy:
   tags:
     - hass
 
+docker-deploy:
+  stage: docker-deploy
+  image:
+    name: alpine:latest
+    entrypoint: [""]
+  environment:
+    name: home-assistant
+  before_script:
+    - apk --no-cache add openssh-client
+    - echo "$DEPLOYMENT_SSH_KEY" > id_rsa
+    - chmod 600 id_rsa
+  script:
+    - ssh -i id_rsa -o "StrictHostKeyChecking=no" $DEPLOYMENT_SSH_LOGIN "cd /mnt/docker-data/home-assistant && ./update.sh"
+  after_script:
+    - rm id_rsa
+  only:
+    refs:
+      - master
+    changes:
+      - docker-compose.yml
+  tags:
+    - hass
+
 restart-hass:
   stage: postflight
   image:
@@ -159,5 +182,8 @@ restart-hass:
   only:
     refs:
       - master
+  except:
+    changes:
+      - docker-compose.yml
   tags:
     - hass
