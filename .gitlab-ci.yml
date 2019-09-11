@@ -3,6 +3,8 @@ stages:
   - preflight
   - homeassistant
   - deploy
+  - docker-deploy
+  - postflight
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
@@ -130,14 +132,30 @@ deploy:
   environment:
     name: home-assistant
   before_script:
-    - apk --no-cache add curl openssh-client
+    - apk --no-cache add openssh-client
     - echo "$DEPLOYMENT_SSH_KEY" > id_rsa
     - chmod 600 id_rsa
   script:
     - ssh -i id_rsa -o "StrictHostKeyChecking=no" $DEPLOYMENT_SSH_LOGIN "cd /mnt/docker-data/home-assistant && git fetch && git checkout $CI_COMMIT_SHA && git submodule sync --recursive && git submodule update --init --recursive"
-    - "curl -X POST -H \"Authorization: Bearer $DEPLOYMENT_HASS_TOKEN\" -H \"Content-Type: application/json\" $DEPLOYMENT_HASS_URL/api/services/homeassistant/restart"
   after_script:
     - rm id_rsa
+  only:
+    refs:
+      - master
+  tags:
+    - hass
+
+restart-hass:
+  stage: postflight
+  image:
+    name: alpine:latest
+    entrypoint: [""]
+  environment:
+    name: home-assistant
+  before_script:
+    - apk --no-cache add curl
+  script:
+    - "curl -X POST -H \"Authorization: Bearer $DEPLOYMENT_HASS_TOKEN\" -H \"Content-Type: application/json\" $DEPLOYMENT_HASS_URL/api/services/homeassistant/restart"
   only:
     refs:
       - master
