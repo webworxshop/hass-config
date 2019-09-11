@@ -165,6 +165,7 @@ docker-deploy:
       - master
     changes:
       - docker-compose.yml
+      - update.sh
   tags:
     - hass
 
@@ -185,5 +186,6 @@ restart-hass:
   except:
     changes:
       - docker-compose.yml
+      - update.sh
   tags:
     - hass

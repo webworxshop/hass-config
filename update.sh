@@ -2,9 +2,9 @@
 set -e
 
 cd /mnt/docker-data/home-assistant || exit
-docker-compose pull
-docker-compose down
-docker-compose up -d
+docker-compose -p ha pull
+docker-compose -p ha down
+docker-compose -p ha up -d
 docker system prune -fa
 docker volume prune -f
 exit
