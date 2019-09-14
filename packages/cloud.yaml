@@ -4,6 +4,10 @@ sensor:
     name: HASS Config
     gitlab_id: robconnolly/hass-config
     token: !secret gitlab_token
+  - platform: gitlab_ci
+    name: ESPHome Devices
+    gitlab_id: robconnolly/esphome-devices
+    token: !secret gitlab_token
 
 linode:
   access_token: !secret linode_api_key
