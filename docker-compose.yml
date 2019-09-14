@@ -55,13 +55,6 @@ services:
       - homeassistant
     restart: always
 
-  esphome:
-    image: esphome/esphome
-    volumes:
-      - /mnt/docker-data/esphome:/config
-    restart: always
-    network_mode: host
-
   marytts:
     image: sliversniper/marytts
     ports:
