@@ -49,7 +49,7 @@ services:
   appdaemon:
     image: acockburn/appdaemon:latest
     volumes:
-      - /mnt/docker-data/home-assistant:/conf
+      - /mnt/docker-data/appdaemon:/conf
       - /etc/localtime:/etc/localtime:ro
     depends_on:
       - homeassistant
