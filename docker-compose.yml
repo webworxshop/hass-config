@@ -25,7 +25,7 @@ services:
     network_mode: host
 
   homeassistant:
-    image: homeassistant/home-assistant:0.98.5
+    image: homeassistant/home-assistant:0.99.0
     volumes:
       - /mnt/docker-data/home-assistant:/config
       - /etc/localtime:/etc/localtime:ro
