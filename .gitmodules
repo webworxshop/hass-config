@@ -4,3 +4,6 @@
 [submodule "www/lovelace-card-tools"]
 	path = www/plugins/lovelace-card-tools
 	url = https://github.com/thomasloven/lovelace-card-tools.git
+[submodule "www/plugins/garbage-collection-card"]
+	path = www/plugins/garbage-collection-card
+	url = https://github.com/amaximus/garbage-collection-card.git
