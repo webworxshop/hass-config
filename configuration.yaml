@@ -13,7 +13,6 @@ homeassistant:
   packages: !include_dir_named packages
 
 http:
-  api_password: !secret http_password 
   ip_ban_enabled: True
   login_attempts_threshold: 5
   use_x_forwarded_for: True
