@@ -23,7 +23,6 @@ variables:
   before_script:
     - python -m homeassistant --version
     - mv fake_secrets.yaml secrets.yaml
-    - rm packages/rubbish.yaml
   script:
     - |
       python -m homeassistant \
