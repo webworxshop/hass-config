@@ -8,7 +8,7 @@
 	path = www/plugins/garbage-collection-card
 	url = https://github.com/amaximus/garbage-collection-card.git
 [submodule "custom_components/garbage_collection"]
-	path = custom_components/garbage_collection
+	path = custom_components/.garbage_collection
 	url = https://github.com/bruxy70/Garbage-Collection.git
 [submodule "www/plugins/mini-media-player"]
 	path = www/plugins/mini-media-player
