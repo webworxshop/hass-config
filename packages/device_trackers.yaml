@@ -8,9 +8,9 @@ device_tracker:
     baseoid: 1.3.6.1.2.1.4.22.1.2
     track_new_devices: no
 
-  - platform: traccar
-    host: !secret traccar_host
-    port: 443
-    username: !secret traccar_user
-    password: !secret traccar_password
-    ssl: true
+#  - platform: traccar
+#    host: !secret traccar_host
+#    port: 443
+#    username: !secret traccar_user
+#    password: !secret traccar_password
+#    ssl: true
