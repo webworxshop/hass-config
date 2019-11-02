@@ -52,7 +52,49 @@ script:
 #        platform: 'state'
 #        to_state: 'on'
 
-automation:  
+automation:
+  - alias: 'Auto wake up'
+    trigger:
+      platform: time
+      at: '07:00:00'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: !secret device_1
+          state: 'away'
+        - condition: state
+          entity_id: 'binary_sensor.workday_sensor'
+          state: 'on'
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.home_mode
+          option: None
+      - service: script.turn_on
+        entity_id: script.downlights_bright
+
+  - alias: 'Auto wake up (weekend)'
+    trigger:
+      platform: time
+      at: '08:00:00'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: !secret device_1
+          state: 'away'
+        - condition: state
+          entity_id: 'binary_sensor.workday_sensor'
+          state: 'off'
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.home_mode
+          option: None
+      - service: script.turn_on
+        entity_id: script.downlights_bright
+
   - alias: 'Getting Up'
     trigger:
       platform: state
