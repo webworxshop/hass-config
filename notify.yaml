@@ -45,7 +45,7 @@
         client::display:
           contentType: "text/markdown"
 
- - name: gotify_2
+  - name: gotify_2
     platform: rest
     resource: !secret gotify_resource
     method: POST_JSON
