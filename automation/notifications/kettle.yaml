@@ -10,7 +10,7 @@
   action:
     - service: switch.turn_off
       entity_id: switch.kettle
-    - service: notify.smtp_notify1
+    - service: notify.gotify_1
       data:
         title: "Set up the Kettle"
         message: 'Remember to set up the kettle!'

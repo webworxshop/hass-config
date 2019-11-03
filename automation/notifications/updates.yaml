@@ -4,7 +4,7 @@
     platform: state
     entity_id: updater.updater
   action:
-    service: notify.smtp_notify1
+    service: notify.gotify_1
     data:
       title: "Update Available"
       message: 'Update for Home Assistant is available.'

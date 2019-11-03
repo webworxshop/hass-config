@@ -36,7 +36,21 @@
     resource: !secret gotify_resource
     method: POST_JSON
     headers:
-      X-Gotify-Key: !secret gotify_key
+      X-Gotify-Key: !secret gotify_key_1
+    message_param_name: message
+    title_param_name: title
+    target_param_name: priority
+    data:
+      extras:
+        client::display:
+          contentType: "text/markdown"
+
+ - name: gotify_2
+    platform: rest
+    resource: !secret gotify_resource
+    method: POST_JSON
+    headers:
+      X-Gotify-Key: !secret gotify_key_2
     message_param_name: message
     title_param_name: title
     target_param_name: priority
@@ -49,7 +63,7 @@
     platform: group
     services:
       - service: gotify_1
-      - service: smtp_notify2
+      - service: gotify_2
 
 #  - name: all_devices
 #    platform: group
