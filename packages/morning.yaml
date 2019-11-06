@@ -62,7 +62,7 @@ automation:
       conditions:
         - condition: state
           entity_id: !secret device_1
-          state: 'away'
+          state: 'not_home'
         - condition: state
           entity_id: 'binary_sensor.workday_sensor'
           state: 'on'
@@ -83,7 +83,7 @@ automation:
       conditions:
         - condition: state
           entity_id: !secret device_1
-          state: 'away'
+          state: 'not_home'
         - condition: state
           entity_id: 'binary_sensor.workday_sensor'
           state: 'off'
