@@ -13,3 +13,6 @@
 [submodule "www/plugins/mini-media-player"]
 	path = www/plugins/mini-media-player
 	url = https://github.com/kalkih/mini-media-player.git
+[submodule "www/plugins/weather-card"]
+	path = www/plugins/weather-card
+	url = https://github.com/bramkragten/weather-card.git
