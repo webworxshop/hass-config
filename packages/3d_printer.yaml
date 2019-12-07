@@ -1,0 +1,32 @@
+
+octoprint:
+  - host: !secret octoprint_host
+    api_key: !secret octoprint_api_key
+    name: "Ender 3"
+    port: 80
+    ssl: False
+    number_of_tools: 1
+    bed: True
+
+camera:
+  - platform: mjpeg
+    name: OctoPrint
+    still_image_url: !secret octoprint_camera_still
+    mjpeg_url: !secret octoprint_camera_stream
+
+automation:
+  - alias: Send a notice when 3D print is done
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.ender_3_printing
+        to: "off"
+        from: "on"
+    condition:
+      - condition: time
+        before: "23:00:00"
+        after: "5:00:00"
+    action:
+      - service: notify.gotify_1
+        data:
+          message: "The 3D printer is finished"
+          title: "Print Complete"
