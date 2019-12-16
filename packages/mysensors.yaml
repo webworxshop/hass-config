@@ -1,0 +1,9 @@
+---
+mysensors:
+  gateways:
+    - device: /dev/ttyUSB0
+      persistence_file: '/config/mysensors.json'
+  debug: true
+  persistence: true
+  version: '2.3'
+  optimistic: false

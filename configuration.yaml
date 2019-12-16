@@ -59,17 +59,6 @@ mqtt:
 #  publish_topic: !secret es_pub_topic
 #  subscribe_topic: !secret es_sub_topic
 
-# not using this yet
-#mysensors:
-#  gateways:
-#    - device: !secret mysensors_host
-#      persistence_file: '/home/hass/.homeassistant/mysensors.json'
-#      tcp_port: !secret mysensors_port
-#  debug: true
-#  persistence: true
-#  version: '1.5'
-#  optimistic: false
-
 #zoneminder:
 #  host: !secret zm_host
 #  path: /zm/
