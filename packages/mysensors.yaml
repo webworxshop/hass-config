@@ -7,3 +7,42 @@ mysensors:
   persistence: true
   version: '2.3'
   optimistic: false
+
+input_boolean:
+  greenhouse_active:
+    name: "Greenhouse In Use"
+    icon: mdi:sprout
+
+automation:
+  - alias: "Greenhouse High Temperature Notification"
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.temperatureandhumidity_3_1
+      above: 27
+      for:
+        minutes: 30
+    condition:
+      condition: state
+      entity_id: input_boolean.greenhouse_active
+      state: 'on'
+    action:
+      service: notify.family
+      data_template:
+        title: "Greenhouse Temperature High!"
+        message: "The greenhouse temperature is {{ states.sensor.temperatureandhumidity_3_1.state }}{{ states.sensor.temperatureandhumidity_3_1.attributes.unit_of_measurement }}. You may wish to open the door and check if the plants need watering."
+  - alias: "Greenhouse Low Temperature Notification"
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.temperatureandhumidity_3_1
+      below: 11
+      for:
+        minutes: 30
+    condition:
+      condition: state
+      entity_id: input_boolean.greenhouse_active
+      state: 'on'
+    action:
+      service: notify.family
+      data_template:
+        title: "Greenhouse Temperature Low!"
+        message: "The greenhouse temperature is {{ states.sensor.temperatureandhumidity_3_1.state }}{{ states.sensor.temperatureandhumidity_3_1.attributes.unit_of_measurement }}. You may wish to close the door."
