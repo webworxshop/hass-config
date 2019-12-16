@@ -30,3 +30,20 @@ automation:
         data:
           message: "The 3D printer is finished"
           title: "Print Complete"
+
+switch:
+  - platform: command_line
+    switches:
+      octoprint_psu:
+        command_on: !secret octoprint_psu_on
+        command_off: !secret octoprint_psu_off
+        command_state: !secret octoprint_psu_status
+        value_template: '{{ value.isPSUOn }}'
+
+shell_command:
+  octoprint_shutdown: !secret octoprint_shutdown
+
+script:
+  octoprint_shutdown:
+    sequence:
+      - service: shell_command.octoprint_shutdown
