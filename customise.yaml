@@ -63,3 +63,9 @@
 
     !secret linode_mail_server_sensor:
       friendly_name: !secret linode_mail_server_friendly_name
+
+    sensor.temperatureandhumidity_3_0
+      friendly_name: "Greenhouse Humidity"
+
+    sensor.temperatureandhumidity_3_1
+      friendly_name: "Greenhouse Temperature"
