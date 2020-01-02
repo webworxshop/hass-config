@@ -30,11 +30,13 @@ binary_sensor:
     state_topic: "wallpanel/kitchen/sensor/battery"
     name: "Kitchen WallPanel Charge State"
     value_template: '{{value_json.charging}}'
+    device_class: power
 
   - platform: mqtt
     state_topic: "wallpanel/kitchen/sensor/battery"
     name: "Kitchen WallPanel AC State"
     value_template: '{{value_json.acPlugged}}'
+    device_class: plug
 
 switch:
   - platform: mqtt
