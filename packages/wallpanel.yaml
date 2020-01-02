@@ -4,12 +4,12 @@ sensor:
     state_topic: "wallpanel/kitchen/sensor/battery"
     name: "Kitchen WallPanel Battery Level"
     unit_of_measurement: "%"
-    value_template: '{value_json.value}'
+    value_template: '{{value_json.value}}'
 
   - platform: mqtt
     state_topic: "wallpanel/kitchen/sensor/qrcode"
     name: "Kitchen QR Code"
-    value_template: '{value_json.value}'
+    value_template: '{{value_json.value}}'
 
 binary_sensor:
   - platform: mqtt
