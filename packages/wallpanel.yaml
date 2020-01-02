@@ -29,12 +29,16 @@ binary_sensor:
   - platform: mqtt
     state_topic: "wallpanel/kitchen/sensor/battery"
     name: "Kitchen WallPanel Charge State"
+    payload_on: "true"
+    payload_off: "false"
     value_template: '{{value_json.charging}}'
     device_class: power
 
   - platform: mqtt
     state_topic: "wallpanel/kitchen/sensor/battery"
     name: "Kitchen WallPanel AC State"
+    payload_on: "true"
+    payload_off: "false"
     value_template: '{{value_json.acPlugged}}'
     device_class: plug
 
