@@ -9,7 +9,7 @@ sensor:
   - platform: mqtt
     state_topic: "wallpanel/kitchen/sensor/qrcode"
     name: "Kitchen QR Code"
-    value_template: ''
+    value_template: '{value_json.value}'
 
 binary_sensor:
   - platform: mqtt
