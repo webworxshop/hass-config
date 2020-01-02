@@ -1,0 +1,41 @@
+---
+sensor:
+  - platform: mqtt
+    state_topic: "wallpanel/kitchen/sensor/battery"
+    name: "Kitchen WallPanel Battery Level"
+    unit_of_measurement: "%"
+    value_template: ''
+
+  - platform: mqtt
+    state_topic: "wallpanel/kitchen/sensor/qrcode"
+    name: "Kitchen QR Code"
+    value_template: ''
+
+binary_sensor:
+  - platform: mqtt
+    state_topic: "wallpanel/kitchen/sensor/motion"
+    name: "Kitchen Motion"
+    payload_on: '{"value":true}'
+    payload_off: '{"value":false}'
+    device_class: motion
+
+  - platform: mqtt
+    state_topic: "wallpanel/kitchen/sensor/face"
+    name: "Kitchen Face Detected"
+    payload_on: '{"value":true}'
+    payload_off: '{"value":false}'
+    device_class: motion
+
+switch:
+  - platform: mqtt
+    command_topic: "wallpanel/kitchen/command"
+    name: "Kitchen Camera State"
+    payload_on: '{"camera": true}'
+    payload_off: '{"camera": false}'
+    optimistic: true
+    retain: true
+
+camera:
+  - platform: mjpeg
+    mjpeg_url: !secret kitchen_camera_url
+    name: Kitchen Camera
