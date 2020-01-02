@@ -26,6 +26,16 @@ binary_sensor:
     payload_off: '{"value":false}'
     device_class: motion
 
+  - platform: mqtt
+    state_topic: "wallpanel/kitchen/sensor/battery"
+    name: "Kitchen WallPanel Charge State"
+    value_template: '{{value_json.charging}}'
+
+  - platform: mqtt
+    state_topic: "wallpanel/kitchen/sensor/battery"
+    name: "Kitchen WallPanel AC State"
+    value_template: '{{value_json.acPlugged}}'
+
 switch:
   - platform: mqtt
     command_topic: "wallpanel/kitchen/command"
