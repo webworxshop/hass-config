@@ -5,6 +5,7 @@ sensor:
     name: "Kitchen WallPanel Battery Level"
     unit_of_measurement: "%"
     value_template: '{{value_json.value}}'
+    device_class: battery
 
   - platform: mqtt
     state_topic: "wallpanel/kitchen/sensor/qrcode"
@@ -29,17 +30,13 @@ binary_sensor:
   - platform: mqtt
     state_topic: "wallpanel/kitchen/sensor/battery"
     name: "Kitchen WallPanel Charge State"
-    payload_on: "true"
-    payload_off: "false"
-    value_template: '{{value_json.charging}}'
+    value_template: '{% if value_json.charging %}ON{% else %}OFF{% endif %}'
     device_class: power
 
   - platform: mqtt
     state_topic: "wallpanel/kitchen/sensor/battery"
     name: "Kitchen WallPanel AC State"
-    payload_on: "true"
-    payload_off: "false"
-    value_template: '{{value_json.acPlugged}}'
+    value_template: '{% if value_json.acPlugged %}ON{% else %}OFF{% endif %}'
     device_class: plug
 
 switch:
