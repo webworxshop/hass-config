@@ -1,4 +1,4 @@
- 
+---
 sun:
 
 weather:
@@ -6,7 +6,8 @@ weather:
     name: "Home"
     api_key: !secret darksky_api_key
     units: ca
-    
+    mode: daily
+
 sensor:
   - platform: darksky
     api_key: !secret darksky_api_key
@@ -18,7 +19,7 @@ sensor:
     units: ca
     scan_interval:
       minutes: 15
-      
+
   - platform: template
     sensors:
       air_pressure:
@@ -31,14 +32,14 @@ sensor:
         unit_of_measurement: "km/h"
         value_template: "{{ states.weather.home.attributes.wind_speed }}"
         icon_template: "mdi:weather-windy"
-        
+
   - platform: moon
-  
+
   - platform: command_line
     name: North Taranaki Webcam URL
     scan_interval: 900
     command: "/config/shell_commands/tac_webcam.py"
-    
+
 camera:
   - platform: generic
     name: North Taranaki Webcam
@@ -47,7 +48,7 @@ camera:
   - platform: generic
     name: Fitzroy Beach Webcam
     still_image_url: "https://www.primowireless.co.nz/webcameras/snapshot_fitzboardriders_sth.jpg"
-    
+
 openuv:
   api_key: !secret openuv_api_key
   binary_sensors:
@@ -61,7 +62,6 @@ openuv:
       - max_uv_index
       - safe_exposure_time_type_1
       - safe_exposure_time_type_2
-      
+
 binary_sensor:
   - platform: iss
-
