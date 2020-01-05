@@ -3,6 +3,27 @@ neato:
   username: !secret neato_user
   password: !secret neato_password
 
+script:
+  spot_clean:
+    alias: "Spot Clean"
+    sequence:
+      - alias: "Start spot clean"
+        service: vacuum.neato_custom_cleaning
+        data:
+          entity_id: vacuum.marvin
+          mode: 2
+          category: 3
+
+  house_clean:
+    alias: "House Clean"
+    sequence:
+      - alias: "Start house clean"
+        service: vacuum.neato_custom_cleaning
+        data:
+          entity_id: vacuum.marvin
+          mode: 1
+          category: 2
+
 automation:
   - alias: "Schedule vacuum Monday and Friday"
     trigger:
