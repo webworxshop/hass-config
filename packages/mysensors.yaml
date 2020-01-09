@@ -19,7 +19,7 @@ automation:
   - alias: "Greenhouse High Temperature Notification"
     trigger:
       platform: numeric_state
-      entity_id: sensor.temperatureandhumidity_3_1
+      entity_id: sensor.temperatureandhumidity_3_1_2
       above: 27
       for:
         minutes: 30
@@ -31,11 +31,11 @@ automation:
       service: notify.family
       data_template:
         title: "Greenhouse Temperature High!"
-        message: "The greenhouse temperature is {{ states.sensor.temperatureandhumidity_3_1.state }}{{ states.sensor.temperatureandhumidity_3_1.attributes.unit_of_measurement }}. You may wish to open the door and check if the plants need watering."
+        message: "The greenhouse temperature is {{ states.sensor.temperatureandhumidity_3_1_2.state }}{{ states.sensor.temperatureandhumidity_3_1_2.attributes.unit_of_measurement }}. You may wish to open the door and check if the plants need watering."
   - alias: "Greenhouse Low Temperature Notification"
     trigger:
       platform: numeric_state
-      entity_id: sensor.temperatureandhumidity_3_1
+      entity_id: sensor.temperatureandhumidity_3_1_2
       below: 11
       for:
         minutes: 30
@@ -47,4 +47,4 @@ automation:
       service: notify.family
       data_template:
         title: "Greenhouse Temperature Low!"
-        message: "The greenhouse temperature is {{ states.sensor.temperatureandhumidity_3_1.state }}{{ states.sensor.temperatureandhumidity_3_1.attributes.unit_of_measurement }}. You may wish to close the door."
+        message: "The greenhouse temperature is {{ states.sensor.temperatureandhumidity_3_1_2.state }}{{ states.sensor.temperatureandhumidity_3_1_2.attributes.unit_of_measurement }}. You may wish to close the door."
