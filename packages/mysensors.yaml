@@ -3,6 +3,10 @@ mysensors:
   gateways:
     - device: /dev/ttyUSB0
       persistence_file: '/config/mysensors.json'
+    - device: mqtt
+      persistence_file: '/config/mysensors-mqtt.json'
+      topic_in_prefix: 'mysensors/out'
+      topic_out_prefix: 'mysensors/in'
   debug: true
   persistence: true
   version: '2.3'
