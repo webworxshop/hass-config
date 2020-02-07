@@ -1,7 +1,7 @@
 
 tts:
   platform: marytts
-  language: 'en-GB'
+  language: 'en_GB'
   host: !secret marytts_host
   voice: 'dfki-poppy-hsmm'
 

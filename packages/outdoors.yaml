@@ -51,17 +51,6 @@ camera:
 
 openuv:
   api_key: !secret openuv_api_key
-  binary_sensors:
-    monitored_conditions:
-      - uv_protection_window
-  sensors:
-    monitored_conditions:
-      - current_ozone_level
-      - current_uv_index
-      - current_uv_level
-      - max_uv_index
-      - safe_exposure_time_type_1
-      - safe_exposure_time_type_2
 
 binary_sensor:
   - platform: iss
